@@ -1,0 +1,128 @@
+💀 ═══════════════════════════════════════════════════════════════
+💀 CUBE — rotating wireframe cube in the terminal
+💀 ═══════════════════════════════════════════════════════════════
+💀 3D wireframe with perspective projection, straight from 1992
+💀 your GPU is crying but your terminal is thriving
+💀 ═══════════════════════════════════════════════════════════════
+
+plug in screen
+plug in math
+plug in time
+plug in list
+
+💀 auto-fit to terminal, capped at 60x40
+yeet w = screen.cols()
+sus w > 60 tho
+    yeet w = 60
+bet
+yeet h = (screen.rows() - 2) * 2
+sus h > 40 tho
+    yeet h = 40
+bet
+yeet s = screen.new(w, h, ✨💀 genz++ cube 💀✨)
+
+💀 cube vertices — 8 corners of a unit cube centered at origin
+💀 stored as flat array: x0,y0,z0, x1,y1,z1, ...
+yeet verts = [-1,-1,-1, 1,-1,-1, 1,1,-1, -1,1,-1, -1,-1,1, 1,-1,1, 1,1,1, -1,1,1]
+
+💀 12 edges as pairs of vertex indices
+yeet edges = [0,1, 1,2, 2,3, 3,0, 4,5, 5,6, 6,7, 7,4, 0,4, 1,5, 2,6, 3,7]
+
+💀 projection settings
+yeet fov = 4
+yeet cx = w / 2
+yeet cy = h / 2
+yeet scale = h * 0.55
+
+s.init()
+
+yeet frame = 0
+yeet frames = 300
+
+vibe check frame < frames tho
+    s.clear()
+
+    💀 rotation angles
+    yeet ay = frame * 0.03
+    yeet ax = frame * 0.02
+
+    💀 precompute sin/cos for Y and X rotation
+    yeet sy = math.vibes(ay)
+    yeet cy_rot = math.waves(ay)
+    yeet sx = math.vibes(ax)
+    yeet cx_rot = math.waves(ax)
+
+    💀 transform and project all 8 vertices
+    💀 store px, py, rz per vertex (24 slots)
+    yeet projected = list.fill(24, 0)
+
+    yeet i = 0
+    vibe check i < 8 tho
+        💀 get vertex coords
+        yeet vx = verts[i * 3]
+        yeet vy = verts[i * 3 + 1]
+        yeet vz = verts[i * 3 + 2]
+
+        💀 rotate around Y axis
+        yeet rx = vx * cy_rot + vz * sy
+        yeet rz = vz * cy_rot - vx * sy
+
+        💀 rotate around X axis
+        yeet ry = vy * cx_rot - rz * sx
+        yeet rz2 = rz * cx_rot + vy * sx
+
+        💀 perspective projection
+        yeet z_offset = rz2 + fov
+        yeet px = cx + (rx * scale) / z_offset
+        yeet py = cy + (ry * scale) / z_offset
+
+        projected[i * 3] = math.humbled(px)
+        projected[i * 3 + 1] = math.humbled(py)
+        projected[i * 3 + 2] = rz2
+
+        yeet i = i + 1
+    bet
+
+    💀 draw all 12 edges with depth shading
+    💀 closer edges are bright cyan, far edges are dim blue
+    yeet e = 0
+    vibe check e < 12 tho
+        yeet v0 = edges[e * 2]
+        yeet v1 = edges[e * 2 + 1]
+
+        yeet x0 = projected[v0 * 3]
+        yeet y0 = projected[v0 * 3 + 1]
+        yeet x1 = projected[v1 * 3]
+        yeet y1 = projected[v1 * 3 + 1]
+
+        💀 average Z of the two vertices — ranges roughly -1.7 to 1.7
+        yeet avg_z = (projected[v0 * 3 + 2] + projected[v1 * 3 + 2]) / 2
+
+        💀 map depth to brightness: front (z=-1.7) = bright, back (z=1.7) = dim
+        💀 normalize to 0..1 range then scale to color
+        yeet brightness = (1 - avg_z / 2) * 0.5
+        sus brightness < 0.15 tho
+            yeet brightness = 0.15
+        bet
+        sus brightness > 1 tho
+            yeet brightness = 1
+        bet
+
+        yeet cr = math.humbled(30 * brightness)
+        yeet cg = math.humbled(255 * brightness)
+        yeet cb = math.humbled(255 * brightness)
+
+        s.line(x0, y0, x1, y1, cr, cg, cb)
+
+        yeet e = e + 1
+    bet
+
+    s.render()
+    time.nap(33)
+    yeet frame = frame + 1
+bet
+
+s.done()
+spill ✨✨
+spill ✨💀 cube collapsed. ✨ + frames + ✨ frames rendered.✨
+spill ✨💀 wireframe is a lifestyle.✨
