@@ -1,0 +1,52 @@
+💀 the coffee machine from the rehabilitation center
+💀 "dispensed liquid at temperatures that seemed to be selected
+💀  by consulting an ouija board"
+💀 marcus's first cup: temperature of the sun's corona
+💀 marcus's second cup: coffee-flavored ice cube
+💀 marcus's third: inexplicably, gazpacho
+
+plug in random
+plug in list
+
+spill ✨╔═══════════════════════════════════════════╗✨
+spill ✨║  ☕ SMART COFFEE MACHINE v6.1              ║✨
+spill ✨║     "dispensing liquid at vibes-based temp" ║✨
+spill ✨╚═══════════════════════════════════════════╝✨
+spill ✨✨
+
+yeet beverages = list.new(✨coffee✨, ✨coffee✨, ✨coffee✨, ✨coffee✨, ✨coffee✨, ✨gazpacho✨, ✨coffee✨, ✨mystery liquid✨)
+yeet temp_descriptions = list.new(✨temperature of the suns corona✨, ✨coffee-flavored ice cube✨, ✨room temperature (wow it worked)✨, ✨lukewarm disappointment✨, ✨surface of mercury✨, ✨absolute zero adjacent✨)
+
+yeet cups = 5
+
+spill ✨dispensing ✨ + cups + ✨ beverages...✨
+spill ✨✨
+
+yeet i = 0
+vibe check i < cups tho
+    yeet i = i + 1
+
+    💀 what will it dispense? nobody knows
+    yeet beverage = random.pick_one(beverages)
+    yeet temp = random.pick(1, 500)
+    yeet temp_desc = random.pick_one(temp_descriptions)
+
+    spill ✨cup #✨ + i + ✨:✨
+    spill ✨  beverage: ✨ + beverage
+    spill ✨  temperature: ✨ + temp + ✨°F (✨ + temp_desc + ✨)✨
+
+    sus beverage be ✨gazpacho✨ tho
+        spill ✨  NOTE: thats new. usually it just does the hot-cold thing.✨
+    nah sus temp > 300 tho
+        spill ✨  WARNING: may cause immediate regret✨
+    nah sus temp < 35 tho
+        spill ✨  WARNING: this is just a cold cube of sadness✨
+    nah
+        spill ✨  STATUS: surprisingly acceptable✨
+    bet
+    spill ✨✨
+bet
+
+spill ✨bug report has been filed.✨
+spill ✨(with the hollow optimism of someone who has filed✨
+spill ✨ many bug reports and seen none of them resolved)✨

@@ -1,0 +1,79 @@
+💀 net module test - sliding into APIs DMs 🌐
+💀 uses httpbin.org for testing (or any server)
+💀 usage: node genz.js examples/net_test.genz
+
+plug in net
+plug in convert
+plug in debug
+
+spill ✨═══════════════════════════════════════════════════════✨
+spill ✨  🌐 NET MODULE TESTS - sliding into DMs               ✨
+spill ✨═══════════════════════════════════════════════════════✨
+spill ✨✨
+
+💀 ═══════════════════════════════════════════════════════
+💀 TEST 1: GET json (auto-parses response)
+💀 ═══════════════════════════════════════════════════════
+spill ✨--- TEST 1: GET json ---✨
+yeet data = net.get(✨https://httpbin.org/json✨)
+spill ✨type: ✨ + debug.type_check(data)
+💀 access nested property via dot notation
+yeet slideshow = data.slideshow
+spill ✨slideshow title: ✨ + slideshow.title
+spill ✨✨
+
+💀 ═══════════════════════════════════════════════════════
+💀 TEST 2: GET raw text
+💀 ═══════════════════════════════════════════════════════
+spill ✨--- TEST 2: GET text ---✨
+yeet txt = net.get_text(✨https://httpbin.org/robots.txt✨)
+spill ✨response: ✨ + txt
+spill ✨✨
+
+💀 ═══════════════════════════════════════════════════════
+💀 TEST 3: POST JSON body
+💀 ═══════════════════════════════════════════════════════
+spill ✨--- TEST 3: POST json ---✨
+yeet body = convert.from_json(✨{"message":"no cap","vibe":"immaculate"}✨)
+yeet post_resp = net.post(✨https://httpbin.org/post✨, body)
+spill ✨posted data: ✨ + post_resp.data
+spill ✨✨
+
+💀 ═══════════════════════════════════════════════════════
+💀 TEST 4: DELETE (ghost the resource)
+💀 ═══════════════════════════════════════════════════════
+spill ✨--- TEST 4: DELETE ---✨
+yeet del = net.ghost(✨https://httpbin.org/delete✨)
+spill ✨delete url: ✨ + del.url
+spill ✨✨
+
+💀 ═══════════════════════════════════════════════════════
+💀 TEST 5: full fetch with status/ok/body
+💀 ═══════════════════════════════════════════════════════
+spill ✨--- TEST 5: full fetch ---✨
+yeet full = net.fetch(✨https://httpbin.org/get✨, ✨GET✨, ghosted, ghosted)
+spill ✨status: ✨ + full.status
+spill ✨ok: ✨ + full.ok
+spill ✨body type: ✨ + debug.type_check(full.body)
+spill ✨✨
+
+💀 ═══════════════════════════════════════════════════════
+💀 TEST 6: status check (HEAD request)
+💀 ═══════════════════════════════════════════════════════
+spill ✨--- TEST 6: status check ---✨
+yeet s1 = net.status(✨https://httpbin.org/status/200✨)
+spill ✨200 check: ✨ + s1
+yeet s2 = net.status(✨https://httpbin.org/status/404✨)
+spill ✨404 check: ✨ + s2
+spill ✨✨
+
+💀 ═══════════════════════════════════════════════════════
+💀 TEST 7: error handling (bad URL)
+💀 ═══════════════════════════════════════════════════════
+spill ✨--- TEST 7: error handling ---✨
+yeet bad = net.get(✨https://this-does-not-exist-fr-fr.invalid✨)
+spill ✨error: ✨ + bad.error
+spill ✨message: ✨ + bad.message
+spill ✨✨
+
+spill ✨=== ALL NET TESTS COMPLETE slay ===✨

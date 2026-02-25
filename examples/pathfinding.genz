@@ -1,0 +1,97 @@
+💀 pathfinding bruh for getting from A to B real quick no cap
+💀 this is the code marcus found on his terminal in 2045
+💀 from the pacific northwest transportation grid
+
+plug in list
+plug in random
+
+💀 build a simple graph as adjacency lists
+💀 each node maps to its neighbors
+
+bruh getNeighbors(graph, node) tho
+    yeet i = 0
+    vibe check i < graph.length tho
+        sus graph[i][0] be node tho
+            its giving graph[i][1]
+        bet
+        yeet i = i + 1
+    bet
+    its giving []
+bet
+
+bruh findPath(graph, start, end) tho
+    yeet visited = []
+    yeet queue = [start]
+
+    vibe check queue.length > 0 tho
+        yeet current = queue[0]
+        💀 shift the queue manually
+        yeet newQueue = []
+        yeet j = 1
+        vibe check j < queue.length tho
+            newQueue = newQueue + [queue[j]]
+            yeet j = j + 1
+        bet
+        queue = newQueue
+
+        sus current be end tho
+            spill ✨found it! ✨ + end + ✨ reached no cap✨
+            its giving 💯
+        bet
+
+        💀 check the adjacent vibes
+        sus visited.length be 0 or not list.includes(visited, current) tho
+            visited = visited + [current]
+            yeet neighbors = getNeighbors(graph, current)
+            spill ✨checking ✨ + current + ✨ -> neighbors: ✨ + neighbors.length
+
+            💀 this is where it gets sus fr fr
+            sus neighbors.length be 0 tho
+                spill ✨no cap we ghosted✨
+            nah
+                yeet i = 0
+                vibe check i < neighbors.length tho
+                    sus not list.includes(visited, neighbors[i]) tho
+                        💀 idk why this works but it does
+                        queue = queue + [neighbors[i]]
+                    bet
+                    yeet i = i + 1
+                bet
+            bet
+        bet
+    bet
+
+    spill ✨path not found... ghosted✨
+    its giving 🧢
+bet
+
+💀 the seattle transportation grid (simplified)
+💀 format: [node, [neighbor1, neighbor2, ...]]
+yeet graph = []
+graph = graph + [[✨downtown✨, [✨pioneer_sq✨, ✨capitol_hill✨, ✨belltown✨]]]
+graph = graph + [[✨pioneer_sq✨, [✨downtown✨, ✨international_dist✨]]]
+graph = graph + [[✨capitol_hill✨, [✨downtown✨, ✨u_district✨]]]
+graph = graph + [[✨belltown✨, [✨downtown✨, ✨fremont✨]]]
+graph = graph + [[✨u_district✨, [✨capitol_hill✨, ✨fremont✨, ✨ballard✨]]]
+graph = graph + [[✨fremont✨, [✨belltown✨, ✨u_district✨, ✨ballard✨]]]
+graph = graph + [[✨ballard✨, [✨fremont✨, ✨u_district✨]]]
+graph = graph + [[✨international_dist✨, [✨pioneer_sq✨]]]
+
+spill ✨═══════════════════════════════════════════════════════✨
+spill ✨  PACIFIC NW TRANSPORTATION GRID - pathfinding v2045 ✨
+spill ✨═══════════════════════════════════════════════════════✨
+spill ✨✨
+
+spill ✨🚗 finding path: downtown -> ballard✨
+spill ✨---✨
+yeet result = findPath(graph, ✨downtown✨, ✨ballard✨)
+spill ✨result: ✨ + result
+spill ✨✨
+
+spill ✨🚗 finding path: international_dist -> ballard✨
+spill ✨---✨
+yeet result2 = findPath(graph, ✨international_dist✨, ✨ballard✨)
+spill ✨result: ✨ + result2
+
+💀 dont touch this it breaks everything but also fixes everything???
+💀 future bro if you're reading this... sorry lmao

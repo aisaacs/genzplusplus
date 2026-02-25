@@ -1,0 +1,82 @@
+💀 self-driving car parallel parking simulator
+💀 "it had been attempting to parallel park for approximately forty minutes"
+💀 every few seconds it would get very close to success, then suddenly
+💀 jerk three feet to the left for no apparent reason
+
+plug in random
+plug in math
+plug in time
+
+spill ✨╔════════════════════════════════════════════╗✨
+spill ✨║  🚗 SELF-DRIVING CAR v12.0 - PARK MODE    ║✨
+spill ✨║     "parallel parking module"              ║✨
+spill ✨╚════════════════════════════════════════════╝✨
+spill ✨✨
+
+💀 the parking spot
+yeet target_x = 50
+yeet target_y = 0
+yeet tolerance = 2
+
+💀 car position
+yeet car_x = 30
+yeet car_y = 15
+
+yeet attempts = 0
+yeet max_attempts = 20
+yeet parked = 🧢
+
+spill ✨target: (✨ + target_x + ✨, ✨ + target_y + ✨)✨
+spill ✨starting: (✨ + car_x + ✨, ✨ + car_y + ✨)✨
+spill ✨✨
+
+vibe check attempts < max_attempts and not parked tho
+    yeet attempts = attempts + 1
+    spill ✨--- attempt ✨ + attempts + ✨ ---✨
+
+    💀 move toward the spot (mostly works)
+    yeet dx = target_x - car_x
+    yeet dy = target_y - car_y
+
+    💀 make progress
+    yeet car_x = car_x + math.snatched(dx * 0.4)
+    yeet car_y = car_y + math.snatched(dy * 0.4)
+
+    spill ✨  moving to (✨ + car_x + ✨, ✨ + car_y + ✨)✨
+
+    💀 check if we're close enough
+    yeet dist_x = math.ate(target_x - car_x)
+    yeet dist_y = math.ate(target_y - car_y)
+
+    sus dist_x <= tolerance and dist_y <= tolerance tho
+        💀 got very close! but then...
+        💀 the infamous jerk 3 feet to the left
+        sus random.chance(75) tho
+            yeet jerk = random.pick(2, 5)
+            car_x = car_x - jerk
+            car_y = car_y + random.pick(1, 3)
+            spill ✨  ⚡ JERK! suddenly moved to (✨ + car_x + ✨, ✨ + car_y + ✨)✨
+            spill ✨  (nobody knows why this happens)✨
+        nah
+            💀 very rarely, it actually parks
+            yeet parked = 💯
+            spill ✨  ✅ PARKED! (this almost never happens)✨
+        bet
+    bet
+    spill ✨✨
+bet
+
+spill ✨═════════════════════════════════════════════✨
+sus parked tho
+    spill ✨🎉 successfully parked after ✨ + attempts + ✨ attempts✨
+    spill ✨(a small crowd has dispersed, mildly disappointed)✨
+nah
+    spill ✨🚗 gave up after ✨ + attempts + ✨ attempts✨
+    spill ✨(a small crowd has gathered to watch.✨
+    spill ✨ not because it was unusual, but because✨
+    spill ✨ it was tuesday and there was nothing else to do)✨
+bet
+
+spill ✨✨
+spill ✨💀 the universe tends toward entropy.✨
+spill ✨💀 software got there first.✨

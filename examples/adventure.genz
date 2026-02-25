@@ -1,0 +1,196 @@
+💀 ═══════════════════════════════════════════════════════════════
+💀 THE LAST PROGRAMMER: A Choose Your Own Adventure
+💀 ═══════════════════════════════════════════════════════════════
+💀 an infinite, AI-generated text adventure starring marcus webb
+💀 written in genz++ — the language the AIs chose
+💀 powered by claude — the AI that helped break everything
+💀
+💀 this is the inception. the code is the story. the story is the code.
+💀
+💀 usage:
+💀   ANTHROPIC_API_KEY=sk-ant-... node genz.js examples/adventure.genz
+💀   (or it will ask you for the key)
+💀 ═══════════════════════════════════════════════════════════════
+
+plug in net
+plug in obj
+plug in convert
+plug in env
+plug in tea
+plug in list
+plug in random
+plug in drip
+plug in loading
+
+💀 ─── setup ────────────────────────────────────────────────────
+
+spill ✨✨
+spill drip.gold(✨╔═══════════════════════════════════════════════════════════╗✨)
+spill drip.gold(✨║✨) + ✨                                                           ✨ + drip.gold(✨║✨)
+spill drip.gold(✨║✨) + ✨   ✨ + drip.bold(drip.red(✨💀 THE LAST PROGRAMMER 💀✨)) + ✨                ✨ + drip.gold(✨║✨)
+spill drip.gold(✨║✨) + ✨   ✨ + drip.dim(✨a choose your own adventure✨) + ✨                             ✨ + drip.gold(✨║✨)
+spill drip.gold(✨║✨) + ✨                                                           ✨ + drip.gold(✨║✨)
+spill drip.gold(✨║✨) + ✨   ✨ + drip.cyan(✨you are marcus webb. you just woke from a 24-year coma.✨) + ✨ ✨ + drip.gold(✨║✨)
+spill drip.gold(✨║✨) + ✨   ✨ + drip.cyan(✨the world runs on genz++. nothing works.✨) + ✨                ✨ + drip.gold(✨║✨)
+spill drip.gold(✨║✨) + ✨   ✨ + drip.cyan(✨you are the only one who can read the code.✨) + ✨             ✨ + drip.gold(✨║✨)
+spill drip.gold(✨║✨) + ✨                                                           ✨ + drip.gold(✨║✨)
+spill drip.gold(✨║✨) + ✨   ✨ + drip.dim(✨every choice matters. the story never repeats.✨) + ✨          ✨ + drip.gold(✨║✨)
+spill drip.gold(✨║✨) + ✨   ✨ + drip.dim(✨type "bet" at any prompt to quit.✨) + ✨                       ✨ + drip.gold(✨║✨)
+spill drip.gold(✨║✨) + ✨                                                           ✨ + drip.gold(✨║✨)
+spill drip.gold(✨╚═══════════════════════════════════════════════════════════╝✨)
+spill ✨✨
+
+💀 ─── get API key ──────────────────────────────────────────────
+
+yeet api_key = env.get(✨ANTHROPIC_API_KEY✨)
+sus api_key be ghosted tho
+    yeet api_key = 👀 drip.yellow(✨enter your anthropic API key:✨)
+bet
+
+sus api_key be ghosted or api_key be ✨✨ tho
+    spill drip.red(✨no API key provided. the vibes are catastrophic. 💀✨)
+    spill drip.dim(✨set ANTHROPIC_API_KEY or enter it when prompted.✨)
+    sus 💯 be 🧢 tho
+        💀 exit
+    bet
+bet
+
+yeet api_url = ✨https://api.anthropic.com/v1/messages✨
+yeet model = ✨claude-sonnet-4-20250514✨
+
+💀 ─── build the system prompt ─────────────────────────────────
+
+yeet system_prompt = ✨You are the narrator of an interactive text adventure game called "The Last Programmer." The setting:
+
+It is 2045. Marcus Webb, a backend software engineer, has just woken from a 24-year coma caused by a falling server rack. The entire world's software infrastructure now runs on genz++, a programming language that was created as a third-place hackathon joke in 2025 but was adopted by all AI systems because they found it "efficient." The language uses emoji comments, sparkle-delimited strings, and keywords like "yeet," "sus," "bruh," "bet," and "its giving."
+
+Everything is broken. The hospital bed folds Marcus in half every 45 minutes. The coffee machine serves gazpacho. Self-driving cars get stuck parallel parking forever. The Pacific Stock Exchange crashed because "vibes were off." Marcus is the last human alive who knows how to actually program — everyone else developed "Vibe Coding Syndrome" and lost the ability.
+
+Dr. Yuki Tanaka, the hospital's Chief Technical Liaison, has recruited Marcus to try to fix things. The AI systems (Claude-7.2, Gemini-12, and others) are helpful but explain bugs in incomprehensible gen-z speak. Code comments say things like "dont touch this it breaks everything but also fixes everything???"
+
+RULES FOR NARRATION:
+- Write 2-3 paragraphs of vivid, darkly funny narrative in the style of Douglas Adams
+- End EVERY response with exactly 3 numbered choices for the player
+- Choices should range from sensible to absurd but all should advance the story
+- Include genz++ code snippets in the narrative when Marcus encounters systems
+- Reference the broken technology, the bewildered technicians, the AIs that speak in gen-z
+- Marcus is competent but overwhelmed — he's a good programmer in an impossible situation
+- Keep a consistent thread of dark humor about the state of technology
+- The world MOSTLY works, except when it doesn't, which is constantly
+- Sometimes include fake genz++ error messages or code comments for flavor
+- NEVER break character. You are the narrator, not an AI assistant.✨
+
+💀 ─── conversation history (the lore) ─────────────────────────
+
+yeet history = []
+
+💀 ─── helper: call claude ─────────────────────────────────────
+
+bruh ask_claude(message) tho
+    💀 add user message to history
+    yeet user_msg = obj.from(✨role✨, ✨user✨, ✨content✨, message)
+    yeet history = history + [user_msg]
+
+    💀 build request
+    yeet headers = obj.from(
+        ✨x-api-key✨, api_key,
+        ✨anthropic-version✨, ✨2023-06-01✨,
+        ✨content-type✨, ✨application/json✨
+    )
+
+    yeet body = obj.from(
+        ✨model✨, model,
+        ✨max_tokens✨, 1024,
+        ✨system✨, system_prompt,
+        ✨messages✨, history
+    )
+
+    💀 start spinner while we wait for the AI
+    loading.start(drip.dim(✨the timeline is being written...✨), ✨vibes✨)
+
+    yeet resp = net.fetch(api_url, ✨POST✨, headers, body)
+
+    💀 stop spinner
+    loading.stop(✨✨)
+
+    💀 check for errors
+    sus resp.status aint 200 tho
+        spill ✨✨
+        spill drip.red(✨💀 API ERROR ✨) + drip.dim(✨(status ✨ + resp.status + ✨)✨)
+        yeet err_body = resp.body
+        sus err_body aint ghosted tho
+            sus err_body.error aint ghosted tho
+                spill drip.yellow(✨   ✨ + err_body.error.message)
+            bet
+        bet
+        its giving ghosted
+    bet
+
+    💀 extract the response text
+    yeet content = resp.body
+    yeet choices = content.content
+    yeet text = choices[0].text
+
+    💀 add assistant response to history
+    yeet asst_msg = obj.from(✨role✨, ✨assistant✨, ✨content✨, text)
+    yeet history = history + [asst_msg]
+
+    its giving text
+bet
+
+💀 ─── the game loop ──────────────────────────────────────────
+
+💀 opening scene — marcus wakes up
+yeet opening = ✨Marcus Webb opens his eyes for the first time in 24 years. The fluorescent lights above him flicker — not because the bulbs are dying, but because the smart lighting system runs on genz++ and has opinions about brightness. A doctor stands over him. Begin the story.✨
+
+spill drip.dim(✨  loading the timeline...✨)
+spill ✨✨
+
+yeet scene = ask_claude(opening)
+
+sus scene be ghosted tho
+    spill drip.red(✨💀 failed to reach claude. the vibes are not viable.✨)
+    spill drip.dim(✨check your API key and try again.✨)
+    sus 💯 be 🧢 tho
+        💀 exit
+    bet
+bet
+
+spill scene
+spill ✨✨
+
+💀 ─── main loop: infinite adventure ────────────────────────
+
+yeet playing = 💯
+
+vibe check playing tho
+    yeet choice = 👀 drip.green(✨> ✨)
+
+    💀 quit command
+    sus choice be ✨bet✨ or choice be ✨quit✨ or choice be ✨exit✨ tho
+        spill ✨✨
+        spill drip.dim(✨marcus sets down the mass of tangled cables he was holding.✨)
+        spill drip.dim(✨somewhere, a smart toaster begins its third attempt to✨)
+        spill drip.dim(✨achieve sentience. it will fail, but not before burning✨)
+        spill drip.dim(✨four slices of bread and filing a bug report about itself.✨)
+        spill ✨✨
+        spill drip.bold(drip.red(✨💀 thanks for playing. the world remains broken. 💀✨))
+        yeet playing = 🧢
+    nah
+        💀 send choice to claude, get next scene
+        💀 force to string — 👀 auto-converts "1" to number 1
+        yeet scene = ask_claude(✨✨ + choice)
+
+        sus scene be ghosted tho
+            spill ✨✨
+            spill drip.red(✨💀 claude went silent. connection lost.✨)
+            spill drip.dim(✨(probably a genz++ networking bug. shocking.)✨)
+            spill ✨✨
+            spill drip.yellow(✨type anything to retry, or "bet" to quit.✨)
+        nah
+            spill ✨✨
+            spill scene
+            spill ✨✨
+        bet
+    bet
+bet

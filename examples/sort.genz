@@ -1,0 +1,31 @@
+💀 bubble sort - algorithms be algorithming
+
+plug in list
+
+bruh bubbleSort(arr) tho
+    yeet n = arr.length
+    yeet i = 0
+    vibe check i < n tho
+        yeet j = 0
+        vibe check j < n - i - 1 tho
+            sus arr[j] > arr[j + 1] tho
+                💀 swap em
+                yeet temp = arr[j]
+                arr[j] = arr[j + 1]
+                arr[j + 1] = temp
+            bet
+            yeet j = j + 1
+        bet
+        yeet i = i + 1
+    bet
+    its giving arr
+bet
+
+yeet nums = [64, 34, 25, 12, 22, 11, 90]
+spill ✨before: ✨ + nums
+yeet sorted = bubbleSort(nums)
+spill ✨after:  ✨ + sorted
+
+spill ✨✨
+yeet words = list.new(✨slay✨, ✨based✨, ✨mid✨, ✨goat✨, ✨bussin✨)
+spill ✨words sorted: ✨ + list.sort_words(words)

@@ -1,0 +1,195 @@
+💀 genz++ stdlib test - no cap this better work
+
+plug in math
+plug in tea  
+plug in random
+plug in list
+plug in time
+plug in convert
+plug in debug
+
+💀 ═══════════════════════════════════════════════════════
+💀 MATH TESTS (numbers be mathing)
+💀 ═══════════════════════════════════════════════════════
+spill ✨=== MATH TESTS ===✨
+
+yeet x = -42
+spill ✨ate(-42) should be 42:✨
+spill math.ate(x)
+
+spill ✨glow_up(3.2) should be 4:✨
+spill math.glow_up(3.2)
+
+spill ✨humbled(3.9) should be 3:✨
+spill math.humbled(3.9)
+
+spill ✨snatched(3.5) should be 4:✨
+spill math.snatched(3.5)
+
+spill ✨main_character(1, 5, 3) should be 5:✨
+spill math.main_character(1, 5, 3)
+
+spill ✨npc(1, 5, 3) should be 1:✨
+spill math.npc(1, 5, 3)
+
+spill ✨glow(16) should be 4:✨
+spill math.glow(16)
+
+spill ✨periodt() is pi:✨
+spill math.periodt()
+
+spill ✨power_move(2, 8) should be 256:✨
+spill math.power_move(2, 8)
+
+spill ✨clamp(15, 0, 10) should be 10:✨
+spill math.clamp(15, 0, 10)
+
+💀 ═══════════════════════════════════════════════════════
+💀 TEA TESTS (spill it bestie)
+💀 ═══════════════════════════════════════════════════════
+spill ✨✨
+spill ✨=== TEA TESTS ===✨
+
+yeet msg = ✨hello world✨
+
+spill ✨upper should be HELLO WORLD:✨
+spill tea.upper(msg)
+
+spill ✨lower of CAPS:✨
+spill tea.lower(✨YELLING✨)
+
+spill ✨spill_length of hello world:✨
+spill tea.spill_length(msg)
+
+spill ✨sip(0, 5) should be hello:✨
+spill tea.sip(msg, 0, 5)
+
+spill ✨has_tea for world:✨
+spill tea.has_tea(msg, ✨world✨)
+
+spill ✨reverse of hello:✨
+spill tea.reverse(✨hello✨)
+
+spill ✨repeat fire 3 times:✨
+spill tea.repeat(✨🔥✨, 3)
+
+spill ✨join array with dash:✨
+spill tea.join(list.new(✨a✨, ✨b✨, ✨c✨), ✨-✨)
+
+💀 ═══════════════════════════════════════════════════════
+💀 RANDOM TESTS (chaos mode)
+💀 ═══════════════════════════════════════════════════════
+spill ✨✨
+spill ✨=== RANDOM TESTS ===✨
+
+spill ✨random pick 1-10:✨
+spill random.pick(1, 10)
+
+spill ✨random vibe (0-1):✨
+spill random.vibe()
+
+spill ✨coin flip:✨
+spill random.flip()
+
+spill ✨50% chance:✨
+spill random.chance(50)
+
+spill ✨uuid:✨
+spill random.uuid()
+
+💀 ═══════════════════════════════════════════════════════
+💀 LIST TESTS (the squad)
+💀 ═══════════════════════════════════════════════════════
+spill ✨✨
+spill ✨=== LIST TESTS ===✨
+
+yeet squad = list.new(1, 2, 3, 4, 5)
+spill ✨created list:✨
+spill squad
+
+spill ✨length:✨
+spill list.length(squad)
+
+spill ✨first:✨
+spill list.first(squad)
+
+spill ✨last:✨
+spill list.last(squad)
+
+spill ✨sum:✨
+spill list.sum(squad)
+
+spill ✨average:✨
+spill list.average(squad)
+
+spill ✨range(0, 5):✨
+spill list.range(0, 5)
+
+spill ✨unique of [1,1,2,2,3]:✨
+spill list.unique(list.new(1, 1, 2, 2, 3))
+
+spill ✨fill(3, zero):✨
+spill list.fill(3, ✨zero✨)
+
+💀 ═══════════════════════════════════════════════════════
+💀 TIME TESTS (take a nap)
+💀 ═══════════════════════════════════════════════════════
+spill ✨✨
+spill ✨=== TIME TESTS ===✨
+
+spill ✨current vibes:✨
+spill time.vibes()
+
+spill ✨today:✨
+spill time.today()
+
+spill ✨weekday:✨
+spill time.weekday()
+
+spill ✨year:✨
+spill time.year()
+
+💀 ═══════════════════════════════════════════════════════
+💀 CONVERT TESTS (type glow ups)
+💀 ═══════════════════════════════════════════════════════
+spill ✨✨
+spill ✨=== CONVERT TESTS ===✨
+
+spill ✨to_num of 42:✨
+spill convert.to_num(✨42✨)
+
+spill ✨to_str of 123:✨
+spill convert.to_str(123)
+
+spill ✨to_json:✨
+spill convert.to_json(list.new(1, 2, 3))
+
+spill ✨from_json:✨
+spill convert.from_json(✨[1,2,3]✨)
+
+💀 ═══════════════════════════════════════════════════════
+💀 DEBUG TESTS (what's the tea)
+💀 ═══════════════════════════════════════════════════════
+spill ✨✨
+spill ✨=== DEBUG TESTS ===✨
+
+spill ✨type_check of 42:✨
+spill debug.type_check(42)
+
+spill ✨type_check of string:✨
+spill debug.type_check(✨hello✨)
+
+spill ✨type_check of ghosted:✨
+spill debug.type_check(ghosted)
+
+spill ✨type_check of list:✨
+spill debug.type_check(list.new(1, 2))
+
+spill ✨is_num(42):✨
+spill debug.is_num(42)
+
+spill ✨is_str of hello:✨
+spill debug.is_str(✨hello✨)
+
+spill ✨✨
+spill ✨=== ALL TESTS COMPLETE slay ===✨

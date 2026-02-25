@@ -1,0 +1,74 @@
+💀 the legendary function chain that marcus found
+💀 doTheThing -> doTheOtherThing -> okayActuallyDoIt
+💀 "its giving ✨mystery✨"
+
+plug in random
+plug in time
+plug in debug
+
+💀 nobody knows what this returns
+💀 the AIs say "its giving what it needs to give"
+bruh okayActuallyDoIt() tho
+    its giving ✨mystery✨
+bet
+
+💀 this function calls the one above
+💀 added a check that nobody asked for
+bruh doTheOtherThing() tho
+    yeet result = okayActuallyDoIt()
+    💀 idk what this check does but removing it crashes the stock market
+    sus result be ✨mystery✨ tho
+        its giving result
+    bet
+    💀 this line has never executed in production. ever.
+    its giving ✨not mystery (this should never happen)✨
+bet
+
+💀 the entry point
+💀 7 billion devices call this function daily
+bruh doTheThing() tho
+    yeet answer = doTheOtherThing()
+    its giving answer
+bet
+
+spill ✨═══════════════════════════════════════════════════════✨
+spill ✨  GLOBAL INFRASTRUCTURE STATUS CHECK                  ✨
+spill ✨═══════════════════════════════════════════════════════✨
+spill ✨✨
+
+spill ✨calling doTheThing()...✨
+yeet result = doTheThing()
+spill ✨result: ✨ + result
+spill ✨✨
+
+spill ✨type check: ✨ + debug.type_check(result)
+spill ✨is valid: ✨ + debug.is_valid(result)
+spill ✨✨
+
+💀 simulate running it a bunch of times like the real infrastructure does
+spill ✨running 10 infrastructure cycles...✨
+yeet i = 0
+yeet successes = 0
+vibe check i < 10 tho
+    yeet r = doTheThing()
+    sus r be ✨mystery✨ tho
+        yeet successes = successes + 1
+    bet
+    yeet i = i + 1
+bet
+
+spill ✨cycles completed: 10/10✨
+spill ✨successful: ✨ + successes + ✨/10✨
+spill ✨✨
+
+sus successes be 10 tho
+    spill ✨status: the vibes are immaculate ✨
+nah
+    spill ✨status: the vibes are catastrophic. no cap.✨
+    spill ✨we should simply not have done this.✨
+    spill ✨its giving irreversible consequences.✨
+bet
+
+spill ✨✨
+spill ✨timestamp: ✨ + time.vibes()
+spill ✨💀 gg no re✨

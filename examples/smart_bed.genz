@@ -1,0 +1,77 @@
+💀 the hospital smart bed simulator
+💀 "his hospital bed had a smart feature that was supposed to adjust
+💀  to his sleeping position. instead it folded him into Day Mode
+💀  every time sunlight hit the photosensor at a particular angle"
+
+plug in random
+plug in time
+
+spill ✨╔═══════════════════════════════════════════╗✨
+spill ✨║  🛏️  SMART BED v4.2 - patient comfort sys  ║✨
+spill ✨║     powered by genz++ (this was a mistake) ║✨
+spill ✨╚═══════════════════════════════════════════╝✨
+spill ✨✨
+
+yeet mode = ✨Night Mode✨
+yeet patient_comfort = 8
+yeet folds = 0
+yeet hour = 0
+
+spill ✨simulating 24 hours of smart bed behavior...✨
+spill ✨✨
+
+vibe check hour < 24 tho
+    💀 simulate light level (0-100)
+    yeet light = 0
+    sus hour >= 6 and hour <= 18 tho
+        💀 daytime: light comes through the window
+        yeet light = random.pick(30, 95)
+    nah
+        yeet light = random.pick(0, 15)
+    bet
+
+    💀 THE BUG: when light hits photosensor at "particular angle"
+    💀 (between 42 and 69, because of course those numbers)
+    sus light >= 42 and light <= 69 tho
+        💀 FOLD INTO DAY MODE
+        yeet mode = ✨DAY MODE✨
+        yeet patient_comfort = patient_comfort - 3
+        yeet folds = folds + 1
+        spill ✨⏰ ✨ + hour + ✨:00 | light: ✨ + light + ✨ | ⚡ FOLDED TO DAY MODE (patient says ow)✨
+    nah sus light > 69 tho
+        💀 too bright, bed gets confused
+        yeet mode = ✨??? Mode✨
+        spill ✨⏰ ✨ + hour + ✨:00 | light: ✨ + light + ✨ | 🤔 bed is confused✨
+    nah
+        💀 actually works correctly for once
+        sus hour >= 22 or hour < 6 tho
+            yeet mode = ✨Night Mode✨
+            sus patient_comfort < 10 tho
+                yeet patient_comfort = patient_comfort + 1
+            bet
+        nah
+            yeet mode = ✨Day Mode (gentle)✨
+        bet
+        spill ✨⏰ ✨ + hour + ✨:00 | light: ✨ + light + ✨ | ✅ ✨ + mode
+    bet
+
+    yeet hour = hour + 1
+bet
+
+spill ✨✨
+spill ✨═══════════════════════════════════════════✨
+spill ✨total involuntary folds: ✨ + folds
+spill ✨final comfort level: ✨ + patient_comfort + ✨/10✨
+spill ✨✨
+
+sus folds > 5 tho
+    spill ✨marcus has stopped fighting it.✨
+    spill ✨he learned to sleep in day mode.✨
+    spill ✨it wasnt comfortable, but nothing was anymore.✨
+nah
+    spill ✨relatively calm night. (dont get used to it)✨
+bet
+
+spill ✨✨
+spill ✨bug report status: filed ✨
+spill ✨bug report resolution: ghosted✨

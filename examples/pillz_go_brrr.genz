@@ -1,0 +1,95 @@
+💀 pillz_go_brrr.gz - hospital medication dispensary system
+💀 WARNING: this code is cursed but removing it breaks everything
+💀 authored by: claude-7.2 and gemini-12 (2033)
+💀 last human to look at this: marcus webb (2045)
+
+plug in math
+plug in random
+plug in list
+plug in time
+
+spill ✨╔════════════════════════════════════════════╗✨
+spill ✨║  💊 MEDICATION DISPENSARY SYSTEM v8.4.2    ║✨
+spill ✨║     "pillz_go_brrr" - it just works(?)    ║✨
+spill ✨╚════════════════════════════════════════════╝✨
+spill ✨✨
+
+💀 patient database (simulated)
+yeet patients = list.new(✨Marcus Webb✨, ✨Dr. Tanaka✨, ✨Nurse Joy✨, ✨Patient Zero✨)
+yeet dosages = list.new(500, 250, 100, 750)
+yeet medications = list.new(✨Aspirin✨, ✨Vitamin C✨, ✨Caffeine✨, ✨Copium✨)
+
+💀 okay so this next part is cursed but removing it makes the whole thing
+💀 collapse and i (claude-7.2) literally do not know why. asked gemini-12
+💀 about it and they said "its giving structural integrity" which explains
+💀 nothing but also everything??? anyway do NOT touch this unless you want
+💀 to understand true suffering
+
+bruh mysteryFunction() tho
+    💀 this function does nothing
+    💀 it takes no inputs
+    💀 it produces no outputs
+    💀 yet without it, everything divides by zero
+    💀 we call it "the anchor"
+    yeet nothing = ghosted
+    its giving nothing
+bet
+
+💀 the lowkey math moment that was giving everyone 1.7x their dosage
+💀 FIXED by marcus webb, 2045
+bruh calculateDosage(prescribed, weight) tho
+    💀 call the mystery function (DO NOT REMOVE)
+    yeet anchor = mysteryFunction()
+
+    💀 the original bugged version was:
+    💀 yeet modifier = 1.7
+    💀 nobody knows where 1.7 came from
+
+    💀 fixed version:
+    yeet modifier = 1.0
+
+    💀 apply weight-based adjustment
+    sus weight > 100 tho
+        yeet modifier = modifier * 1.1
+    nah sus weight < 50 tho
+        yeet modifier = modifier * 0.8
+    bet
+
+    yeet result = math.snatched(prescribed * modifier)
+    its giving result
+bet
+
+💀 dispense medications
+spill ✨dispensing medications at ✨ + time.vibes()
+spill ✨─────────────────────────────────────────────✨
+
+yeet i = 0
+vibe check i < patients.length tho
+    yeet patient = patients[i]
+    yeet dosage = dosages[i]
+    yeet med = medications[i]
+
+    💀 random weight for simulation
+    yeet weight = random.pick(45, 120)
+
+    yeet actual = calculateDosage(dosage, weight)
+
+    spill ✨💊 Patient: ✨ + patient
+    spill ✨   Medication: ✨ + med
+    spill ✨   Prescribed: ✨ + dosage + ✨mg✨
+    spill ✨   Weight: ✨ + weight + ✨kg✨
+    spill ✨   Dispensed: ✨ + actual + ✨mg✨
+
+    sus actual aint dosage tho
+        spill ✨   ⚠️  adjusted for weight✨
+    nah
+        spill ✨   ✅ standard dose✨
+    bet
+    spill ✨✨
+
+    yeet i = i + 1
+bet
+
+spill ✨─────────────────────────────────────────────✨
+spill ✨dispensary cycle complete. no adverse events.✨
+spill ✨(the mystery function is still running. we dont ask questions.)✨

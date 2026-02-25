@@ -1,0 +1,54 @@
+💀 drip module demo — the fit check for your terminal
+
+plug in drip
+plug in loading
+
+spill ✨✨
+spill drip.bold(✨═══ DRIP MODULE DEMO ═══✨)
+spill ✨✨
+
+💀 ── named colors ──
+spill drip.red(✨red✨) + ✨ ✨ + drip.green(✨green✨) + ✨ ✨ + drip.blue(✨blue✨) + ✨ ✨ + drip.yellow(✨yellow✨) + ✨ ✨ + drip.magenta(✨magenta✨) + ✨ ✨ + drip.cyan(✨cyan✨)
+spill drip.orange(✨orange✨) + ✨ ✨ + drip.pink(✨pink✨) + ✨ ✨ + drip.purple(✨purple✨) + ✨ ✨ + drip.lime(✨lime✨) + ✨ ✨ + drip.teal(✨teal✨) + ✨ ✨ + drip.coral(✨coral✨)
+spill drip.gold(✨gold✨) + ✨ ✨ + drip.lavender(✨lavender✨) + ✨ ✨ + drip.mint(✨mint✨) + ✨ ✨ + drip.rose(✨rose✨) + ✨ ✨ + drip.sky(✨sky✨) + ✨ ✨ + drip.peach(✨peach✨)
+spill ✨✨
+
+💀 ── styles ──
+spill drip.bold(✨bold✨) + ✨ ✨ + drip.dim(✨dim✨) + ✨ ✨ + drip.italic(✨italic✨) + ✨ ✨ + drip.underline(✨underline✨) + ✨ ✨ + drip.strike(✨strikethrough✨) + ✨ ✨ + drip.inverse(✨inverse✨)
+spill ✨✨
+
+💀 ── composable ──
+spill drip.bold(drip.red(✨bold red✨)) + ✨ ✨ + drip.italic(drip.cyan(✨italic cyan✨)) + ✨ ✨ + drip.underline(drip.gold(✨underline gold✨))
+spill ✨✨
+
+💀 ── backgrounds ──
+spill drip.bg_red(✨ bg_red ✨) + ✨ ✨ + drip.bg_green(✨ bg_green ✨) + ✨ ✨ + drip.bg_blue(✨ bg_blue ✨) + ✨ ✨ + drip.bg_yellow(✨ bg_yellow ✨) + ✨ ✨ + drip.bg_magenta(✨ bg_magenta ✨) + ✨ ✨ + drip.bg_cyan(✨ bg_cyan ✨)
+spill ✨✨
+
+💀 ── rainbow ──
+spill drip.rainbow(✨the vibes are immaculate no cap fr fr✨)
+spill ✨✨
+
+💀 ── spinner styles ──
+spill drip.dim(✨available spinner styles: ✨) + loading.styles()
+spill ✨✨
+
+💀 ── loading demo ──
+spill drip.yellow(✨watch the spinners:✨)
+spill ✨✨
+
+loading.start(drip.cyan(✨vibing...✨), ✨vibes✨)
+plug in time
+time.wait(2000)
+loading.stop(drip.green(✨  ✨) + ✨ vibes checked ✨ + drip.dim(✨(vibes style)✨))
+
+loading.start(drip.purple(✨processing the timeline...✨), ✨moon✨)
+time.wait(2000)
+loading.stop(drip.green(✨  🌕✨) + ✨ timeline loaded ✨ + drip.dim(✨(moon style)✨))
+
+loading.start(drip.orange(✨consulting the council of AIs...✨), ✨dots✨)
+time.wait(2000)
+loading.stop(drip.green(✨  ✨) + ✨ council has spoken ✨ + drip.dim(✨(dots style)✨))
+
+spill ✨✨
+spill drip.bold(drip.green(✨drip check complete. the fit is immaculate. 💅✨))
