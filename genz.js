@@ -1344,6 +1344,112 @@ const stdlib = {
     };
   })(),
 
+  // ─────────────────────────────────────────────────────────────────────────
+  // CANVAS - graphics era 🎨
+  // ─────────────────────────────────────────────────────────────────────────
+  canvas: {
+    new: function(width, height, name) {
+      return {
+        _type: 'canvas',
+        name: name || 'canvas',
+        width: width || 800,
+        height: height || 600,
+        commands: [],
+        bg: '#1a1a2e',
+
+        // background color
+        vibe: function(color) { this.bg = color; return this; },
+
+        // fill color for shapes
+        fill: function(color) { this.commands.push({ type: 'fill', color }); return this; },
+
+        // stroke/outline color
+        stroke: function(color) { this.commands.push({ type: 'stroke', color }); return this; },
+
+        // line width
+        thicc: function(width) { this.commands.push({ type: 'lineWidth', width }); return this; },
+
+        // rectangle (outline)
+        box: function(x, y, w, h) { this.commands.push({ type: 'rect', x, y, w, h }); return this; },
+
+        // filled rectangle
+        fill_box: function(x, y, w, h) { this.commands.push({ type: 'fillRect', x, y, w, h }); return this; },
+
+        // circle (outline)
+        circle: function(x, y, r) { this.commands.push({ type: 'circle', x, y, r, fill: false }); return this; },
+
+        // filled circle
+        fill_circle: function(x, y, r) { this.commands.push({ type: 'circle', x, y, r, fill: true }); return this; },
+
+        // line
+        line: function(x1, y1, x2, y2) { this.commands.push({ type: 'line', x1, y1, x2, y2 }); return this; },
+
+        // text
+        text: function(str, x, y, size) { this.commands.push({ type: 'text', str, x, y, size: size || 16 }); return this; },
+
+        // triangle (outline)
+        triangle: function(x1, y1, x2, y2, x3, y3) {
+          this.commands.push({ type: 'triangle', points: [[x1,y1],[x2,y2],[x3,y3]], fill: false }); return this;
+        },
+
+        // filled triangle
+        fill_triangle: function(x1, y1, x2, y2, x3, y3) {
+          this.commands.push({ type: 'triangle', points: [[x1,y1],[x2,y2],[x3,y3]], fill: true }); return this;
+        },
+
+        // polygon (array of [x,y] pairs)
+        polygon: function(points) {
+          this.commands.push({ type: 'triangle', points, fill: false }); return this;
+        },
+        fill_polygon: function(points) {
+          this.commands.push({ type: 'triangle', points, fill: true }); return this;
+        },
+
+        // linear gradient
+        gradient: function(x1, y1, x2, y2, color1, color2) {
+          this.commands.push({ type: 'gradient', x1, y1, x2, y2, color1, color2 }); return this;
+        },
+
+        // arc (partial circle)
+        arc: function(x, y, r, startAngle, endAngle) {
+          this.commands.push({ type: 'arc', x, y, r, startAngle, endAngle, fill: false }); return this;
+        },
+        fill_arc: function(x, y, r, startAngle, endAngle) {
+          this.commands.push({ type: 'arc', x, y, r, startAngle, endAngle, fill: true }); return this;
+        },
+
+        // rounded rectangle
+        pill: function(x, y, w, h, radius) {
+          this.commands.push({ type: 'roundRect', x, y, w, h, radius: radius || 10 }); return this;
+        },
+        fill_pill: function(x, y, w, h, radius) {
+          this.commands.push({ type: 'fillRoundRect', x, y, w, h, radius: radius || 10 }); return this;
+        },
+
+        // clear canvas
+        clear: function() { this.commands.push({ type: 'clear' }); return this; },
+
+        // transform state
+        save: function() { this.commands.push({ type: 'save' }); return this; },
+        restore: function() { this.commands.push({ type: 'restore' }); return this; },
+        rotate: function(angle) { this.commands.push({ type: 'rotate', angle }); return this; },
+        translate: function(x, y) { this.commands.push({ type: 'translate', x, y }); return this; },
+        scale: function(sx, sy) { this.commands.push({ type: 'scale', x: sx, y: sy !== undefined ? sy : sx }); return this; },
+
+        // set global alpha
+        opacity: function(a) { this.commands.push({ type: 'alpha', a }); return this; },
+
+        // render to HTML file
+        serve: function(filename) {
+          const html = _generateCanvasHTML(this);
+          fs.writeFileSync(filename || 'output.html', html);
+          console.log(`🎨 Canvas saved to ${filename || 'output.html'} - open it in your browser bestie`);
+          return this;
+        }
+      };
+    }
+  },
+
   debug: {
     type_check: (x) => {
       if (x === null) return 'ghosted';
@@ -1362,6 +1468,387 @@ const stdlib = {
     },
   },
 };
+
+// ============================================================================
+// CANVAS HTML GENERATOR
+// ============================================================================
+
+function _generateCanvasHTML(screen) {
+  const cmdJS = screen.commands.map(cmd => {
+    switch(cmd.type) {
+      case 'fill': return `ctx.fillStyle = '${cmd.color}';`;
+      case 'stroke': return `ctx.strokeStyle = '${cmd.color}';`;
+      case 'lineWidth': return `ctx.lineWidth = ${cmd.width};`;
+      case 'rect': return `ctx.strokeRect(${cmd.x}, ${cmd.y}, ${cmd.w}, ${cmd.h});`;
+      case 'fillRect': return `ctx.fillRect(${cmd.x}, ${cmd.y}, ${cmd.w}, ${cmd.h});`;
+      case 'circle': return `ctx.beginPath(); ctx.arc(${cmd.x}, ${cmd.y}, ${cmd.r}, 0, Math.PI*2); ctx.${cmd.fill?'fill':'stroke'}();`;
+      case 'arc': return `ctx.beginPath(); ctx.arc(${cmd.x}, ${cmd.y}, ${cmd.r}, ${cmd.startAngle}, ${cmd.endAngle}); ctx.${cmd.fill?'fill':'stroke'}();`;
+      case 'line': return `ctx.beginPath(); ctx.moveTo(${cmd.x1}, ${cmd.y1}); ctx.lineTo(${cmd.x2}, ${cmd.y2}); ctx.stroke();`;
+      case 'text': return `ctx.font = '${cmd.size}px monospace'; ctx.fillText('${cmd.str}', ${cmd.x}, ${cmd.y});`;
+      case 'triangle': case 'polygon': {
+        const pts = cmd.points;
+        let js = `ctx.beginPath(); ctx.moveTo(${pts[0][0]}, ${pts[0][1]});`;
+        for (let i = 1; i < pts.length; i++) js += ` ctx.lineTo(${pts[i][0]}, ${pts[i][1]});`;
+        js += ` ctx.closePath(); ctx.${cmd.fill?'fill':'stroke'}();`;
+        return js;
+      }
+      case 'roundRect': return `ctx.beginPath(); ctx.roundRect(${cmd.x}, ${cmd.y}, ${cmd.w}, ${cmd.h}, ${cmd.radius}); ctx.stroke();`;
+      case 'fillRoundRect': return `ctx.beginPath(); ctx.roundRect(${cmd.x}, ${cmd.y}, ${cmd.w}, ${cmd.h}, ${cmd.radius}); ctx.fill();`;
+      case 'gradient': return `{ const g = ctx.createLinearGradient(${cmd.x1},${cmd.y1},${cmd.x2},${cmd.y2}); g.addColorStop(0,'${cmd.color1}'); g.addColorStop(1,'${cmd.color2}'); ctx.fillStyle = g; }`;
+      case 'clear': return `ctx.clearRect(0, 0, canvas.width, canvas.height);`;
+      case 'save': return `ctx.save();`;
+      case 'restore': return `ctx.restore();`;
+      case 'rotate': return `ctx.rotate(${cmd.angle});`;
+      case 'translate': return `ctx.translate(${cmd.x}, ${cmd.y});`;
+      case 'scale': return `ctx.scale(${cmd.x}, ${cmd.y});`;
+      case 'alpha': return `ctx.globalAlpha = ${cmd.a};`;
+      default: return '';
+    }
+  }).join('\n    ');
+
+  return `<!DOCTYPE html>
+<html>
+<head>
+  <title>${screen.name} - genz++ canvas</title>
+  <style>
+    body { margin:0; display:flex; justify-content:center; align-items:center; min-height:100vh; background:#0f0f1a; }
+    canvas { border:3px solid #ff6b9d; border-radius:12px; box-shadow:0 0 30px rgba(255,107,157,0.3); }
+  </style>
+</head>
+<body>
+  <canvas id="canvas" width="${screen.width}" height="${screen.height}"></canvas>
+  <script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = '${screen.bg}';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ${cmdJS}
+  </script>
+</body>
+</html>`;
+}
+
+// ============================================================================
+// SCREEN — mode 13h for the terminal 📺
+// ============================================================================
+//
+// A pixel buffer that renders to the terminal using half-block characters (▀).
+// Each terminal cell is 1 char wide and represents 2 vertical pixels by using
+// the upper-half-block character with separate fg (top pixel) and bg (bottom pixel).
+// This gives roughly 2:1 pixel density. Colors are 24-bit RGB via ANSI truecolor.
+//
+// Usage:
+//   plug in screen
+//   yeet s = screen.new(80, 40)   💀 80x40 pixels
+//   s.pixel(10, 5, 255, 0, 0)     💀 red pixel at (10, 5)
+//   s.render()                     💀 flush to terminal
+//
+
+// detect truecolor support — macOS Terminal.app only does 256 colors
+const _truecolor = (process.env.COLORTERM === 'truecolor' || process.env.COLORTERM === '24bit');
+
+// convert RGB to nearest ANSI 256-color index
+function _rgb256(r, g, b) {
+  // use grayscale ramp (232-255) when r≈g≈b
+  if (r === g && g === b) {
+    if (r < 8) return 16;      // black
+    if (r > 248) return 231;   // white
+    return 232 + Math.round((r - 8) / 247 * 23);
+  }
+  // 6x6x6 color cube (indices 16-231)
+  const ri = Math.round(r / 255 * 5);
+  const gi = Math.round(g / 255 * 5);
+  const bi = Math.round(b / 255 * 5);
+  return 16 + 36 * ri + 6 * gi + bi;
+}
+
+function _fgColor(r, g, b) {
+  return _truecolor ? `\x1b[38;2;${r};${g};${b}m` : `\x1b[38;5;${_rgb256(r,g,b)}m`;
+}
+function _bgColor(r, g, b) {
+  return _truecolor ? `\x1b[48;2;${r};${g};${b}m` : `\x1b[48;5;${_rgb256(r,g,b)}m`;
+}
+
+const _screen = (() => {
+  return {
+    // terminal dimensions (in characters) — use to auto-size screens
+    cols: function() { return process.stdout.columns || 80; },
+    rows: function() { return process.stdout.rows || 24; },
+
+    new: function(w, h, title) {
+      w = w || 80;
+      h = h % 2 === 0 ? h : h + 1; // ensure even height for half-blocks
+      const buf = new Uint8Array(w * h * 3); // RGB per pixel
+
+      const obj = {
+        _type: 'screen',
+        width: w,
+        height: h,
+        _buf: buf,
+        _title: title || null,
+
+        // ── pixel operations ──
+
+        pixel: function(x, y, r, g, b) {
+          x = x | 0; y = y | 0;
+          if (x < 0 || x >= w || y < 0 || y >= h) return this;
+          const i = (y * w + x) * 3;
+          buf[i] = r; buf[i+1] = g; buf[i+2] = b;
+          return this;
+        },
+
+        get: function(x, y) {
+          x = x | 0; y = y | 0;
+          if (x < 0 || x >= w || y < 0 || y >= h) return [0, 0, 0];
+          const i = (y * w + x) * 3;
+          return [buf[i], buf[i+1], buf[i+2]];
+        },
+
+        clear: function(r, g, b) {
+          r = r || 0; g = g || 0; b = b || 0;
+          for (let i = 0; i < w * h; i++) {
+            buf[i*3] = r; buf[i*3+1] = g; buf[i*3+2] = b;
+          }
+          return this;
+        },
+
+        fill: function(r, g, b) { return this.clear(r, g, b); },
+
+        // ── shape drawing ──
+
+        line: function(x0, y0, x1, y1, r, g, b) {
+          // bresenham
+          x0=x0|0; y0=y0|0; x1=x1|0; y1=y1|0;
+          const dx = Math.abs(x1-x0), sx = x0<x1?1:-1;
+          const dy = -Math.abs(y1-y0), sy = y0<y1?1:-1;
+          let err = dx+dy;
+          while(true) {
+            this.pixel(x0,y0,r,g,b);
+            if(x0===x1 && y0===y1) break;
+            const e2 = 2*err;
+            if(e2>=dy) { err+=dy; x0+=sx; }
+            if(e2<=dx) { err+=dx; y0+=sy; }
+          }
+          return this;
+        },
+
+        box: function(x, y, bw, bh, r, g, b) {
+          this.line(x,y,x+bw-1,y,r,g,b);
+          this.line(x+bw-1,y,x+bw-1,y+bh-1,r,g,b);
+          this.line(x+bw-1,y+bh-1,x,y+bh-1,r,g,b);
+          this.line(x,y+bh-1,x,y,r,g,b);
+          return this;
+        },
+
+        fill_box: function(x, y, bw, bh, r, g, b) {
+          x=x|0; y=y|0;
+          for(let py=y; py<y+bh; py++)
+            for(let px=x; px<x+bw; px++)
+              this.pixel(px,py,r,g,b);
+          return this;
+        },
+
+        circle: function(cx, cy, radius, r, g, b) {
+          // midpoint circle
+          cx=cx|0; cy=cy|0; radius=radius|0;
+          let x=radius, y=0, err=1-radius;
+          while(x>=y) {
+            this.pixel(cx+x,cy+y,r,g,b); this.pixel(cx-x,cy+y,r,g,b);
+            this.pixel(cx+x,cy-y,r,g,b); this.pixel(cx-x,cy-y,r,g,b);
+            this.pixel(cx+y,cy+x,r,g,b); this.pixel(cx-y,cy+x,r,g,b);
+            this.pixel(cx+y,cy-x,r,g,b); this.pixel(cx-y,cy-x,r,g,b);
+            y++;
+            if(err<0) { err+=2*y+1; } else { x--; err+=2*(y-x)+1; }
+          }
+          return this;
+        },
+
+        fill_circle: function(cx, cy, radius, r, g, b) {
+          cx=cx|0; cy=cy|0; radius=radius|0;
+          for(let py=-radius; py<=radius; py++)
+            for(let px=-radius; px<=radius; px++)
+              if(px*px+py*py<=radius*radius)
+                this.pixel(cx+px,cy+py,r,g,b);
+          return this;
+        },
+
+        text: function(str, x, y, r, g, b) {
+          // 3x5 pixel font for ascii 32-126
+          const font = _miniFont;
+          str = String(str);
+          for (let ci = 0; ci < str.length; ci++) {
+            const ch = str.charCodeAt(ci) - 32;
+            const glyph = font[ch] || font[0];
+            for (let gy = 0; gy < 5; gy++)
+              for (let gx = 0; gx < 3; gx++)
+                if ((glyph[gy] >> (2-gx)) & 1)
+                  this.pixel(x + ci*4 + gx, y + gy, r, g, b);
+          }
+          return this;
+        },
+
+        // ── rendering ──
+
+        render: function() {
+          // move cursor to top-left
+          let out = '\x1b[H';
+          if (this._title) out += `\x1b[2K\x1b[1m ${this._title}\x1b[0m\n`;
+          // render using half-block characters: ▀
+          // each row of chars covers 2 pixel rows (top = fg, bottom = bg)
+          let prevTr=-1,prevTg=-1,prevTb=-1,prevBr=-1,prevBg=-1,prevBb=-1;
+          for (let y = 0; y < h; y += 2) {
+            let row = '';
+            prevTr=-1; // reset per-row to avoid cross-row artifacts
+            for (let x = 0; x < w; x++) {
+              const ti = (y * w + x) * 3;       // top pixel
+              const bi = ((y+1) * w + x) * 3;   // bottom pixel
+              const tr = buf[ti], tg = buf[ti+1], tb = buf[ti+2];
+              const br = buf[bi], bg = buf[bi+1], bb = buf[bi+2];
+              // skip escape if colors are same as last cell
+              if (tr===prevTr&&tg===prevTg&&tb===prevTb&&br===prevBr&&bg===prevBg&&bb===prevBb) {
+                row += '▀';
+              } else {
+                row += _fgColor(tr,tg,tb) + _bgColor(br,bg,bb) + '▀';
+                prevTr=tr; prevTg=tg; prevTb=tb;
+                prevBr=br; prevBg=bg; prevBb=bb;
+              }
+            }
+            out += row + '\n';
+          }
+          out += '\x1b[0m';
+          process.stdout.write(out);
+          return this;
+        },
+
+        // clear terminal and hide cursor before animation
+        init: function() {
+          process.stdout.write('\x1b[2J\x1b[?25l');
+          return this;
+        },
+
+        // show cursor and reset terminal after animation
+        done: function() {
+          process.stdout.write('\x1b[?25h\x1b[0m');
+          return this;
+        },
+
+        // export to PPM (simple image format)
+        save_ppm: function(filename) {
+          let data = `P6\n${w} ${h}\n255\n`;
+          const header = Buffer.from(data, 'ascii');
+          const pixels = Buffer.from(buf.buffer, buf.byteOffset, buf.byteLength);
+          fs.writeFileSync(filename || 'output.ppm', Buffer.concat([header, pixels]));
+          return this;
+        }
+      };
+      return obj;
+    }
+  };
+})();
+
+// ─── tiny 3x5 pixel font ─────────────────────────────────────
+// Each glyph is 5 rows of 3-bit bitmaps (MSB = leftmost pixel)
+// Covers ASCII 32 (space) through 126 (~)
+const _miniFont = [
+  [0,0,0,0,0],             // 32 space
+  [2,2,2,0,2],             // 33 !
+  [5,5,0,0,0],             // 34 "
+  [5,7,5,7,5],             // 35 #
+  [3,6,3,6,3],             // 36 $
+  [5,1,2,4,5],             // 37 %
+  [2,5,2,5,3],             // 38 &
+  [2,2,0,0,0],             // 39 '
+  [1,2,2,2,1],             // 40 (
+  [4,2,2,2,4],             // 41 )
+  [5,2,5,0,0],             // 42 *
+  [0,2,7,2,0],             // 43 +
+  [0,0,0,2,4],             // 44 ,
+  [0,0,7,0,0],             // 45 -
+  [0,0,0,0,2],             // 46 .
+  [1,1,2,4,4],             // 47 /
+  [7,5,5,5,7],             // 48 0
+  [2,6,2,2,7],             // 49 1
+  [7,1,7,4,7],             // 50 2
+  [7,1,7,1,7],             // 51 3
+  [5,5,7,1,1],             // 52 4
+  [7,4,7,1,7],             // 53 5
+  [7,4,7,5,7],             // 54 6
+  [7,1,2,2,2],             // 55 7
+  [7,5,7,5,7],             // 56 8
+  [7,5,7,1,7],             // 57 9
+  [0,2,0,2,0],             // 58 :
+  [0,2,0,2,4],             // 59 ;
+  [1,2,4,2,1],             // 60 <
+  [0,7,0,7,0],             // 61 =
+  [4,2,1,2,4],             // 62 >
+  [7,1,3,0,2],             // 63 ?
+  [7,5,7,4,7],             // 64 @
+  [7,5,7,5,5],             // 65 A
+  [6,5,6,5,6],             // 66 B
+  [7,4,4,4,7],             // 67 C
+  [6,5,5,5,6],             // 68 D
+  [7,4,7,4,7],             // 69 E
+  [7,4,7,4,4],             // 70 F
+  [7,4,5,5,7],             // 71 G
+  [5,5,7,5,5],             // 72 H
+  [7,2,2,2,7],             // 73 I
+  [1,1,1,5,7],             // 74 J
+  [5,5,6,5,5],             // 75 K
+  [4,4,4,4,7],             // 76 L
+  [5,7,7,5,5],             // 77 M
+  [5,7,7,7,5],             // 78 N
+  [7,5,5,5,7],             // 79 O
+  [7,5,7,4,4],             // 80 P
+  [7,5,5,7,3],             // 81 Q
+  [7,5,7,6,5],             // 82 R
+  [7,4,7,1,7],             // 83 S
+  [7,2,2,2,2],             // 84 T
+  [5,5,5,5,7],             // 85 U
+  [5,5,5,5,2],             // 86 V
+  [5,5,7,7,5],             // 87 W
+  [5,5,2,5,5],             // 88 X
+  [5,5,2,2,2],             // 89 Y
+  [7,1,2,4,7],             // 90 Z
+  [3,2,2,2,3],             // 91 [
+  [4,4,2,1,1],             // 92 backslash
+  [6,2,2,2,6],             // 93 ]
+  [2,5,0,0,0],             // 94 ^
+  [0,0,0,0,7],             // 95 _
+  [4,2,0,0,0],             // 96 `
+  [0,3,5,5,3],             // 97 a
+  [4,6,5,5,6],             // 98 b
+  [0,3,4,4,3],             // 99 c
+  [1,3,5,5,3],             // 100 d
+  [0,7,5,6,3],             // 101 e
+  [1,2,7,2,2],             // 102 f
+  [0,3,5,3,6],             // 103 g
+  [4,6,5,5,5],             // 104 h
+  [2,0,2,2,2],             // 105 i
+  [1,0,1,5,2],             // 106 j
+  [4,5,6,5,5],             // 107 k
+  [2,2,2,2,1],             // 108 l
+  [0,7,7,5,5],             // 109 m
+  [0,6,5,5,5],             // 110 n
+  [0,7,5,5,7],             // 111 o
+  [0,6,5,6,4],             // 112 p
+  [0,3,5,3,1],             // 113 q
+  [0,3,4,4,4],             // 114 r
+  [0,3,6,1,6],             // 115 s
+  [2,7,2,2,1],             // 116 t
+  [0,5,5,5,3],             // 117 u
+  [0,5,5,5,2],             // 118 v
+  [0,5,5,7,5],             // 119 w
+  [0,5,2,2,5],             // 120 x
+  [0,5,5,3,6],             // 121 y
+  [0,7,2,4,7],             // 122 z
+  [1,2,6,2,1],             // 123 {
+  [2,2,2,2,2],             // 124 |
+  [4,2,3,2,4],             // 125 }
+  [0,5,2,0,0],             // 126 ~
+];
+
+// Wire screen into stdlib
+stdlib.screen = _screen;
 
 // ============================================================================
 // INTERPRETER
@@ -1650,7 +2137,7 @@ class Interpreter {
           args.push(await this.evaluate(arg));
         }
 
-        const result = method(...args);
+        const result = method.call(obj, ...args);
         // Handle promises (for time.nap)
         if (result instanceof Promise) {
           return await result;

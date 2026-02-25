@@ -1,0 +1,112 @@
+💀 ═══════════════════════════════════════════════════════════════
+💀 FIRE — classic demoscene fire effect in the terminal
+💀 ═══════════════════════════════════════════════════════════════
+💀 this is what the smart toaster sees when it dreams
+💀 ═══════════════════════════════════════════════════════════════
+
+plug in screen
+plug in math
+plug in random
+plug in time
+plug in list
+
+💀 auto-fit to terminal, capped at 60x40
+yeet w = screen.cols()
+sus w > 60 tho
+    yeet w = 60
+bet
+yeet h = (screen.rows() - 2) * 2
+sus h > 40 tho
+    yeet h = 40
+bet
+yeet s = screen.new(w, h, ✨💀 genz++ fire 💀✨)
+
+💀 fire buffer — heat values 0-255
+yeet buf_size = w * h
+yeet fire = list.fill(buf_size, 0)
+
+💀 fire palette — map heat to RGB
+💀 black -> red -> yellow -> white
+bruh heat_to_rgb(heat) tho
+    sus heat < 64 tho
+        its giving [heat * 4, 0, 0]
+    nah sus heat < 128 tho
+        its giving [255, (heat - 64) * 4, 0]
+    nah sus heat < 192 tho
+        its giving [255, 255, (heat - 128) * 4]
+    nah
+        its giving [255, 255, 255]
+    bet
+bet
+
+s.init()
+
+yeet frame = 0
+yeet frames = 150
+
+vibe check frame < frames tho
+    💀 set bottom row to random hot values
+    yeet x = 0
+    vibe check x < w tho
+        yeet idx = (h - 1) * w + x
+        fire[idx] = random.pick(160, 255)
+        yeet x = x + 1
+    bet
+
+    💀 propagate fire upward with cooling
+    yeet y = 0
+    vibe check y < h - 1 tho
+        yeet x = 0
+        vibe check x < w tho
+            yeet idx = (y + 1) * w + x
+
+            💀 average neighbors from row below + some randomness
+            yeet left = fire[idx - 1]
+            sus x be 0 tho
+                yeet left = fire[idx]
+            bet
+            yeet right = fire[idx + 1]
+            sus x be w - 1 tho
+                yeet right = fire[idx]
+            bet
+            yeet below = fire[idx]
+            yeet below2 = fire[idx]
+            sus y + 2 < h tho
+                yeet below2 = fire[(y + 2) * w + x]
+            bet
+
+            yeet avg = (left + right + below + below2) / 4
+            yeet cool = random.pick(2, 14)
+            yeet heat = avg - cool
+            sus heat < 0 tho
+                yeet heat = 0
+            bet
+            fire[y * w + x] = math.humbled(heat)
+
+            yeet x = x + 1
+        bet
+        yeet y = y + 1
+    bet
+
+    💀 render to screen
+    yeet y = 0
+    vibe check y < h tho
+        yeet x = 0
+        vibe check x < w tho
+            yeet heat = fire[y * w + x]
+            yeet rgb = heat_to_rgb(heat)
+            s.pixel(x, y, rgb[0], rgb[1], rgb[2])
+            yeet x = x + 1
+        bet
+        yeet y = y + 1
+    bet
+
+    s.render()
+    time.nap(30)
+    yeet frame = frame + 1
+bet
+
+s.done()
+spill ✨✨
+spill ✨💀 fire extinguished. ✨ + frames + ✨ frames rendered.✨
+spill ✨💀 the toaster has woken up.✨

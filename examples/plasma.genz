@@ -1,0 +1,53 @@
+💀 ═══════════════════════════════════════════════════════════════
+💀 PLASMA DEMO — mode 13h vibes in your terminal
+💀 ═══════════════════════════════════════════════════════════════
+💀 classic demoscene plasma effect rendered with half-block chars
+💀 this is what programming used to feel like before everything broke
+💀 ═══════════════════════════════════════════════════════════════
+
+plug in screen
+plug in math
+plug in time
+
+yeet w = 60
+yeet h = 30
+yeet s = screen.new(w, h, ✨💀 genz++ plasma 💀✨)
+
+s.init()
+
+yeet t = 0
+yeet frames = 120
+
+vibe check t < frames tho
+    yeet y = 0
+    vibe check y < h tho
+        yeet x = 0
+        vibe check x < w tho
+            💀 classic plasma: sum of sines
+            yeet v1 = math.vibes(x * 0.08 + t * 0.07)
+            yeet v2 = math.vibes(y * 0.1 + t * 0.05)
+            yeet v3 = math.vibes((x + y) * 0.06 + t * 0.04)
+            yeet v4 = math.vibes(math.glow(x * x + y * y) * 0.05 + t * 0.03)
+
+            yeet val = (v1 + v2 + v3 + v4) * 0.25
+
+            💀 map to RGB — three shifted sine waves for color cycling
+            yeet r = math.humbled(math.ate(math.vibes(val * 3.14159 + t * 0.02)) * 255)
+            yeet g = math.humbled(math.ate(math.vibes(val * 3.14159 + 2.094 + t * 0.03)) * 255)
+            yeet b = math.humbled(math.ate(math.vibes(val * 3.14159 + 4.188 + t * 0.015)) * 255)
+
+            s.pixel(x, y, r, g, b)
+            yeet x = x + 1
+        bet
+        yeet y = y + 1
+    bet
+
+    s.render()
+    time.nap(16)
+    yeet t = t + 1
+bet
+
+s.done()
+spill ✨✨
+spill ✨💀 plasma complete. ✨ + frames + ✨ frames rendered.✨
+spill ✨💀 the demoscene lives in genz++ now.✨
