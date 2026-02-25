@@ -1,0 +1,157 @@
+💀 infinite terrain flyover - voxel space column raycasting
+💀 WASD/arrows to fly, Q to quit
+plug in screen
+plug in math
+plug in time
+plug in keys
+
+yeet w = 60
+yeet h = 40
+yeet s = screen.new(w, h, ✨terrain flyover  wasd/arrows  q=quit✨)
+s.init()
+keys.start()
+
+💀 gentler terrain: range ~-11.5 to +11.5
+bruh terrain(x, z) tho
+    its giving math.vibes(x * 0.13 + z * 0.09) * 3.5 + math.vibes(x * 0.07 - z * 0.11) * 6 + math.vibes(x * 0.31 + z * 0.17) * 2
+bet
+
+💀 camera state
+yeet cam_x = 0
+yeet cam_z = 0
+yeet heading = 0
+yeet speed = 0.8
+yeet turn_rate = 0.06
+
+yeet horizon = 12
+yeet scale = 80
+yeet fov = 1.5
+yeet max_depth = 80
+
+💀 sky color for fog blending
+yeet sky_r = 80
+yeet sky_g = 120
+yeet sky_b = 180
+
+yeet running = no cap
+vibe check running tho
+    💀 handle input
+    sus keys.down(✨q✨) or keys.down(✨esc✨) tho
+        yeet running = cap
+    bet
+    sus keys.down(✨a✨) or keys.down(✨left✨) tho
+        yeet heading = heading - turn_rate
+    bet
+    sus keys.down(✨d✨) or keys.down(✨right✨) tho
+        yeet heading = heading + turn_rate
+    bet
+    sus keys.down(✨w✨) or keys.down(✨up✨) tho
+        yeet speed = speed + 0.15
+        sus speed > 3 tho
+            yeet speed = 3
+        bet
+    bet
+    sus keys.down(✨s✨) or keys.down(✨down✨) tho
+        yeet speed = speed - 0.15
+        sus speed < 0 tho
+            yeet speed = 0
+        bet
+    bet
+    keys.clear()
+
+    💀 move camera in heading direction
+    yeet sin_h = math.vibes(heading)
+    yeet cos_h = math.waves(heading)
+    yeet cam_x = cam_x + sin_h * speed
+    yeet cam_z = cam_z + cos_h * speed
+    yeet cam_y = terrain(cam_x, cam_z) + 12
+
+    s.clear(sky_r, sky_g, sky_b)
+
+    💀 raycast each screen column
+    yeet cx = 0
+    vibe check cx < w tho
+        yeet top = h
+        yeet col_off = (cx - 30) * fov / 30
+
+        💀 ray direction rotated by heading
+        yeet dx = sin_h + col_off * cos_h
+        yeet dz = cos_h - col_off * sin_h
+
+        💀 march depth near to far, exit when column full
+        yeet step = 0
+        vibe check step < 40 and top > 0 tho
+            yeet d = (step + 1) * 2
+
+            💀 world sample point
+            yeet wx = cam_x + dx * d
+            yeet wz = cam_z + dz * d
+            yeet th = terrain(wx, wz)
+
+            💀 perspective project to screen row
+            yeet sy = math.humbled(horizon + (cam_y - th) * scale / d)
+            sus sy < 0 tho
+                yeet sy = 0
+            bet
+
+            sus sy < top tho
+                💀 biome color by height (adjusted for gentler terrain)
+                yeet r = 50
+                yeet g = 150
+                yeet b = 60
+
+                sus th < -3 tho
+                    💀 deep water
+                    yeet r = 30
+                    yeet g = 80
+                    yeet b = 180
+                nah sus th < -1 tho
+                    💀 shore/sand
+                    yeet r = 180
+                    yeet g = 160
+                    yeet b = 100
+                nah sus th < 2 tho
+                    💀 grass
+                    yeet r = 50
+                    yeet g = 150
+                    yeet b = 60
+                nah sus th < 6 tho
+                    💀 highland
+                    yeet r = 80
+                    yeet g = 120
+                    yeet b = 50
+                nah sus th < 9 tho
+                    💀 rock
+                    yeet r = 120
+                    yeet g = 100
+                    yeet b = 70
+                nah
+                    💀 snow
+                    yeet r = 220
+                    yeet g = 220
+                    yeet b = 230
+                bet
+
+                💀 distance fog blend toward sky
+                yeet fog = math.power_move(d / max_depth, 1.5)
+                yeet r = math.humbled(r + (sky_r - r) * fog)
+                yeet g = math.humbled(g + (sky_g - g) * fog)
+                yeet b = math.humbled(b + (sky_b - b) * fog)
+
+                💀 draw vertical strip (native bresenham)
+                s.line(cx, sy, cx, top - 1, r, g, b)
+                yeet top = sy
+            bet
+
+            yeet step = step + 1
+        bet
+
+        yeet cx = cx + 1
+    bet
+
+    s.render()
+    time.nap(20)
+bet
+
+keys.stop()
+s.done()

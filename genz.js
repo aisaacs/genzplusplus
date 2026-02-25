@@ -1467,6 +1467,62 @@ const stdlib = {
       return x;
     },
   },
+
+  // ── keys: non-blocking keyboard input for games/demos ──
+  keys: (() => {
+    const _pressed = new Set();
+    let _listener = null;
+    let _active = false;
+
+    function _parse(data) {
+      // ctrl-c → exit immediately
+      if (data === '\x03') {
+        process.stdout.write('\x1b[?25h\x1b[0m');
+        process.exit();
+      }
+      if (data === '\x1b[A') return 'up';
+      if (data === '\x1b[B') return 'down';
+      if (data === '\x1b[C') return 'right';
+      if (data === '\x1b[D') return 'left';
+      if (data === '\x1b') return 'esc';
+      if (data === ' ') return 'space';
+      if (data === '\r') return 'enter';
+      if (data === '\x7f') return 'backspace';
+      return data.toLowerCase();
+    }
+
+    return {
+      start: function() {
+        if (_active) return;
+        if (process.stdin.isTTY) {
+          process.stdin.setRawMode(true);
+          process.stdin.resume();
+          process.stdin.setEncoding('utf8');
+          _active = true;
+          _listener = (data) => { _pressed.add(_parse(data)); };
+          process.stdin.on('data', _listener);
+        }
+      },
+      stop: function() {
+        if (_active && process.stdin.isTTY) {
+          process.stdin.setRawMode(false);
+          process.stdin.pause();
+          if (_listener) {
+            process.stdin.removeListener('data', _listener);
+            _listener = null;
+          }
+          _active = false;
+        }
+      },
+      down: function(name) { return _pressed.has(name); },
+      clear: function() { _pressed.clear(); },
+      last: function() {
+        const arr = [..._pressed];
+        return arr.length > 0 ? arr[arr.length - 1] : '';
+      },
+      any: function() { return _pressed.size > 0; },
+    };
+  })(),
 };
 
 // ============================================================================
