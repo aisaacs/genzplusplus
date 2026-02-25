@@ -100,6 +100,59 @@ The repo includes an infinite, AI-powered choose-your-own-adventure game where y
 ANTHROPIC_API_KEY=sk-ant-... node genz.js examples/adventure.genz
 ```
 
+## Install
+
+### npm (global)
+
+```bash
+npm install -g genz-lang
+```
+
+Now you can run `genz` from anywhere:
+
+```bash
+genz examples/hello_world.genz
+genz                              # starts the REPL
+genz --version
+```
+
+### Run without installing
+
+```bash
+npx genz-lang examples/hello_world.genz
+```
+
+### Make .genz files executable
+
+Add the shebang to the top of your file:
+
+```
+#!/usr/bin/env genz
+spill ✨i am a real program now✨
+```
+
+Then `chmod +x` it and run it directly:
+
+```bash
+chmod +x my_script.genz
+./my_script.genz
+```
+
+## VS Code Extension
+
+Syntax highlighting, a dark theme, and snippets. See [`vscode-genz/`](vscode-genz/) for the full extension.
+
+### Quick install
+
+```bash
+cd vscode-genz
+npm install -g @vscode/vsce    # if you don't have vsce
+vsce package                   # creates genz-lang-1.0.0.vsix
+code --install-extension genz-lang-1.0.0.vsix
+```
+
+You get: syntax highlighting for all keywords and emoji tokens, the "genz++ Dark (The Last Programmer)" color theme, 13 code snippets (type `bruh` + tab for a function, `sus` + tab for an if, etc.), auto-closing sparkle strings, and code folding between `tho` and `bet`.
+
 ## File Extensions
 
 `.genz` or `.gz` — yes, we know about gzip, and no, we do not care.
@@ -120,13 +173,15 @@ They are not configurable. You will be called bestie.
 
 - **[LANGUAGE.md](LANGUAGE.md)** — Complete language reference. Every keyword, operator, and module documented.
 - **[EXAMPLES.md](EXAMPLES.md)** — Annotated walkthrough of all example programs.
+- **[vscode-genz/README.md](vscode-genz/README.md)** — VS Code extension docs.
 
 ## Requirements
 
-- Node.js (any recent version)
+- Node.js >= 18
 - That's it
 - No, seriously, that's the whole dependency list
 - The runtime is one file
+- Zero npm dependencies
 
 ## Contributing
 

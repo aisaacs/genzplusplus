@@ -1,0 +1,91 @@
+{
+  "Function": {
+    "prefix": "bruh",
+    "body": [
+      "bruh ${1:name}(${2:params}) tho",
+      "    ${0}",
+      "bet"
+    ],
+    "description": "Declare a function"
+  },
+  "If": {
+    "prefix": "sus",
+    "body": [
+      "sus ${1:condition} tho",
+      "    ${0}",
+      "bet"
+    ],
+    "description": "If statement"
+  },
+  "If/Else": {
+    "prefix": "susnah",
+    "body": [
+      "sus ${1:condition} tho",
+      "    ${2}",
+      "nah",
+      "    ${0}",
+      "bet"
+    ],
+    "description": "If/Else statement"
+  },
+  "While Loop": {
+    "prefix": "vibe",
+    "body": [
+      "vibe check ${1:condition} tho",
+      "    ${0}",
+      "bet"
+    ],
+    "description": "While loop"
+  },
+  "Variable": {
+    "prefix": "yeet",
+    "body": "yeet ${1:name} = ${0}",
+    "description": "Declare a variable"
+  },
+  "Print": {
+    "prefix": "spill",
+    "body": "spill ${0}",
+    "description": "Print output"
+  },
+  "Return": {
+    "prefix": "its",
+    "body": "its giving ${0}",
+    "description": "Return a value"
+  },
+  "Import": {
+    "prefix": "plug",
+    "body": "plug in ${1|math,tea,random,list,time,convert,net,obj,env,drip,loading,debug|}",
+    "description": "Import a stdlib module"
+  },
+  "Input": {
+    "prefix": "input",
+    "body": "yeet ${1:name} = 👀 ✨${2:prompt}✨",
+    "description": "Read user input"
+  },
+  "For Loop (manual)": {
+    "prefix": "forloop",
+    "body": [
+      "yeet ${1:i} = ${2:0}",
+      "vibe check ${1:i} < ${3:10} tho",
+      "    ${0}",
+      "    yeet ${1:i} = ${1:i} + 1",
+      "bet"
+    ],
+    "description": "For loop (manual while loop pattern)"
+  },
+  "Object": {
+    "prefix": "objfrom",
+    "body": "yeet ${1:name} = obj.from(✨${2:key}✨, ${3:value})",
+    "description": "Create an object"
+  },
+  "HTTP GET": {
+    "prefix": "netget",
+    "body": "yeet ${1:data} = net.get(✨${2:url}✨)",
+    "description": "HTTP GET request"
+  },
+  "Colored Output": {
+    "prefix": "drip",
+    "body": "spill drip.${1|red,green,blue,yellow,cyan,magenta,orange,pink,purple,gold,bold,dim,italic,underline,rainbow|}(✨${0}✨)",
+    "description": "Print with color/style"
+  }
+}

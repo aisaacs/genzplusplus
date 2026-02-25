@@ -1,0 +1,30 @@
+{
+  "comments": {
+    "lineComment": "💀"
+  },
+  "brackets": [
+    ["(", ")"],
+    ["[", "]"]
+  ],
+  "autoClosingPairs": [
+    { "open": "(", "close": ")" },
+    { "open": "[", "close": "]" },
+    { "open": "✨", "close": "✨" }
+  ],
+  "surroundingPairs": [
+    ["(", ")"],
+    ["[", "]"],
+    ["✨", "✨"]
+  ],
+  "folding": {
+    "markers": {
+      "start": "\\b(sus|vibe check|bruh)\\b.*\\btho\\b",
+      "end": "\\bbet\\b"
+    }
+  },
+  "wordPattern": "(-?\\d*\\.\\d\\w*)|([^\\`\\~\\!\\@\\#\\%\\^\\&\\*\\(\\)\\-\\=\\+\\[\\{\\]\\}\\\\\\|\\;\\:\\'\\\"\\,\\.\\<\\>\\/\\?\\s]+)",
+  "indentationRules": {
+    "increaseIndentPattern": "\\b(sus|nah|nah sus|vibe check|bruh)\\b.*\\btho\\b",
+    "decreaseIndentPattern": "^\\s*(bet|nah)\\b"
+  }
+}

@@ -1831,11 +1831,18 @@ async function main() {
     console.log('genz++ interpreter v1.0');
     console.log('');
     console.log('Usage:');
-    console.log('  node genz.js                  Start the REPL');
-    console.log('  node genz.js <file.genz>      Run a file');
-    console.log('  node genz.js <file.gz>        Run a file (.gz = genz, not gzip)');
+    console.log('  genz                          Start the REPL');
+    console.log('  genz <file.genz>              Run a file');
+    console.log('  genz <file.gz>                Run a file (.gz = genz, not gzip)');
+    console.log('  genz --version                Show version');
     console.log('');
     console.log('No cap, this is the future of programming 💯');
+    return;
+  }
+
+  if (args[0] === '--version' || args[0] === '-v') {
+    const pkg = require('./package.json');
+    console.log(`genz++ v${pkg.version}`);
     return;
   }
 

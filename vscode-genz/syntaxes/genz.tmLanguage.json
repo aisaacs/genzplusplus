@@ -1,0 +1,153 @@
+{
+  "scopeName": "source.genz",
+  "name": "genz++",
+  "fileTypes": ["genz", "gz"],
+  "patterns": [
+    { "include": "#comments" },
+    { "include": "#strings" },
+    { "include": "#booleans" },
+    { "include": "#null" },
+    { "include": "#numbers" },
+    { "include": "#keywords-control" },
+    { "include": "#keywords-declaration" },
+    { "include": "#keywords-io" },
+    { "include": "#keywords-return" },
+    { "include": "#keywords-import" },
+    { "include": "#operators" },
+    { "include": "#modules" },
+    { "include": "#function-call" },
+    { "include": "#input" },
+    { "include": "#punctuation" }
+  ],
+  "repository": {
+    "comments": {
+      "match": "💀.*$",
+      "name": "comment.line.genz"
+    },
+    "strings": {
+      "begin": "✨",
+      "end": "✨",
+      "name": "string.quoted.sparkle.genz",
+      "patterns": [
+        {
+          "match": ".",
+          "name": "string.quoted.sparkle.genz"
+        }
+      ]
+    },
+    "booleans": {
+      "patterns": [
+        {
+          "match": "💯|\\bno cap\\b",
+          "name": "constant.language.boolean.true.genz"
+        },
+        {
+          "match": "🧢|\\bcap\\b",
+          "name": "constant.language.boolean.false.genz"
+        }
+      ]
+    },
+    "null": {
+      "match": "\\bghosted\\b",
+      "name": "constant.language.null.genz"
+    },
+    "numbers": {
+      "match": "\\b\\d+(\\.\\d+)?\\b",
+      "name": "constant.numeric.genz"
+    },
+    "keywords-control": {
+      "patterns": [
+        {
+          "match": "\\b(sus|nah|tho|bet)\\b",
+          "name": "keyword.control.genz"
+        },
+        {
+          "match": "\\bvibe check\\b",
+          "name": "keyword.control.loop.genz"
+        }
+      ]
+    },
+    "keywords-declaration": {
+      "patterns": [
+        {
+          "match": "\\byeet\\b",
+          "name": "keyword.declaration.variable.genz"
+        },
+        {
+          "match": "\\bbruh\\b",
+          "name": "keyword.declaration.function.genz"
+        }
+      ]
+    },
+    "keywords-io": {
+      "match": "\\bspill\\b",
+      "name": "keyword.other.io.genz"
+    },
+    "keywords-return": {
+      "match": "\\bits giving\\b",
+      "name": "keyword.control.return.genz"
+    },
+    "keywords-import": {
+      "match": "\\bplug in\\b",
+      "name": "keyword.control.import.genz"
+    },
+    "operators": {
+      "patterns": [
+        {
+          "match": "\\b(be|aint)\\b",
+          "name": "keyword.operator.comparison.genz"
+        },
+        {
+          "match": "\\b(and|or|not)\\b",
+          "name": "keyword.operator.logical.genz"
+        },
+        {
+          "match": "[+\\-*/%]",
+          "name": "keyword.operator.arithmetic.genz"
+        },
+        {
+          "match": "(<=|>=|<|>)",
+          "name": "keyword.operator.comparison.symbol.genz"
+        },
+        {
+          "match": "=",
+          "name": "keyword.operator.assignment.genz"
+        }
+      ]
+    },
+    "modules": {
+      "match": "\\b(math|tea|random|list|time|convert|net|obj|env|drip|loading|debug)\\b",
+      "name": "support.class.module.genz"
+    },
+    "function-call": {
+      "match": "\\b([a-zA-Z_][a-zA-Z0-9_]*)\\s*(?=\\()",
+      "captures": {
+        "1": { "name": "entity.name.function.genz" }
+      }
+    },
+    "input": {
+      "match": "👀",
+      "name": "keyword.other.input.genz"
+    },
+    "punctuation": {
+      "patterns": [
+        {
+          "match": "[\\(\\)]",
+          "name": "punctuation.paren.genz"
+        },
+        {
+          "match": "[\\[\\]]",
+          "name": "punctuation.bracket.genz"
+        },
+        {
+          "match": ",",
+          "name": "punctuation.comma.genz"
+        },
+        {
+          "match": "\\.",
+          "name": "punctuation.dot.genz"
+        }
+      ]
+    }
+  }
+}

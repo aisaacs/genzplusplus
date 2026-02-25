@@ -1,0 +1,64 @@
+{
+  "name": "genz-lang",
+  "displayName": "genz++ 💀",
+  "description": "Syntax highlighting and language support for genz++ — the programming language the AIs chose.",
+  "version": "1.0.0",
+  "publisher": "",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Themes"
+  ],
+  "keywords": [
+    "genz",
+    "genz++",
+    "esoteric",
+    "programming-language",
+    "the-last-programmer"
+  ],
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "license": "MIT",
+  "icon": "icon.png",
+  "contributes": {
+    "languages": [
+      {
+        "id": "genz",
+        "aliases": [
+          "genz++",
+          "GenZ++",
+          "genz"
+        ],
+        "extensions": [
+          ".genz",
+          ".gz"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "genz",
+        "scopeName": "source.genz",
+        "path": "./syntaxes/genz.tmLanguage.json"
+      }
+    ],
+    "themes": [
+      {
+        "label": "genz++ Dark (The Last Programmer)",
+        "uiTheme": "vs-dark",
+        "path": "./themes/genz-dark.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "genz",
+        "path": "./snippets.json"
+      }
+    ]
+  }
+}

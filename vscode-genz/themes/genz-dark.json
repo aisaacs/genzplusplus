@@ -1,0 +1,172 @@
+{
+  "name": "genz++ Dark (The Last Programmer)",
+  "type": "dark",
+  "colors": {
+    "editor.background": "#0d1117",
+    "editor.foreground": "#c9d1d9",
+    "editorCursor.foreground": "#ff6b6b",
+    "editor.lineHighlightBackground": "#161b22",
+    "editor.selectionBackground": "#264f78",
+    "editorLineNumber.foreground": "#484f58",
+    "editorLineNumber.activeForeground": "#ff6b6b",
+    "terminal.foreground": "#c9d1d9",
+    "terminal.ansiBlack": "#0d1117",
+    "terminal.ansiRed": "#ff7b72",
+    "terminal.ansiGreen": "#7ee787",
+    "terminal.ansiYellow": "#ffa657",
+    "terminal.ansiBlue": "#79c0ff",
+    "terminal.ansiMagenta": "#d2a8ff",
+    "terminal.ansiCyan": "#a5d6ff",
+    "terminal.ansiWhite": "#c9d1d9",
+    "sideBar.background": "#010409",
+    "sideBar.foreground": "#c9d1d9",
+    "activityBar.background": "#0d1117",
+    "statusBar.background": "#161b22",
+    "statusBar.foreground": "#ff6b6b",
+    "titleBar.activeBackground": "#0d1117"
+  },
+  "tokenColors": [
+    {
+      "name": "Comments (💀)",
+      "scope": "comment.line.genz",
+      "settings": {
+        "foreground": "#6e7681",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "Strings (✨sparkles✨)",
+      "scope": "string.quoted.sparkle.genz",
+      "settings": {
+        "foreground": "#a5d6ff"
+      }
+    },
+    {
+      "name": "Booleans (💯 🧢)",
+      "scope": [
+        "constant.language.boolean.true.genz",
+        "constant.language.boolean.false.genz"
+      ],
+      "settings": {
+        "foreground": "#ff7b72",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "Null (ghosted)",
+      "scope": "constant.language.null.genz",
+      "settings": {
+        "foreground": "#ff7b72",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "Numbers",
+      "scope": "constant.numeric.genz",
+      "settings": {
+        "foreground": "#ffa657"
+      }
+    },
+    {
+      "name": "Control Flow (sus, nah, tho, bet, vibe check)",
+      "scope": [
+        "keyword.control.genz",
+        "keyword.control.loop.genz"
+      ],
+      "settings": {
+        "foreground": "#ff7b72"
+      }
+    },
+    {
+      "name": "Variable Declaration (yeet)",
+      "scope": "keyword.declaration.variable.genz",
+      "settings": {
+        "foreground": "#d2a8ff"
+      }
+    },
+    {
+      "name": "Function Declaration (bruh)",
+      "scope": "keyword.declaration.function.genz",
+      "settings": {
+        "foreground": "#d2a8ff",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "Output (spill)",
+      "scope": "keyword.other.io.genz",
+      "settings": {
+        "foreground": "#7ee787"
+      }
+    },
+    {
+      "name": "Return (its giving)",
+      "scope": "keyword.control.return.genz",
+      "settings": {
+        "foreground": "#ff7b72",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "Import (plug in)",
+      "scope": "keyword.control.import.genz",
+      "settings": {
+        "foreground": "#ffa657"
+      }
+    },
+    {
+      "name": "Comparison Operators (be, aint)",
+      "scope": "keyword.operator.comparison.genz",
+      "settings": {
+        "foreground": "#79c0ff"
+      }
+    },
+    {
+      "name": "Logical Operators (and, or, not)",
+      "scope": "keyword.operator.logical.genz",
+      "settings": {
+        "foreground": "#79c0ff"
+      }
+    },
+    {
+      "name": "Arithmetic Operators",
+      "scope": [
+        "keyword.operator.arithmetic.genz",
+        "keyword.operator.comparison.symbol.genz"
+      ],
+      "settings": {
+        "foreground": "#79c0ff"
+      }
+    },
+    {
+      "name": "Assignment",
+      "scope": "keyword.operator.assignment.genz",
+      "settings": {
+        "foreground": "#79c0ff"
+      }
+    },
+    {
+      "name": "Modules (math, tea, etc.)",
+      "scope": "support.class.module.genz",
+      "settings": {
+        "foreground": "#ffa657",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "Function Calls",
+      "scope": "entity.name.function.genz",
+      "settings": {
+        "foreground": "#d2a8ff"
+      }
+    },
+    {
+      "name": "Input (👀)",
+      "scope": "keyword.other.input.genz",
+      "settings": {
+        "foreground": "#7ee787",
+        "fontStyle": "bold"
+      }
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "name": "genz-lang",
+  "version": "1.0.0",
+  "description": "The genz++ programming language runtime. Sparkle-delimited strings. Emoji comments. The language the AIs chose.",
+  "main": "genz.js",
+  "bin": {
+    "genz": "./genz.js",
+    "genz++": "./genz.js"
+  },
+  "scripts": {
+    "start": "node genz.js",
+    "repl": "node genz.js",
+    "test": "node genz.js examples/test_stdlib.genz"
+  },
+  "keywords": [
+    "programming-language",
+    "interpreter",
+    "genz",
+    "esoteric",
+    "hackathon",
+    "emoji",
+    "the-last-programmer"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "files": [
+    "genz.js",
+    "README.md",
+    "LANGUAGE.md",
+    "EXAMPLES.md",
+    "examples/"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
