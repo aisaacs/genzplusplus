@@ -272,6 +272,7 @@
     <button class="btn stop" id="stop-btn" onclick="stopCode()" disabled>stop</button>
     <select id="examples" onchange="loadExample()">
       <option value="">-- examples --</option>
+      <option value="drums">drum machine</option>
       <option value="hello">hello world</option>
       <option value="fizzbuzz">fizzbuzz</option>
       <option value="fibonacci">fibonacci</option>
@@ -303,6 +304,490 @@
   <!-- EXAMPLES as <script type="text/genz"> — not auto-executed,    -->
   <!-- just stored in the DOM for the playground to pull from.        -->
   <!-- ═══════════════════════════════════════════════════════════════ -->
+
+  <script type="text/genz" id="example-drums">
+💀 ═══════════════════════════════════════════════════════════════
+💀 DRUM MACHINE — 16-step sequencer + oscilloscope + synthesis
+💀 ═══════════════════════════════════════════════════════════════
+💀 4 tracks, procedural audio, real-time waveform visualization
+💀 click pads to program beats, hit PLAY to jam
+💀 ═══════════════════════════════════════════════════════════════
+
+plug in dom
+plug in gpu
+plug in sound
+plug in math
+plug in time
+plug in list
+plug in tea
+plug in convert
+
+💀 ═══════════════════════════════════════════════════════════════
+💀 CSS
+💀 ═══════════════════════════════════════════════════════════════
+
+dom.vibes(✨
+  #genz-dom {
+    padding: 12px 16px;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  .dm-wrap { max-width: 600px; }
+  .transport {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .tbtn {
+    background: #2a2a3e;
+    color: #e0e0e0;
+    border: 2px solid #444;
+    padding: 8px 18px;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.12s;
+  }
+  .tbtn:hover { border-color: #ff6b9d; }
+  .tbtn.playing { background: #ff6b9d; border-color: #ff6b9d; color: #fff; }
+  .bpm-display {
+    color: #67e8f9;
+    font-size: 15px;
+    font-weight: bold;
+    margin: 0 4px;
+    min-width: 80px;
+    text-align: center;
+  }
+  .bpm-btn {
+    background: #1a1a2e;
+    color: #67e8f9;
+    border: 1px solid #67e8f9;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: inherit;
+  }
+  .bpm-btn:hover { background: #67e8f9; color: #0f0f1a; }
+  .grid { margin-top: 8px; }
+  .track-row {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    margin-bottom: 3px;
+  }
+  .track-label {
+    width: 52px;
+    font-size: 11px;
+    color: #888;
+    text-align: right;
+    padding-right: 8px;
+    font-weight: 600;
+  }
+  .pad {
+    width: 28px;
+    height: 28px;
+    background: #1a1a2e;
+    border: 1px solid #333;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.08s;
+    flex-shrink: 0;
+  }
+  .pad:hover { border-color: #666; }
+  .pad.on.t0 { background: #ff6b9d; border-color: #ff6b9d; }
+  .pad.on.t1 { background: #67e8f9; border-color: #67e8f9; }
+  .pad.on.t2 { background: #fbbf24; border-color: #fbbf24; }
+  .pad.on.t3 { background: #c084fc; border-color: #c084fc; }
+  .pad.lit { box-shadow: 0 0 8px rgba(255,255,255,0.3); border-color: #fff !important; }
+  .pad.on.lit.t0 { box-shadow: 0 0 12px #ff6b9d; }
+  .pad.on.lit.t1 { box-shadow: 0 0 12px #67e8f9; }
+  .pad.on.lit.t2 { box-shadow: 0 0 12px #fbbf24; }
+  .pad.on.lit.t3 { box-shadow: 0 0 12px #c084fc; }
+  .step-row {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    margin-top: 2px;
+  }
+  .step-spacer { width: 52px; flex-shrink: 0; }
+  .step-dot {
+    width: 28px;
+    height: 4px;
+    background: #1a1a2e;
+    border-radius: 2px;
+    flex-shrink: 0;
+    transition: background 0.08s;
+  }
+  .step-dot.lit { background: #ff6b9d; }
+  @media (max-width: 600px) {
+    .pad { width: 22px; height: 22px; }
+    .step-dot { width: 22px; }
+    .track-label { width: 40px; font-size: 10px; }
+  }
+✨)
+
+💀 ═══════════════════════════════════════════════════════════════
+💀 STATE
+💀 ═══════════════════════════════════════════════════════════════
+
+yeet grid = list.mint(64, 0)
+yeet pads = list.mint(64, 0)
+yeet markers = list.mint(16, 0)
+yeet current_step = 15
+yeet playing = 🧢
+yeet bpm = 120
+yeet last_step_time = 0
+
+💀 energy values for waveform (0 to 1, decaying each frame)
+yeet kick_e = 0
+yeet snare_e = 0
+yeet hat_e = 0
+yeet bass_e = 0
+yeet wt = 0
+
+yeet names = [✨KICK✨, ✨SNARE✨, ✨HAT✨, ✨BASS✨]
+yeet bpm_el = ghosted
+yeet play_el = ghosted
+
+💀 ═══════════════════════════════════════════════════════════════
+💀 SOUND
+💀 ═══════════════════════════════════════════════════════════════
+
+yeet snd = sound.spawn()
+snd.volume(70)
+
+bruh kick() tho
+    snd.bop(✨sine✨, 60, 150, 80)
+    snd.noise(30, 50)
+    yeet kick_e = 1
+bet
+
+bruh snare() tho
+    snd.noise(150, 55)
+    snd.bop(✨tri✨, 200, 60, 30)
+    yeet snare_e = 1
+bet
+
+bruh hat_sound() tho
+    snd.noise(40, 35)
+    yeet hat_e = 1
+bet
+
+bruh bass_sound() tho
+    snd.bop(✨square✨, 80, 200, 50)
+    snd.bop(✨sine✨, 40, 200, 35)
+    yeet bass_e = 1
+bet
+
+💀 ═══════════════════════════════════════════════════════════════
+💀 GPU — oscilloscope canvas
+💀 ═══════════════════════════════════════════════════════════════
+
+yeet GW = 400
+yeet GH = 120
+yeet w = gpu.spawn(GW, GH, ✨oscilloscope✨)
+
+💀 ═══════════════════════════════════════════════════════════════
+💀 DOM CALLBACKS
+💀 ═══════════════════════════════════════════════════════════════
+
+bruh toggle_pad(ev) tho
+    yeet id = ev.target_id
+    sus id be ghosted tho
+        its giving 0
+    bet
+    yeet numstr = tea.sip(id, 1)
+    yeet idx = convert.cook_num(numstr)
+    sus grid[idx] be 0 tho
+        grid[idx] = 1
+        dom.glow_up(pads[idx], ✨on✨)
+    nah
+        grid[idx] = 0
+        dom.humble(pads[idx], ✨on✨)
+    bet
+bet
+
+bruh do_play(ev) tho
+    yeet playing = 💯
+    yeet last_step_time = 0
+    yeet current_step = 15
+    dom.glow_up(play_el, ✨playing✨)
+bet
+
+bruh do_stop(ev) tho
+    yeet playing = 🧢
+    dom.humble(play_el, ✨playing✨)
+    💀 clear all step highlights
+    yeet s = 0
+    vibe check s < 16 tho
+        dom.humble(markers[s], ✨lit✨)
+        dom.humble(pads[s], ✨lit✨)
+        dom.humble(pads[16 + s], ✨lit✨)
+        dom.humble(pads[32 + s], ✨lit✨)
+        dom.humble(pads[48 + s], ✨lit✨)
+        yeet s = s + 1
+    bet
+bet
+
+bruh bpm_down(ev) tho
+    sus bpm > 60 tho
+        yeet bpm = bpm - 5
+        dom.caption(bpm_el, ✨BPM: ✨ + bpm)
+    bet
+bet
+
+bruh bpm_up(ev) tho
+    sus bpm < 200 tho
+        yeet bpm = bpm + 5
+        dom.caption(bpm_el, ✨BPM: ✨ + bpm)
+    bet
+bet
+
+💀 ═══════════════════════════════════════════════════════════════
+💀 BUILD DOM
+💀 ═══════════════════════════════════════════════════════════════
+
+yeet wrap = dom.cook(✨div✨)
+dom.glow_up(wrap, ✨dm-wrap✨)
+
+💀 — transport controls —
+yeet transport = dom.cook(✨div✨)
+dom.glow_up(transport, ✨transport✨)
+
+yeet play_el = dom.cook(✨button✨)
+dom.glow_up(play_el, ✨tbtn✨)
+dom.caption(play_el, ✨▶ PLAY✨)
+dom.tune_in(play_el, ✨click✨, do_play)
+dom.yeet_in(transport, play_el)
+
+yeet stop_el = dom.cook(✨button✨)
+dom.glow_up(stop_el, ✨tbtn✨)
+dom.caption(stop_el, ✨■ STOP✨)
+dom.tune_in(stop_el, ✨click✨, do_stop)
+dom.yeet_in(transport, stop_el)
+
+yeet bpm_el = dom.cook(✨span✨)
+dom.glow_up(bpm_el, ✨bpm-display✨)
+dom.caption(bpm_el, ✨BPM: 120✨)
+dom.yeet_in(transport, bpm_el)
+
+yeet bd = dom.cook(✨button✨)
+dom.glow_up(bd, ✨bpm-btn✨)
+dom.caption(bd, ✨−✨)
+dom.tune_in(bd, ✨click✨, bpm_down)
+dom.yeet_in(transport, bd)
+
+yeet bu = dom.cook(✨button✨)
+dom.glow_up(bu, ✨bpm-btn✨)
+dom.caption(bu, ✨+✨)
+dom.tune_in(bu, ✨click✨, bpm_up)
+dom.yeet_in(transport, bu)
+
+dom.yeet_in(wrap, transport)
+
+💀 — sequencer grid —
+yeet gdiv = dom.cook(✨div✨)
+dom.glow_up(gdiv, ✨grid✨)
+
+yeet tr = 0
+vibe check tr < 4 tho
+    yeet row = dom.cook(✨div✨)
+    dom.glow_up(row, ✨track-row✨)
+
+    💀 track label
+    yeet lbl = dom.cook(✨div✨)
+    dom.glow_up(lbl, ✨track-label✨)
+    dom.caption(lbl, names[tr])
+    dom.yeet_in(row, lbl)
+
+    💀 16 pads
+    yeet st = 0
+    vibe check st < 16 tho
+        yeet idx = tr * 16 + st
+        yeet pad = dom.cook(✨div✨)
+        dom.glow_up(pad, ✨pad✨)
+        dom.glow_up(pad, ✨t✨ + tr)
+        dom.slap(pad, ✨id✨, ✨p✨ + idx)
+        dom.tune_in(pad, ✨click✨, toggle_pad)
+        pads[idx] = pad
+        dom.yeet_in(row, pad)
+        yeet st = st + 1
+    bet
+
+    dom.yeet_in(gdiv, row)
+    yeet tr = tr + 1
+bet
+
+💀 — step indicator row —
+yeet srow = dom.cook(✨div✨)
+dom.glow_up(srow, ✨step-row✨)
+
+yeet spacer = dom.cook(✨div✨)
+dom.glow_up(spacer, ✨step-spacer✨)
+dom.yeet_in(srow, spacer)
+
+yeet si = 0
+vibe check si < 16 tho
+    yeet mk = dom.cook(✨div✨)
+    dom.glow_up(mk, ✨step-dot✨)
+    markers[si] = mk
+    dom.yeet_in(srow, mk)
+    yeet si = si + 1
+bet
+
+dom.yeet_in(gdiv, srow)
+dom.yeet_in(wrap, gdiv)
+dom.yeet(wrap)
+
+💀 ═══════════════════════════════════════════════════════════════
+💀 DEFAULT PATTERN
+💀 ═══════════════════════════════════════════════════════════════
+
+bruh preset(pi) tho
+    grid[pi] = 1
+    dom.glow_up(pads[pi], ✨on✨)
+bet
+
+💀 kick: four on the floor
+preset(0)
+preset(4)
+preset(8)
+preset(12)
+
+💀 snare: backbeat
+preset(20)
+preset(28)
+
+💀 hat: eighth notes
+preset(32)
+preset(34)
+preset(36)
+preset(38)
+preset(40)
+preset(42)
+preset(44)
+preset(46)
+
+💀 bass: syncopated
+preset(48)
+preset(51)
+preset(54)
+preset(58)
+preset(61)
+
+spill ✨drum machine loaded — hit PLAY✨
+
+💀 ═══════════════════════════════════════════════════════════════
+💀 MAIN LOOP
+💀 ═══════════════════════════════════════════════════════════════
+
+vibe check w.serve() tho
+    yeet now = time.rn()
+
+    💀 ─── sequencer timing ───
+    sus playing be 💯 tho
+        yeet ms_per_step = 60000 / bpm / 4
+        sus now - last_step_time >= ms_per_step tho
+            💀 un-highlight previous step
+            yeet ps = current_step
+            dom.humble(markers[ps], ✨lit✨)
+            yeet ti = 0
+            vibe check ti < 4 tho
+                dom.humble(pads[ti * 16 + ps], ✨lit✨)
+                yeet ti = ti + 1
+            bet
+
+            💀 advance
+            yeet current_step = (current_step + 1) % 16
+            yeet last_step_time = now
+
+            💀 highlight current step
+            dom.glow_up(markers[current_step], ✨lit✨)
+            yeet ti = 0
+            vibe check ti < 4 tho
+                dom.glow_up(pads[ti * 16 + current_step], ✨lit✨)
+                yeet ti = ti + 1
+            bet
+
+            💀 trigger sounds for active cells
+            sus grid[current_step] be 1 tho
+                kick()
+            bet
+            sus grid[16 + current_step] be 1 tho
+                snare()
+            bet
+            sus grid[32 + current_step] be 1 tho
+                hat_sound()
+            bet
+            sus grid[48 + current_step] be 1 tho
+                bass_sound()
+            bet
+        bet
+    bet
+
+    💀 ─── waveform render ───
+    w.cleanse(10, 10, 25)
+
+    💀 center line
+    yeet cy = GH / 2
+    w.strut(0, cy, GW - 1, cy, 25, 25, 50)
+
+    💀 scope trace
+    yeet prev_y = cy
+    yeet x = 0
+    vibe check x < GW tho
+        💀 composite wave from 4 energy-weighted oscillators
+        yeet y1 = kick_e * math.vibes(x * 0.05 + wt) * 35
+        yeet y2 = snare_e * math.vibes(x * 0.4 + wt * 3) * 20
+        yeet y3 = hat_e * math.vibes(x * 0.8 + wt * 5) * 10
+        yeet y4 = bass_e * math.vibes(x * 0.08 + wt * 0.5) * 30
+        yeet py = cy + math.humbled(y1 + y2 + y3 + y4)
+
+        💀 color shifts with energy
+        yeet cr = 80 + math.humbled(kick_e * 175)
+        yeet cg = 240 - math.humbled(kick_e * 80)
+        yeet cb = 255
+        sus cr > 255 tho
+            yeet cr = 255
+        bet
+        sus cg < 80 tho
+            yeet cg = 80
+        bet
+
+        sus x > 0 tho
+            w.strut(x - 1, prev_y, x, py, cr, cg, cb)
+            💀 dim glow line for thickness
+            w.strut(x - 1, prev_y + 1, x, py + 1, math.humbled(cr * 0.3), math.humbled(cg * 0.3), math.humbled(cb * 0.3))
+        bet
+
+        yeet prev_y = py
+        yeet x = x + 1
+    bet
+
+    w.flaunt()
+
+    💀 ─── energy decay ───
+    yeet kick_e = kick_e * 0.92
+    yeet snare_e = snare_e * 0.92
+    yeet hat_e = hat_e * 0.92
+    yeet bass_e = bass_e * 0.92
+
+    💀 waveform animation phase
+    yeet wt = wt + 0.15
+bet
+
+snd.unalive()
+w.unalive()
+  </script>
 
   <script type="text/genz" id="example-hello">
 💀 hello world - the simplest genz++ program no cap
