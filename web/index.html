@@ -183,6 +183,8 @@
       <option value="fizzbuzz">fizzbuzz</option>
       <option value="fibonacci">fibonacci</option>
       <option value="plasma">gpu plasma</option>
+      <option value="toccata">toccata & fugue</option>
+      <option value="asteroids">asteroids</option>
       <option value="dom_hello">dom: hello</option>
       <option value="dom_counter">dom: counter</option>
     </select>
@@ -440,6 +442,1192 @@ dom.yeet_in(box, plus_btn)
 dom.yeet(box)
 
 spill ✨counter ready! click the buttons.✨
+  </script>
+
+  <script type="text/genz" id="example-toccata">
+💀 ═══════════════════════════════════════════════════════════════
+💀 TOCCATA & FUGUE IN D MINOR — Bach x Cyberpunk
+💀 ═══════════════════════════════════════════════════════════════
+💀 procedural plasma + procedural audio synthesis demoscene
+💀 every pixel computed, every note synthesized, zero files loaded
+💀 ESC to quit
+💀 ═══════════════════════════════════════════════════════════════
+
+plug in gpu
+plug in math
+plug in sound
+plug in time
+
+yeet W = 200
+yeet H = 100
+yeet w = gpu.spawn(W, H, ✨TOCCATA — genz++✨)
+yeet snd = sound.spawn()
+snd.volume(80)
+
+💀 plasma resolution — 4x4 fat pixels
+yeet PX = 4
+yeet LW = W / PX
+yeet LH = H / PX
+
+💀 music energy — drives visual reactivity
+yeet energy = 0
+yeet bass_e = 0
+yeet pt = 0
+yeet t = 0
+yeet LOOP = 1500
+
+💀 ═══════════════════════════════════════════════════════════════
+💀 SOUND HELPERS
+💀 ═══════════════════════════════════════════════════════════════
+
+💀 organ — stacks octaves like a pipe organ with multiple stops
+bruh organ(of, od, ov) tho
+    snd.bop(✨saw✨, of, od, ov)
+    snd.bop(✨saw✨, of * 2, od, ov * 0.6)
+    snd.bop(✨square✨, of, od, ov * 0.3)
+    yeet energy = 1
+bet
+
+💀 lead — saw + square doubling for the runs
+bruh lead(lf, ld, lv) tho
+    snd.bop(✨saw✨, lf, ld, lv)
+    snd.bop(✨square✨, lf, ld, lv * 0.25)
+    yeet energy = 0.8
+bet
+
+bruh bass_note(nf, nd, nv) tho
+    snd.bop(✨square✨, nf, nd, nv)
+    snd.bop(✨sine✨, nf, nd, nv * 0.5)
+    yeet bass_e = 1
+bet
+
+💀 heavy kick — sub-bass thump + transient
+bruh kick() tho
+    snd.noise(80, 65)
+    snd.bop(✨sine✨, 50, 150, 60)
+    snd.bop(✨sine✨, 30, 100, 45)
+    yeet bass_e = 1
+bet
+
+💀 snare — noise crack + mid tone
+bruh snare() tho
+    snd.noise(180, 55)
+    snd.bop(✨tri✨, 200, 60, 30)
+    yeet energy = 0.7
+bet
+
+bruh hat() tho
+    snd.noise(30, 25)
+bet
+
+bruh open_hat() tho
+    snd.noise(80, 30)
+bet
+
+💀 ═══════════════════════════════════════════════════════════════
+💀 MAIN LOOP
+💀 ═══════════════════════════════════════════════════════════════
+
+vibe check w.serve() tho
+    yeet frame_start = time.rn()
+
+    sus w.pressed(✨esc✨) tho
+        dip
+    bet
+
+    snd.serve()
+
+    💀 decay music energy each frame
+    yeet energy = energy * 0.93
+    yeet bass_e = bass_e * 0.91
+
+    💀 plasma time — speeds up on note hits
+    yeet pt = pt + 0.07 + energy * 0.05
+
+    yeet f = t % LOOP
+
+    💀 ═══════════════════════════════════
+    💀 TOCCATA — rubato opening
+    💀 dramatic pauses, accelerating runs
+    💀 ═══════════════════════════════════
+
+    💀 sub-bass rumble buildup
+    sus f be 5 tho
+        snd.slide(✨sine✨, 40, 500, 800, 30)
+    bet
+
+    💀 ─────────────────────────────────
+    💀 FIRST PHRASE — high octave
+    💀 ─────────────────────────────────
+
+    💀 mordent: D5-C#5-D5 (lightning fast)
+    sus f be 30 tho
+        lead(587, 35, 75)
+    bet
+    sus f be 32 tho
+        lead(554, 35, 70)
+    bet
+    💀 held D5 — fermata with organ fullness
+    sus f be 34 tho
+        organ(587, 900, 75)
+    bet
+
+    💀 descending run: A4-G4-F4-E4-D4-C#4-D4
+    💀 ACCELERATING — gaps decrease: 11, 10, 9, 8, 6, 5
+    sus f be 100 tho
+        lead(440, 170, 70)
+    bet
+    sus f be 111 tho
+        lead(392, 155, 70)
+    bet
+    sus f be 121 tho
+        lead(349, 140, 70)
+    bet
+    sus f be 130 tho
+        lead(330, 125, 70)
+    bet
+    sus f be 138 tho
+        lead(294, 100, 70)
+    bet
+    sus f be 144 tho
+        lead(277, 80, 65)
+    bet
+    💀 resolve on D4 — fermata
+    sus f be 149 tho
+        organ(294, 1000, 75)
+        bass_note(147, 1000, 35)
+    bet
+
+    💀 ─────────────────────────────────
+    💀 SECOND PHRASE — one octave lower
+    💀 ─────────────────────────────────
+
+    💀 mordent: D4-C#4-D4
+    sus f be 240 tho
+        lead(294, 35, 75)
+    bet
+    sus f be 242 tho
+        lead(277, 35, 70)
+    bet
+    💀 held D4 — fermata
+    sus f be 244 tho
+        organ(294, 900, 75)
+    bet
+
+    💀 descending run: A3-G3-F3-E3-D3-C#3-D3
+    sus f be 310 tho
+        lead(220, 170, 70)
+    bet
+    sus f be 321 tho
+        lead(196, 155, 70)
+    bet
+    sus f be 331 tho
+        lead(175, 140, 70)
+    bet
+    sus f be 340 tho
+        lead(165, 125, 70)
+    bet
+    sus f be 348 tho
+        lead(147, 100, 70)
+    bet
+    sus f be 354 tho
+        lead(139, 80, 65)
+    bet
+    💀 resolve on D3 — long fermata
+    sus f be 359 tho
+        organ(147, 1300, 75)
+        bass_note(73, 1300, 50)
+    bet
+
+    💀 ─────────────────────────────────
+    💀 TENSION — diminished approach
+    💀 ─────────────────────────────────
+
+    sus f be 460 tho
+        snd.slide(✨saw✨, 1000, 60, 800, 35)
+        snd.slide(✨sine✨, 50, 500, 700, 30)
+    bet
+    sus f be 490 tho
+        snd.noise(300, 40)
+    bet
+
+    💀 ═══════════════════════════════════
+    💀 THE CHORD — D minor, every stop pulled
+    💀 12 voices: sub-bass through mixture
+    💀 ═══════════════════════════════════
+
+    sus f be 520 tho
+        💀 sub-bass foundation
+        snd.bop(✨sine✨, 36, 3500, 55)
+        snd.bop(✨sine✨, 73, 3500, 55)
+
+        💀 bass organ — saw + square
+        snd.bop(✨saw✨, 147, 3500, 50)
+        snd.bop(✨square✨, 147, 3500, 30)
+
+        💀 principal — the core of the organ
+        snd.bop(✨saw✨, 220, 3500, 45)
+        snd.bop(✨saw✨, 294, 3500, 50)
+        snd.bop(✨saw✨, 349, 3500, 45)
+
+        💀 octave stop — brilliance
+        snd.bop(✨saw✨, 440, 3000, 40)
+        snd.bop(✨saw✨, 587, 3000, 35)
+
+        💀 mixture — shimmer
+        snd.bop(✨square✨, 294, 3000, 25)
+        snd.bop(✨square✨, 440, 2500, 20)
+
+        💀 crash impact
+        snd.noise(600, 60)
+
+        yeet energy = 1
+        yeet bass_e = 1
+    bet
+
+    💀 reverb tail
+    sus f be 523 tho
+        snd.noise(200, 40)
+    bet
+    sus f be 530 tho
+        snd.slide(✨sine✨, 80, 2500, 1200, 20)
+    bet
+
+    💀 ═══════════════════════════════════
+    💀 BEAT DROP — cyberpunk kicks in
+    💀 120 BPM = 30 frames per beat
+    💀 bar = 120 frames
+    💀 ═══════════════════════════════════
+
+    sus f >= 750 tho
+        💀 crash cymbal on the drop
+        sus f be 750 tho
+            snd.noise(500, 60)
+        bet
+
+        💀 ── drums: kick + snare + hats ──
+        yeet bf = (f - 750) % 120
+
+        💀 four-on-the-floor kick
+        sus bf be 0 tho
+            kick()
+        bet
+        sus bf be 30 tho
+            kick()
+        bet
+        sus bf be 60 tho
+            kick()
+        bet
+        sus bf be 90 tho
+            kick()
+        bet
+
+        💀 snare on 2 and 4
+        sus bf be 30 tho
+            snare()
+        bet
+        sus bf be 90 tho
+            snare()
+        bet
+
+        💀 hi-hats on 8th notes — closed on beat, open offbeat
+        sus bf be 0 tho
+            hat()
+        bet
+        sus bf be 15 tho
+            open_hat()
+        bet
+        sus bf be 30 tho
+            hat()
+        bet
+        sus bf be 45 tho
+            open_hat()
+        bet
+        sus bf be 60 tho
+            hat()
+        bet
+        sus bf be 75 tho
+            open_hat()
+        bet
+        sus bf be 90 tho
+            hat()
+        bet
+        sus bf be 105 tho
+            open_hat()
+        bet
+
+        💀 ── bass: D2 and A2 alternating every half-bar ──
+        yeet bb = (f - 750) % 120
+        sus bb be 0 tho
+            bass_note(73, 400, 55)
+        bet
+        sus bb be 60 tho
+            bass_note(110, 400, 50)
+        bet
+
+        💀 ── fugue subject on organ lead ──
+        yeet mf = (f - 750) % 240
+        sus mf be 0 tho
+            organ(294, 200, 55)
+        bet
+        sus mf be 30 tho
+            organ(440, 200, 55)
+        bet
+        sus mf be 60 tho
+            lead(587, 130, 60)
+        bet
+        sus mf be 75 tho
+            lead(554, 80, 55)
+        bet
+        sus mf be 90 tho
+            organ(587, 280, 65)
+        bet
+        sus mf be 120 tho
+            organ(349, 200, 55)
+        bet
+        sus mf be 150 tho
+            organ(330, 200, 55)
+        bet
+        sus mf be 180 tho
+            lead(294, 130, 60)
+        bet
+        sus mf be 195 tho
+            lead(277, 80, 55)
+        bet
+        sus mf be 210 tho
+            organ(294, 280, 65)
+        bet
+    bet
+
+    💀 ═══════════════════════════════════
+    💀 PLASMA — cyberpunk palette
+    💀 ═══════════════════════════════════
+
+    yeet y = 0
+    vibe check y < LH tho
+        yeet x = 0
+        vibe check x < LW tho
+            💀 four overlapping sines — classic plasma
+            yeet v1 = math.vibes(x * 0.08 + pt)
+            yeet v2 = math.vibes(y * 0.1 + pt * 0.7)
+            yeet v3 = math.vibes((x + y) * 0.06 + pt * 0.6)
+            yeet v4 = math.vibes(math.glow(x * x + y * y) * 0.04 + pt * 0.5)
+            yeet val = (v1 + v2 + v3 + v4) * 0.25
+
+            💀 cyberpunk color mapping: purple → magenta → cyan
+            yeet phase = val * 3.14159 + pt * 0.3
+            yeet pr = math.ate(math.vibes(phase))
+            yeet pg = math.ate(math.vibes(phase + 4.2))
+            yeet pb = math.ate(math.vibes(phase + 2.1))
+
+            💀 R: magenta/red — squared for high contrast
+            💀 G: subdued, flares on melody hits
+            💀 B: dominant cyan/purple base
+            yeet flash = bass_e * 80
+            yeet r = math.humbled(pr * pr * 220 + flash)
+            yeet g = math.humbled(pg * 50 + energy * 100)
+            yeet b = math.humbled(pb * 255)
+
+            sus r > 255 tho
+                yeet r = 255
+            bet
+            sus g > 255 tho
+                yeet g = 255
+            bet
+
+            💀 scanline darkening — every other row
+            sus y % 2 be 0 tho
+                yeet r = math.humbled(r * 0.7)
+                yeet g = math.humbled(g * 0.7)
+                yeet b = math.humbled(b * 0.7)
+            bet
+
+            w.drip(x * PX, y * PX, PX, PX, r, g, b)
+            yeet x = x + 1
+        bet
+        yeet y = y + 1
+    bet
+
+    💀 ═══════════════════════════════════
+    💀 TITLE OVERLAY
+    💀 ═══════════════════════════════════
+
+    yeet tr = 200 + math.humbled(bass_e * 55)
+    yeet tg = 140 + math.humbled(energy * 80)
+    yeet tb = 220 + math.humbled(bass_e * 35)
+
+    sus f < 520 tho
+        w.stan(✨TOCCATA & FUGUE✨, 262, 16, tr, tg, tb, 3)
+        w.stan(✨IN D MINOR✨, 333, 52, 160, 100, 180, 2)
+    nah
+        w.stan(✨TOCCATA✨, 330, 16, tr, tg, tb, 3)
+    bet
+    w.stan(✨BWV 565 x CYBERPUNK✨, 291, H - 38, 100, 70, 140, 2)
+    w.stan(✨genz++✨, 375, H - 18, 70, 50, 90)
+
+    w.flaunt()
+
+    💀 cap at 60fps so music plays at correct tempo
+    yeet frame_ms = time.rn() - frame_start
+    sus frame_ms < 16 tho
+        time.nap(16 - frame_ms)
+    bet
+
+    yeet t = t + 1
+bet
+
+snd.unalive()
+w.unalive()
+spill ✨✨
+spill ✨💀 toccata complete. bach has been cyberpunked.✨
+  </script>
+
+  <script type="text/genz" id="example-asteroids">
+💀 ═══════════════════════════════════════════════════════════════
+💀 ASTEROIDS — classic vector-style arcade game
+💀 ═══════════════════════════════════════════════════════════════
+💀 arrows/WASD to move, space to shoot, ESC to quit
+💀 ═══════════════════════════════════════════════════════════════
+
+plug in gpu
+plug in math
+plug in random
+plug in list
+plug in sound
+
+💀 ── window ──
+yeet W = 800
+yeet H = 600
+yeet w = gpu.spawn(W, H, ✨genz++ ASTEROIDS✨)
+yeet snd = sound.spawn()
+snd.volume(60)
+yeet PI = math.periodt()
+
+💀 ── ship state ──
+yeet ship_x = 400
+yeet ship_y = 300
+yeet ship_dx = 0
+yeet ship_dy = 0
+yeet ship_angle = 0 - PI / 2
+yeet ship_dead = 0
+yeet ship_inv = 0
+yeet thrusting = 0
+yeet death_x = 0
+yeet death_y = 0
+yeet death_angle = 0
+
+💀 ── game state ──
+yeet lives = 3
+yeet score = 0
+yeet wave_num = 1
+yeet cooldown = 0
+yeet frame = 0
+yeet game_over = 0
+yeet game_started = 0
+
+💀 ── heartbeat music ──
+yeet beat_timer = 0
+yeet beat_note = 0
+yeet beat_interval = 45
+
+💀 ── asteroid pool (max 30) ──
+yeet MAX_AST = 30
+yeet ast_x = list.mint(MAX_AST, 0)
+yeet ast_y = list.mint(MAX_AST, 0)
+yeet ast_dx = list.mint(MAX_AST, 0)
+yeet ast_dy = list.mint(MAX_AST, 0)
+yeet ast_r = list.mint(MAX_AST, 0)
+yeet ast_on = list.mint(MAX_AST, 0)
+
+💀 ── bullet pool (max 10) ──
+yeet MAX_BUL = 10
+yeet bul_x = list.mint(MAX_BUL, 0)
+yeet bul_y = list.mint(MAX_BUL, 0)
+yeet bul_dx = list.mint(MAX_BUL, 0)
+yeet bul_dy = list.mint(MAX_BUL, 0)
+yeet bul_ttl = list.mint(MAX_BUL, 0)
+yeet bul_on = list.mint(MAX_BUL, 0)
+
+💀 ── starfield (3D — stars fly toward viewer) ──
+yeet STAR_COUNT = 80
+yeet star_x = list.mint(STAR_COUNT, 0)
+yeet star_y = list.mint(STAR_COUNT, 0)
+yeet star_z = list.mint(STAR_COUNT, 0)
+yeet STAR_DEPTH = 200
+yeet STAR_SPEED = 0.7
+yeet STAR_FOCAL = 200
+yeet n = 0
+vibe check n < STAR_COUNT tho
+    star_x[n] = random.vibe() * 800 - 400
+    star_y[n] = random.vibe() * 600 - 300
+    star_z[n] = random.vibe() * (STAR_DEPTH - 1) + 1
+    yeet n = n + 1
+bet
+
+💀 ═══════════════════════════════════════════════════════════════
+💀 HELPER FUNCTIONS
+💀 ═══════════════════════════════════════════════════════════════
+
+bruh wrap_x(v) tho
+    its giving v - W * math.humbled(v / W)
+bet
+
+bruh wrap_y(v) tho
+    its giving v - H * math.humbled(v / H)
+bet
+
+bruh dist(x1, y1, x2, y2) tho
+    yeet ddx = x2 - x1
+    yeet ddy = y2 - y1
+    its giving math.glow(ddx * ddx + ddy * ddy)
+bet
+
+bruh rand_vel(lo, hi) tho
+    yeet mag = lo + random.vibe() * (hi - lo)
+    sus random.flip() tho
+        its giving 0 - mag
+    bet
+    its giving mag
+bet
+
+bruh spawn_ast(sx, sy, sdx, sdy, sr) tho
+    yeet sa = 0
+    vibe check sa < MAX_AST tho
+        sus ast_on[sa] be 0 tho
+            ast_x[sa] = sx
+            ast_y[sa] = sy
+            ast_dx[sa] = sdx
+            ast_dy[sa] = sdy
+            ast_r[sa] = sr
+            ast_on[sa] = 1
+            its giving sa
+        bet
+        yeet sa = sa + 1
+    bet
+    its giving 0 - 1
+bet
+
+bruh fire_bul() tho
+    yeet fb = 0
+    vibe check fb < MAX_BUL tho
+        sus bul_on[fb] be 0 tho
+            bul_x[fb] = ship_x
+            bul_y[fb] = ship_y
+            bul_dx[fb] = math.waves(ship_angle) * 4.5
+            bul_dy[fb] = math.vibes(ship_angle) * 4.5
+            bul_ttl[fb] = 60
+            bul_on[fb] = 1
+            its giving 1
+        bet
+        yeet fb = fb + 1
+    bet
+    its giving 0
+bet
+
+bruh spawn_wave(count) tho
+    yeet sw = 0
+    vibe check sw < count tho
+        yeet edge = random.pick(0, 3)
+        yeet spx = 0
+        yeet spy = 0
+        sus edge be 0 tho
+            yeet spx = random.pick(0, W)
+            yeet spy = 0
+        nah sus edge be 1 tho
+            yeet spx = W
+            yeet spy = random.pick(0, H)
+        nah sus edge be 2 tho
+            yeet spx = random.pick(0, W)
+            yeet spy = H
+        nah
+            yeet spx = 0
+            yeet spy = random.pick(0, H)
+        bet
+        yeet svx = rand_vel(0.6, 1.3)
+        yeet svy = rand_vel(0.6, 1.3)
+        spawn_ast(spx, spy, svx, svy, 25)
+        yeet sw = sw + 1
+    bet
+bet
+
+bruh draw_ship(px, py, pa) tho
+    yeet d_cos = math.waves(pa)
+    yeet d_sin = math.vibes(pa)
+    💀 nose (12, 0) in local space — points in direction of angle
+    yeet d_nx = px + 12 * d_cos
+    yeet d_ny = py + 12 * d_sin
+    💀 left rear (-8, -7)
+    yeet d_lx = px + (0 - 8) * d_cos - (0 - 7) * d_sin
+    yeet d_ly = py + (0 - 8) * d_sin + (0 - 7) * d_cos
+    💀 right rear (-8, 7)
+    yeet d_rx = px + (0 - 8) * d_cos - 7 * d_sin
+    yeet d_ry = py + (0 - 8) * d_sin + 7 * d_cos
+    w.strut(math.humbled(d_nx), math.humbled(d_ny), math.humbled(d_lx), math.humbled(d_ly), 0, 255, 100)
+    w.strut(math.humbled(d_nx), math.humbled(d_ny), math.humbled(d_rx), math.humbled(d_ry), 0, 255, 100)
+    w.strut(math.humbled(d_lx), math.humbled(d_ly), math.humbled(d_rx), math.humbled(d_ry), 0, 255, 100)
+bet
+
+bruh draw_flame(px, py, pa) tho
+    yeet f_cos = math.waves(pa)
+    yeet f_sin = math.vibes(pa)
+    💀 flame tip — random flicker length behind ship
+    yeet f_len = 0 - 14 - random.vibe() * 6
+    yeet f_bx = px + f_len * f_cos
+    yeet f_by = py + f_len * f_sin
+    💀 left base (-8, -4)
+    yeet f_lx = px + (0 - 8) * f_cos - (0 - 4) * f_sin
+    yeet f_ly = py + (0 - 8) * f_sin + (0 - 4) * f_cos
+    💀 right base (-8, 4)
+    yeet f_rx = px + (0 - 8) * f_cos - 4 * f_sin
+    yeet f_ry = py + (0 - 8) * f_sin + 4 * f_cos
+    w.strut(math.humbled(f_lx), math.humbled(f_ly), math.humbled(f_bx), math.humbled(f_by), 255, 150, 0)
+    w.strut(math.humbled(f_rx), math.humbled(f_ry), math.humbled(f_bx), math.humbled(f_by), 255, 150, 0)
+bet
+
+bruh draw_stars() tho
+    yeet sk = 0
+    vibe check sk < STAR_COUNT tho
+        yeet sz = star_z[sk]
+        💀 project current position
+        yeet sx = 400 + star_x[sk] * STAR_FOCAL / sz
+        yeet sy = 300 + star_y[sk] * STAR_FOCAL / sz
+        💀 project previous position (one frame back) for streak
+        yeet pz = sz + STAR_SPEED
+        yeet spx = 400 + star_x[sk] * STAR_FOCAL / pz
+        yeet spy = 300 + star_y[sk] * STAR_FOCAL / pz
+        💀 brightness: close = bright, far = dim
+        yeet sbr = math.humbled(255 - sz * 1.2)
+        sus sbr < 20 tho
+            yeet sbr = 20
+        bet
+        yeet sbr_b = sbr + 40
+        sus sbr_b > 255 tho
+            yeet sbr_b = 255
+        bet
+        w.strut(math.humbled(spx), math.humbled(spy), math.humbled(sx), math.humbled(sy), sbr, sbr, sbr_b)
+        yeet sk = sk + 1
+    bet
+bet
+
+bruh draw_life(lx, ly) tho
+    💀 small upward-pointing triangle for life indicator
+    w.strut(lx, ly - 6, lx - 4, ly + 4, 0, 255, 100)
+    w.strut(lx, ly - 6, lx + 4, ly + 4, 0, 255, 100)
+    w.strut(lx - 4, ly + 4, lx + 4, ly + 4, 0, 255, 100)
+bet
+
+bruh draw_explosion(ex, ey, ea, t) tho
+    💀 t: 0 = just died, 1 = animation done
+    yeet spread = t * 90
+    yeet bright = math.humbled(255 * (1 - t))
+    sus bright < 0 tho
+        yeet bright = 0
+    bet
+    yeet g_col = math.humbled(bright * 0.5)
+
+    💀 ship triangle breaking apart — 3 edges offset outward
+    yeet e_cos = math.waves(ea)
+    yeet e_sin = math.vibes(ea)
+
+    💀 original vertices
+    yeet v_nx = 12 * e_cos
+    yeet v_ny = 12 * e_sin
+    yeet v_lx = (0 - 8) * e_cos - (0 - 7) * e_sin
+    yeet v_ly = (0 - 8) * e_sin + (0 - 7) * e_cos
+    yeet v_rx = (0 - 8) * e_cos - 7 * e_sin
+    yeet v_ry = (0 - 8) * e_sin + 7 * e_cos
+
+    💀 each edge drifts outward from its midpoint direction + rotates
+    yeet rot = t * 0.8
+
+    💀 edge 1: nose → left
+    yeet m1x = (v_nx + v_lx) / 2
+    yeet m1y = (v_ny + v_ly) / 2
+    yeet c1 = math.waves(rot)
+    yeet s1 = math.vibes(rot)
+    yeet e1ax = ex + m1x * spread * 0.02 + (v_nx - m1x) * c1 - (v_ny - m1y) * s1 + m1x
+    yeet e1ay = ey + m1y * spread * 0.02 + (v_nx - m1x) * s1 + (v_ny - m1y) * c1 + m1y
+    yeet e1bx = ex + m1x * spread * 0.02 + (v_lx - m1x) * c1 - (v_ly - m1y) * s1 + m1x
+    yeet e1by = ey + m1y * spread * 0.02 + (v_lx - m1x) * s1 + (v_ly - m1y) * c1 + m1y
+    w.strut(math.humbled(e1ax), math.humbled(e1ay), math.humbled(e1bx), math.humbled(e1by), 0, bright, math.humbled(bright * 0.4))
+
+    💀 edge 2: nose → right
+    yeet m2x = (v_nx + v_rx) / 2
+    yeet m2y = (v_ny + v_ry) / 2
+    yeet c2 = math.waves(0 - rot)
+    yeet s2 = math.vibes(0 - rot)
+    yeet e2ax = ex + m2x * spread * 0.02 + (v_nx - m2x) * c2 - (v_ny - m2y) * s2 + m2x
+    yeet e2ay = ey + m2y * spread * 0.02 + (v_nx - m2x) * s2 + (v_ny - m2y) * c2 + m2y
+    yeet e2bx = ex + m2x * spread * 0.02 + (v_rx - m2x) * c2 - (v_ry - m2y) * s2 + m2x
+    yeet e2by = ey + m2y * spread * 0.02 + (v_rx - m2x) * s2 + (v_ry - m2y) * c2 + m2y
+    w.strut(math.humbled(e2ax), math.humbled(e2ay), math.humbled(e2bx), math.humbled(e2by), 0, bright, math.humbled(bright * 0.4))
+
+    💀 edge 3: left → right (rear)
+    yeet m3x = (v_lx + v_rx) / 2
+    yeet m3y = (v_ly + v_ry) / 2
+    yeet e3ax = ex + m3x * spread * 0.025 + v_lx
+    yeet e3ay = ey + m3y * spread * 0.025 + v_ly
+    yeet e3bx = ex + m3x * spread * 0.025 + v_rx
+    yeet e3by = ey + m3y * spread * 0.025 + v_ry
+    w.strut(math.humbled(e3ax), math.humbled(e3ay), math.humbled(e3bx), math.humbled(e3by), 0, bright, math.humbled(bright * 0.4))
+
+    💀 extra debris sparks flying outward
+    yeet e_k = 0
+    vibe check e_k < 6 tho
+        yeet ang = ea + e_k * PI / 3 + e_k * 0.5
+        yeet r_dist = spread * (0.6 + (e_k % 3) * 0.3)
+        yeet cx = ex + math.waves(ang) * r_dist
+        yeet cy = ey + math.vibes(ang) * r_dist
+        yeet perp = ang + PI / 2
+        yeet hlen = 2 + e_k * 0.7
+        yeet p1x = cx + math.waves(perp) * hlen
+        yeet p1y = cy + math.vibes(perp) * hlen
+        yeet p2x = cx - math.waves(perp) * hlen
+        yeet p2y = cy - math.vibes(perp) * hlen
+        w.strut(math.humbled(p1x), math.humbled(p1y), math.humbled(p2x), math.humbled(p2y), bright, g_col, 0)
+        yeet e_k = e_k + 1
+    bet
+bet
+
+bruh reset_game() tho
+    yeet ship_x = 400
+    yeet ship_y = 300
+    yeet ship_dx = 0
+    yeet ship_dy = 0
+    yeet ship_angle = 0 - PI / 2
+    yeet ship_dead = 0
+    yeet ship_inv = 0
+    yeet thrusting = 0
+    yeet lives = 3
+    yeet score = 0
+    yeet wave_num = 1
+    yeet cooldown = 0
+    yeet game_over = 0
+    yeet beat_timer = 0
+    yeet beat_note = 0
+    yeet beat_interval = 45
+    💀 clear all asteroids
+    yeet ra = 0
+    vibe check ra < MAX_AST tho
+        ast_on[ra] = 0
+        yeet ra = ra + 1
+    bet
+    💀 clear all bullets
+    yeet rb = 0
+    vibe check rb < MAX_BUL tho
+        bul_on[rb] = 0
+        yeet rb = rb + 1
+    bet
+    spawn_wave(4)
+bet
+
+💀 ═══════════════════════════════════════════════════════════════
+💀 MAIN GAME LOOP
+💀 ═══════════════════════════════════════════════════════════════
+
+yeet running = no cap
+
+vibe check running and w.serve() tho
+
+    💀 ── ESC to quit ──
+    sus w.pressed(✨esc✨) tho
+        yeet running = cap
+    bet
+
+    sus running tho
+
+        snd.serve()
+        yeet frame = frame + 1
+
+        💀 advance stars toward viewer
+        yeet i = 0
+        vibe check i < STAR_COUNT tho
+            star_z[i] = star_z[i] - STAR_SPEED
+            sus star_z[i] < 0.5 tho
+                star_x[i] = random.vibe() * 800 - 400
+                star_y[i] = random.vibe() * 600 - 300
+                star_z[i] = STAR_DEPTH
+            bet
+            yeet i = i + 1
+        bet
+
+        💀 ══════════════════════════════════════════════════════
+        💀 START SCREEN
+        💀 ══════════════════════════════════════════════════════
+
+        sus game_started be 0 tho
+
+            sus w.pressed(✨enter✨) tho
+                yeet game_started = 1
+                spawn_wave(4)
+            bet
+
+            w.cleanse(0, 0, 0)
+
+            draw_stars()
+
+            💀 decorative drifting asteroids
+            yeet da = frame * 0.008
+            w.halo(math.humbled(200 + math.waves(da) * 100), math.humbled(200 + math.vibes(da * 0.7) * 60), 25, 80, 80, 80)
+            w.halo(math.humbled(620 + math.waves(da * 0.6 + 2) * 80), math.humbled(160 + math.vibes(da * 0.9 + 1) * 50), 25, 70, 70, 70)
+            w.halo(math.humbled(500 + math.waves(da * 1.1 + 4) * 60), math.humbled(430 + math.vibes(da * 0.5 + 3) * 40), 13, 60, 60, 60)
+            w.halo(math.humbled(120 + math.waves(da * 0.9 + 5) * 50), math.humbled(450 + math.vibes(da * 0.8 + 2) * 30), 7, 50, 50, 50)
+            w.halo(math.humbled(680 + math.waves(da * 0.7 + 1) * 40), math.humbled(380 + math.vibes(da * 1.2 + 4) * 35), 7, 50, 50, 50)
+
+            💀 title
+            w.stan(✨ASTEROIDS✨, 310, 140, 0, 255, 100, 5)
+
+            💀 subtitle — genz style
+            w.stan(✨no cap this hits different✨, 296, 210, 100, 100, 130, 2)
+
+            💀 decorative ship in center
+            draw_ship(400, 290, 0 - PI / 2)
+
+            💀 controls
+            w.stan(✨ARROWS / WASD   MOVE✨, 320, 360, 150, 150, 150, 2)
+            w.stan(✨SPACE   SHOOT✨, 348, 385, 150, 150, 150, 2)
+            w.stan(✨ESC   QUIT✨, 360, 410, 150, 150, 150, 2)
+
+            💀 blinking prompt
+            sus frame % 60 < 40 tho
+                w.stan(✨PRESS ENTER✨, 334, 480, 255, 255, 100, 3)
+            bet
+
+            w.flaunt()
+
+        nah sus game_over be 1 tho
+
+            💀 ══════════════════════════════════════════════════
+            💀 GAME OVER SCREEN
+            💀 ══════════════════════════════════════════════════
+
+            w.cleanse(0, 0, 0)
+
+            draw_stars()
+
+            w.stan(✨GAME OVER✨, 328, 220, 255, 50, 50, 4)
+            w.stan(✨SCORE✨, 380, 290, 180, 180, 180, 2)
+            w.stan(✨✨ + score, 376, 320, 255, 255, 255, 3)
+            w.stan(✨gg no re✨, 368, 380, 100, 100, 130, 2)
+
+            💀 blinking prompt
+            sus frame % 60 < 40 tho
+                w.stan(✨PRESS ENTER✨, 334, 460, 255, 255, 100, 3)
+            bet
+
+            w.flaunt()
+
+            sus w.pressed(✨enter✨) tho
+                reset_game()
+            bet
+
+        nah
+
+            💀 ══════════════════════════════════════════════════
+            💀 INPUT
+            💀 ══════════════════════════════════════════════════
+
+            sus ship_dead be 0 tho
+                💀 rotation
+                sus w.pressed(✨left✨) or w.pressed(✨a✨) tho
+                    yeet ship_angle = ship_angle - 0.055
+                bet
+                sus w.pressed(✨right✨) or w.pressed(✨d✨) tho
+                    yeet ship_angle = ship_angle + 0.055
+                bet
+
+                💀 thrust
+                yeet thrusting = 0
+                sus w.pressed(✨up✨) or w.pressed(✨w✨) tho
+                    yeet ship_dx = ship_dx + math.waves(ship_angle) * 0.1
+                    yeet ship_dy = ship_dy + math.vibes(ship_angle) * 0.1
+                    yeet thrusting = 1
+                    sus frame % 4 be 0 tho
+                        snd.noise(80, 15)
+                    bet
+                bet
+
+                💀 fire
+                sus w.pressed(✨space✨) tho
+                    sus cooldown be 0 tho
+                        fire_bul()
+                        yeet cooldown = 8
+                        snd.slide(✨square✨, 880, 440, 80, 40)
+                    bet
+                bet
+            bet
+
+            💀 ══════════════════════════════════════════════════
+            💀 UPDATE SHIP
+            💀 ══════════════════════════════════════════════════
+
+            sus ship_dead be 0 tho
+                💀 drag
+                yeet ship_dx = ship_dx * 0.985
+                yeet ship_dy = ship_dy * 0.985
+                💀 move + wrap
+                yeet ship_x = wrap_x(ship_x + ship_dx)
+                yeet ship_y = wrap_y(ship_y + ship_dy)
+            nah
+                💀 death countdown
+                yeet ship_dead = ship_dead - 1
+                sus ship_dead be 0 tho
+                    sus lives <= 0 tho
+                        yeet game_over = 1
+                    nah
+                        💀 respawn at center
+                        yeet ship_x = 400
+                        yeet ship_y = 300
+                        yeet ship_dx = 0
+                        yeet ship_dy = 0
+                        yeet ship_angle = 0 - PI / 2
+                        yeet ship_inv = 90
+                    bet
+                bet
+            bet
+
+            💀 invincibility countdown
+            sus ship_inv > 0 tho
+                yeet ship_inv = ship_inv - 1
+            bet
+
+            💀 cooldown countdown
+            sus cooldown > 0 tho
+                yeet cooldown = cooldown - 1
+            bet
+
+            💀 ══════════════════════════════════════════════════
+            💀 UPDATE BULLETS
+            💀 ══════════════════════════════════════════════════
+
+            yeet i = 0
+            vibe check i < MAX_BUL tho
+                sus bul_on[i] be 1 tho
+                    bul_x[i] = wrap_x(bul_x[i] + bul_dx[i])
+                    bul_y[i] = wrap_y(bul_y[i] + bul_dy[i])
+                    bul_ttl[i] = bul_ttl[i] - 1
+                    sus bul_ttl[i] <= 0 tho
+                        bul_on[i] = 0
+                    bet
+                bet
+                yeet i = i + 1
+            bet
+
+            💀 ══════════════════════════════════════════════════
+            💀 UPDATE ASTEROIDS
+            💀 ══════════════════════════════════════════════════
+
+            yeet i = 0
+            vibe check i < MAX_AST tho
+                sus ast_on[i] be 1 tho
+                    ast_x[i] = wrap_x(ast_x[i] + ast_dx[i])
+                    ast_y[i] = wrap_y(ast_y[i] + ast_dy[i])
+                bet
+                yeet i = i + 1
+            bet
+
+            💀 ══════════════════════════════════════════════════
+            💀 BULLET — ASTEROID COLLISION
+            💀 ══════════════════════════════════════════════════
+
+            yeet i = 0
+            vibe check i < MAX_BUL tho
+                sus bul_on[i] be 1 tho
+                    yeet bul_hit = 0
+                    yeet j = 0
+                    vibe check j < MAX_AST and bul_hit be 0 tho
+                        sus ast_on[j] be 1 tho
+                            yeet d = dist(bul_x[i], bul_y[i], ast_x[j], ast_y[j])
+                            sus d < ast_r[j] + 3 tho
+                                💀 hit! destroy bullet + asteroid
+                                yeet bul_hit = 1
+                                bul_on[i] = 0
+                                ast_on[j] = 0
+
+                                💀 score + split — rotate parent trajectory ±25-35 deg
+                                💀 get parent direction as unit vector
+                                yeet par_spd = math.glow(ast_dx[j] * ast_dx[j] + ast_dy[j] * ast_dy[j])
+                                sus par_spd < 0.01 tho
+                                    yeet par_spd = 1
+                                bet
+                                yeet par_nx = ast_dx[j] / par_spd
+                                yeet par_ny = ast_dy[j] / par_spd
+                                💀 split angle: 25-35 degrees = 0.436-0.611 radians
+                                yeet split = 0.436 + random.vibe() * 0.175
+                                yeet cos_s = math.waves(split)
+                                yeet sin_s = math.vibes(split)
+
+                                sus ast_r[j] > 20 tho
+                                    💀 big → 2 medium
+                                    yeet score = score + 20
+                                    snd.noise(400, 55)
+                                    snd.bop(✨sine✨, 80, 400, 35)
+                                    yeet c1_spd = 1 + random.vibe() * 0.7
+                                    yeet c2_spd = 1 + random.vibe() * 0.7
+                                    spawn_ast(ast_x[j], ast_y[j], (par_nx * cos_s - par_ny * sin_s) * c1_spd, (par_nx * sin_s + par_ny * cos_s) * c1_spd, 13)
+                                    spawn_ast(ast_x[j], ast_y[j], (par_nx * cos_s + par_ny * sin_s) * c2_spd, (par_ny * cos_s - par_nx * sin_s) * c2_spd, 13)
+                                nah sus ast_r[j] > 10 tho
+                                    💀 medium → 2 small
+                                    yeet score = score + 50
+                                    snd.noise(250, 45)
+                                    snd.bop(✨sine✨, 120, 250, 30)
+                                    yeet c1_spd = 1.3 + random.vibe() * 0.8
+                                    yeet c2_spd = 1.3 + random.vibe() * 0.8
+                                    spawn_ast(ast_x[j], ast_y[j], (par_nx * cos_s - par_ny * sin_s) * c1_spd, (par_nx * sin_s + par_ny * cos_s) * c1_spd, 7)
+                                    spawn_ast(ast_x[j], ast_y[j], (par_nx * cos_s + par_ny * sin_s) * c2_spd, (par_ny * cos_s - par_nx * sin_s) * c2_spd, 7)
+                                nah
+                                    💀 small → destroyed
+                                    yeet score = score + 100
+                                    snd.noise(120, 35)
+                                    snd.bop(✨sine✨, 200, 120, 25)
+                                bet
+                            bet
+                        bet
+                        yeet j = j + 1
+                    bet
+                bet
+                yeet i = i + 1
+            bet
+
+            💀 ══════════════════════════════════════════════════
+            💀 SHIP — ASTEROID COLLISION
+            💀 ══════════════════════════════════════════════════
+
+            sus ship_dead be 0 tho
+                sus ship_inv be 0 tho
+                    yeet i = 0
+                    vibe check i < MAX_AST and ship_dead be 0 tho
+                        sus ast_on[i] be 1 tho
+                            yeet d = dist(ship_x, ship_y, ast_x[i], ast_y[i])
+                            sus d < ast_r[i] + 8 tho
+                                💀 ship destroyed!
+                                yeet death_x = ship_x
+                                yeet death_y = ship_y
+                                yeet death_angle = ship_angle
+                                yeet lives = lives - 1
+                                yeet ship_dead = 90
+                                snd.slide(✨saw✨, 600, 40, 800, 50)
+                                snd.noise(600, 45)
+                            bet
+                        bet
+                        yeet i = i + 1
+                    bet
+                bet
+            bet
+
+            💀 ══════════════════════════════════════════════════
+            💀 WAVE CLEAR CHECK
+            💀 ══════════════════════════════════════════════════
+
+            yeet ast_count = 0
+            yeet i = 0
+            vibe check i < MAX_AST tho
+                sus ast_on[i] be 1 tho
+                    yeet ast_count = ast_count + 1
+                bet
+                yeet i = i + 1
+            bet
+
+            sus ast_count be 0 tho
+                sus game_over be 0 tho
+                    yeet wave_num = wave_num + 1
+                    spawn_wave(wave_num + 3)
+                    snd.slide(✨sine✨, 300, 900, 400, 50)
+                bet
+            bet
+
+            💀 ══════════════════════════════════════════════════
+            💀 HEARTBEAT — two alternating bass thumps
+            💀 tempo scales with asteroid count (fewer = faster)
+            💀 ══════════════════════════════════════════════════
+
+            sus game_over be 0 tho
+                yeet beat_timer = beat_timer + 1
+                sus beat_timer >= beat_interval tho
+                    yeet beat_timer = 0
+                    sus beat_note be 0 tho
+                        snd.bop(✨square✨, 82, 100, 35)
+                        yeet beat_note = 1
+                    nah
+                        snd.bop(✨square✨, 65, 100, 35)
+                        yeet beat_note = 0
+                    bet
+                    💀 speed up: fewer asteroids = shorter interval
+                    yeet beat_interval = 12 + ast_count * 2
+                    sus beat_interval > 50 tho
+                        yeet beat_interval = 50
+                    bet
+                    sus beat_interval < 8 tho
+                        yeet beat_interval = 8
+                    bet
+                bet
+            bet
+
+            💀 ══════════════════════════════════════════════════
+            💀 RENDER
+            💀 ══════════════════════════════════════════════════
+
+            w.cleanse(0, 0, 0)
+
+            💀 ── stars ──
+            draw_stars()
+
+            💀 ── asteroids (white circle outlines) ──
+            yeet i = 0
+            vibe check i < MAX_AST tho
+                sus ast_on[i] be 1 tho
+                    w.halo(math.humbled(ast_x[i]), math.humbled(ast_y[i]), math.humbled(ast_r[i]), 255, 255, 255)
+                bet
+                yeet i = i + 1
+            bet
+
+            💀 ── bullets (yellow dots) ──
+            yeet i = 0
+            vibe check i < MAX_BUL tho
+                sus bul_on[i] be 1 tho
+                    w.aura(math.humbled(bul_x[i]), math.humbled(bul_y[i]), 2, 255, 255, 0)
+                bet
+                yeet i = i + 1
+            bet
+
+            💀 ── ship ──
+            sus ship_dead be 0 tho
+                💀 flash during invincibility — skip drawing on odd frames
+                sus ship_inv be 0 or frame % 2 be 0 tho
+                    draw_ship(ship_x, ship_y, ship_angle)
+                    sus thrusting be 1 tho
+                        draw_flame(ship_x, ship_y, ship_angle)
+                    bet
+                bet
+            bet
+
+            💀 ── explosion ──
+            sus ship_dead > 0 tho
+                yeet t = (90 - ship_dead) / 90
+                draw_explosion(death_x, death_y, death_angle, t)
+            bet
+
+            💀 ── HUD ──
+            w.stan(✨SCORE  ✨ + score, 20, 20, 255, 255, 255, 2)
+            w.stan(✨WAVE ✨ + wave_num, 370, 20, 180, 180, 255, 2)
+
+            💀 lives as small triangles top-right
+            yeet i = 0
+            vibe check i < lives tho
+                draw_life(W - 30 - i * 25, 25)
+                yeet i = i + 1
+            bet
+
+            w.flaunt()
+
+        bet
+    bet
+bet
+
+snd.unalive()
+w.unalive()
+spill ✨✨
+spill ✨💀 asteroids over. final score: ✨ + score
   </script>
 
   <!-- ═══════════════════════════════════════════════════════════════ -->
