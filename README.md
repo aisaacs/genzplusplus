@@ -113,7 +113,16 @@ node genz.js examples/gpu_terrain.genz  # native window terrain flyover
 node genz.js examples/asteroids.genz    # full arcade game
 ```
 
-The Asteroids game is 694 lines of genz++ with a 3D starfield, ship explosions, asteroid splitting, wave progression, and three game screens. It is the most ambitious genz++ program that isn't calling an AI.
+## The Asteroids Game
+
+A full classic Asteroids arcade game in 694 lines of genz++. Native 800x600 SDL2 window with vector-style rendering — green wireframe ship, white circle asteroids, yellow bullet dots, and a 3D starfield flying toward the viewer. Ship explosions, asteroid splitting, wave progression, scoring, lives, and three game screens (start, gameplay, game over).
+
+```bash
+npm install koffi   # requires SDL2 installed
+node genz.js examples/asteroids.genz
+```
+
+Arrows/WASD to move, space to shoot, ESC to quit.
 
 ## The Adventure Game
 
