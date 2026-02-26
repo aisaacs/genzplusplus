@@ -47,7 +47,8 @@ const TokenType = {
   BRUH: 'BRUH',
   ITS_GIVING: 'ITS_GIVING',
   PLUG_IN: 'PLUG_IN',
-  
+  DIP: 'DIP',
+
   // Literals
   NUMBER: 'NUMBER',
   STRING: 'STRING',
@@ -313,6 +314,7 @@ class Lexer {
           case 'or': this.tokens.push(new Token(TokenType.OR, 'or', this.line)); break;
           case 'not': this.tokens.push(new Token(TokenType.NOT, 'not', this.line)); break;
           case 'cap': this.tokens.push(new Token(TokenType.FALSE, false, this.line)); break;
+          case 'dip': this.tokens.push(new Token(TokenType.DIP, 'dip', this.line)); break;
           default: this.tokens.push(new Token(TokenType.IDENTIFIER, id, this.line));
         }
         continue;
@@ -496,6 +498,10 @@ class PlugStatement extends ASTNode {
   }
 }
 
+class BreakStatement extends ASTNode {
+  constructor() { super(); }
+}
+
 // ============================================================================
 // PARSER
 // ============================================================================
@@ -547,6 +553,11 @@ class Parser {
     if (this.match(TokenType.PLUG_IN)) {
       const moduleName = this.expect(TokenType.IDENTIFIER, 'Expected module name after plug in').value;
       return new PlugStatement(moduleName);
+    }
+
+    // Break: dip
+    if (this.match(TokenType.DIP)) {
+      return new BreakStatement();
     }
 
     // Variable declaration: yeet x = 5
@@ -800,7 +811,19 @@ class Parser {
         }
       } else if (this.match(TokenType.DOT)) {
         // Property/Method access: obj.prop or obj.method(args)
-        const method = this.expect(TokenType.IDENTIFIER, 'Expected method name after dot').value;
+        // Accept identifiers AND keywords as method names (e.g. dom.yeet, list.bet)
+        const tok = this.tokens[this.pos];
+        if (!tok || tok.type === TokenType.EOF) throw new Error(`Expected method name after dot on line ${tok ? tok.line : '?'}. L + ratio`);
+        let method;
+        if (tok.type === TokenType.IDENTIFIER) {
+          method = tok.value;
+          this.pos++;
+        } else if (typeof tok.value === 'string' && /^[a-zA-Z_]/.test(tok.value)) {
+          method = tok.value;
+          this.pos++;
+        } else {
+          throw new Error(`Expected method name after dot on line ${tok.line}. Got '${tok.value}' instead. L + ratio`);
+        }
         let args = [];
         let isCall = false;
         if (this.match(TokenType.LPAREN)) {
@@ -2400,6 +2423,8 @@ class ReturnValue {
   }
 }
 
+class BreakSignal {}
+
 class Interpreter {
   constructor() {
     this.globals = new Map();
@@ -2430,6 +2455,7 @@ class Interpreter {
       for (const stmt of node.statements) {
         const result = await this.execute(stmt);
         if (result instanceof ReturnValue) return result;
+        if (result instanceof BreakSignal) return result;
       }
       return null;
     }
@@ -2441,6 +2467,10 @@ class Interpreter {
         throw new Error(`Module '${node.moduleName}' not found. That's not a thing bestie 💀`);
       }
       return null;
+    }
+
+    if (node instanceof BreakStatement) {
+      return new BreakSignal();
     }
 
     if (node instanceof VarDeclaration) {
@@ -2507,6 +2537,7 @@ class Interpreter {
       while (this.isTruthy(await this.evaluate(node.condition))) {
         const result = await this.executeBlock(node.body);
         if (result instanceof ReturnValue) return result;
+        if (result instanceof BreakSignal) break;
       }
       return null;
     }
@@ -2535,11 +2566,12 @@ class Interpreter {
     const child = new Map();
     child._parent = previous;
     this.environment = child;
-    
+
     try {
       for (const stmt of statements) {
         const result = await this.execute(stmt);
         if (result instanceof ReturnValue) return result;
+        if (result instanceof BreakSignal) return result;
       }
     } finally {
       this.environment = previous;

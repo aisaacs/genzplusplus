@@ -163,9 +163,20 @@ bet
 
 `vibe check` is "while." There is no for loop. If you want a for loop, write a while loop and pretend. Marcus Webb has been asking about for loops since he woke up and everyone keeps telling him "we don't do that here."
 
-### Early Return
+### Break
 
-There is no `break` or `continue`. To exit a loop early, you can set the loop condition to false, or restructure your code, or question why you're writing genz++ in the first place.
+`dip` breaks out of a `vibe check` loop early. There is no `continue`.
+
+```
+yeet i = 0
+vibe check i < 100 tho
+    sus i be 42 tho
+        spill ✨found it✨
+        dip
+    bet
+    yeet i = i + 1
+bet
+```
 
 ---
 
@@ -732,6 +743,46 @@ w.unalive()
 | `is_list(x)` | Is an array |
 | `is_ghosted(x)` | Is null |
 | `inspect(x)` | Prints value with type info and returns it |
+
+### dom — *browser DOM manipulation* (genz-web.js only)
+
+The dom module is available in the browser runtime (`genz-web.js`). It lets you build interactive web pages in genz++.
+
+| Method | What It Does |
+|--------|-------------|
+| `dom.cook(tag)` | Cook a new element (createElement) |
+| `dom.caption(el, text)` | Set text content |
+| `dom.inner(el, html)` | Set innerHTML |
+| `dom.drip(el, prop, val)` | Set a style property |
+| `dom.glow_up(el, cls)` | Add a CSS class |
+| `dom.humble(el, cls)` | Remove a CSS class |
+| `dom.slap(el, attr, val)` | Set an attribute |
+| `dom.peep(el, attr)` | Get an attribute |
+| `dom.yeet(el)` | Append to page body |
+| `dom.yeet_in(parent, child)` | Append child to parent |
+| `dom.ghost(el)` | Remove element from DOM |
+| `dom.snag(selector)` | querySelector |
+| `dom.snag_all(selector)` | querySelectorAll |
+| `dom.tune_in(el, event, fn)` | Add event listener (calls genz++ function) |
+| `dom.value(el)` | Get input value |
+| `dom.set_value(el, val)` | Set input value |
+| `dom.vibes(css)` | Inject a CSS stylesheet |
+| `dom.serve()` | requestAnimationFrame promise |
+
+```
+plug in dom
+
+yeet btn = dom.cook(✨button✨)
+dom.caption(btn, ✨click me✨)
+dom.drip(btn, ✨background✨, ✨#ff6b9d✨)
+
+bruh on_click(ev) tho
+    spill ✨clicked!✨
+bet
+
+dom.tune_in(btn, ✨click✨, on_click)
+dom.yeet(btn)
+```
 
 ---
 

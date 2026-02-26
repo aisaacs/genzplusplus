@@ -69,6 +69,7 @@ If you can read that, you might be the last programmer.
 | `💀 text`      | comment               | `// text`              |
 | `✨text✨`      | string                | `"text"`               |
 | `👀 ✨prompt✨` | input                 | `readline(prompt)`     |
+| `dip`          | break                 | `break`                |
 | `💯`           | true                  | `true`                 |
 | `🧢`           | false                 | `false`                |
 | `ghosted`      | null                  | `null`                 |
@@ -96,6 +97,7 @@ Import modules with `plug in`. All 17 of them.
 | `gpu`       | Native SDL2 window rendering            | `gpu.spawn(800,600,✨title✨)` goes hard |
 | `sound`     | Procedural audio synthesis              | `s.bop(✨sine✨, 440, 200, 80)` goes beep |
 | `debug`     | Type checking & inspection              | `debug.type_check(x)` tells you     |
+| `dom`       | Browser DOM manipulation (web only)     | `dom.cook(✨div✨)` builds websites   |
 
 ## Demoscene & Games
 
@@ -132,6 +134,46 @@ The repo includes an infinite, AI-powered choose-your-own-adventure game where y
 
 ```bash
 ANTHROPIC_API_KEY=sk-ant-... node genz.js examples/adventure.genz
+```
+
+## Browser Runtime
+
+genz++ runs in the browser too. No build step, no bundler, no npm — just a `<script>` tag.
+
+```bash
+# open the playground
+open web/index.html
+
+# or serve it
+npx serve .
+# then visit http://localhost:3000/web/
+```
+
+The browser runtime (`genz-web.js`) includes:
+
+- Full interpreter (lexer, parser, everything)
+- **GPU module** — renders to `<canvas>` with Canvas/ImageData (same API as the SDL2 version)
+- **Sound module** — Web Audio API synthesis (OscillatorNode, GainNode, white noise)
+- **DOM module** — build websites in genz++ (createElement, styles, events, callbacks)
+- All pure-JS stdlib modules (math, tea, random, list, time, convert, net, obj, debug)
+
+### Embed in your own page
+
+```html
+<script src="genz-web.js"></script>
+<div id="genz-output"></div>
+<script>
+  GenzPP.run(`spill ✨hello from genz++✨`);
+</script>
+```
+
+Or use inline script tags:
+
+```html
+<script src="genz-web.js"></script>
+<script type="text/genz">
+  spill ✨this runs automatically✨
+</script>
 ```
 
 ## Install

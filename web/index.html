@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>genz++ playground</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+      background: #0f0f1a;
+      color: #e0e0e0;
+      min-height: 100vh;
+    }
+    .header {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      border-bottom: 2px solid #ff6b9d;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .header h1 {
+      font-size: 24px;
+      background: linear-gradient(90deg, #ff6b9d, #c084fc, #67e8f9);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .header .sub {
+      color: #888;
+      font-size: 13px;
+    }
+    .toolbar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 24px;
+      background: #12121f;
+      border-bottom: 1px solid #2a2a3e;
+    }
+    .btn {
+      background: #ff6b9d;
+      color: #fff;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .btn:hover { background: #ff85b1; transform: translateY(-1px); }
+    .btn:active { transform: translateY(0); }
+    .btn.stop {
+      background: #ef4444;
+    }
+    .btn.stop:hover { background: #f87171; }
+    .btn:disabled {
+      background: #555;
+      cursor: not-allowed;
+      transform: none;
+    }
+    select {
+      background: #1a1a2e;
+      color: #e0e0e0;
+      border: 1px solid #2a2a3e;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 13px;
+      cursor: pointer;
+    }
+    select:focus { outline: none; border-color: #ff6b9d; }
+    .main {
+      display: flex;
+      height: calc(100vh - 110px);
+    }
+    .editor-pane {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      border-right: 1px solid #2a2a3e;
+      min-width: 0;
+    }
+    .editor-label {
+      padding: 8px 16px;
+      font-size: 12px;
+      color: #666;
+      background: #12121f;
+      border-bottom: 1px solid #1a1a2e;
+    }
+    #editor {
+      flex: 1;
+      background: #0a0a14;
+      color: #e0e0e0;
+      border: none;
+      padding: 16px;
+      font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+      font-size: 14px;
+      line-height: 1.6;
+      resize: none;
+      outline: none;
+      tab-size: 4;
+    }
+    #editor::placeholder { color: #444; }
+    .output-pane {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+    .output-label {
+      padding: 8px 16px;
+      font-size: 12px;
+      color: #666;
+      background: #12121f;
+      border-bottom: 1px solid #1a1a2e;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .clear-btn {
+      background: none;
+      border: none;
+      color: #666;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 12px;
+    }
+    .clear-btn:hover { color: #ff6b9d; }
+    #genz-output {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+      background: #0a0a14;
+    }
+    #genz-output .genz-line {
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 14px;
+      line-height: 1.5;
+      color: #c084fc;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+    #genz-output .genz-error {
+      color: #ef4444;
+      font-weight: 600;
+    }
+    #genz-output canvas {
+      max-width: 100%;
+      height: auto;
+    }
+    .status {
+      font-size: 13px;
+      color: #666;
+      padding: 0 8px;
+    }
+    .status.running { color: #67e8f9; }
+    .status.error { color: #ef4444; }
+    .status.done { color: #4ade80; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .main { flex-direction: column; }
+      .editor-pane { border-right: none; border-bottom: 1px solid #2a2a3e; flex: none; height: 40vh; }
+      .output-pane { flex: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>genz++</h1>
+    <span class="sub">the future of code. in your browser. no cap.</span>
+  </div>
+  <div class="toolbar">
+    <button class="btn" id="run-btn" onclick="runCode()">run it</button>
+    <button class="btn stop" id="stop-btn" onclick="stopCode()" disabled>stop</button>
+    <select id="examples" onchange="loadExample()">
+      <option value="">-- examples --</option>
+      <option value="hello">hello world</option>
+      <option value="fizzbuzz">fizzbuzz</option>
+      <option value="fibonacci">fibonacci</option>
+      <option value="plasma">gpu plasma</option>
+      <option value="dom_hello">dom: hello</option>
+      <option value="dom_counter">dom: counter</option>
+    </select>
+    <span class="status" id="status"></span>
+  </div>
+  <div class="main">
+    <div class="editor-pane">
+      <div class="editor-label">editor</div>
+      <textarea id="editor" spellcheck="false" placeholder="write your genz++ code here bestie..."></textarea>
+    </div>
+    <div class="output-pane">
+      <div class="output-label">
+        <span>output</span>
+        <button class="clear-btn" onclick="clearOutput()">clear</button>
+      </div>
+      <div id="genz-output"></div>
+      <div id="genz-gpu"></div>
+      <div id="genz-dom"></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- EXAMPLES as <script type="text/genz"> — not auto-executed,    -->
+  <!-- just stored in the DOM for the playground to pull from.        -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+
+  <script type="text/genz" id="example-hello">
+💀 hello world - the simplest genz++ program no cap
+
+spill ✨hello world✨
+spill ✨this is genz++ running in your browser✨
+spill ✨and its giving everything✨
+  </script>
+
+  <script type="text/genz" id="example-fizzbuzz">
+💀 fizzbuzz but make it genz++
+💀 the classic coding interview question
+
+yeet i = 1
+
+vibe check i <= 30 tho
+    sus i % 15 be 0 tho
+        spill ✨✨ + i + ✨: FizzBuzz slay 💅✨
+    nah sus i % 3 be 0 tho
+        spill ✨✨ + i + ✨: Fizz no cap✨
+    nah sus i % 5 be 0 tho
+        spill ✨✨ + i + ✨: Buzz fr fr✨
+    nah
+        spill i
+    bet
+    yeet i = i + 1
+bet
+  </script>
+
+  <script type="text/genz" id="example-fibonacci">
+💀 fibonacci - the golden ratio coded up
+
+bruh fib(n) tho
+    sus n <= 1 tho
+        its giving n
+    bet
+    its giving fib(n - 1) + fib(n - 2)
+bet
+
+yeet i = 0
+vibe check i <= 15 tho
+    spill ✨fib(✨ + i + ✨) = ✨ + fib(i)
+    yeet i = i + 1
+bet
+  </script>
+
+  <script type="text/genz" id="example-plasma">
+💀 GPU PLASMA — demoscene vibes in your browser
+💀 ESC to quit
+
+plug in gpu
+plug in math
+
+yeet W = 320
+yeet H = 200
+yeet w = gpu.spawn(W, H, ✨genz++ gpu plasma✨)
+
+💀 logic resolution — 1/4 of window, each pixel is a 4x4 block
+yeet PX = 4
+yeet LW = W / PX
+yeet LH = H / PX
+
+yeet t = 0
+
+vibe check w.serve() tho
+    sus w.pressed(✨esc✨) tho
+        dip
+    bet
+
+    yeet y = 0
+    vibe check y < LH tho
+        yeet x = 0
+        vibe check x < LW tho
+            💀 classic plasma: sum of sines
+            yeet v1 = math.vibes(x * 0.08 + t * 0.07)
+            yeet v2 = math.vibes(y * 0.1 + t * 0.05)
+            yeet v3 = math.vibes((x + y) * 0.06 + t * 0.04)
+            yeet v4 = math.vibes(math.glow(x * x + y * y) * 0.05 + t * 0.03)
+
+            yeet val = (v1 + v2 + v3 + v4) * 0.25
+
+            💀 map to RGB
+            yeet r = math.humbled(math.ate(math.vibes(val * 3.14159 + t * 0.02)) * 255)
+            yeet g = math.humbled(math.ate(math.vibes(val * 3.14159 + 2.094 + t * 0.03)) * 255)
+            yeet b = math.humbled(math.ate(math.vibes(val * 3.14159 + 4.188 + t * 0.015)) * 255)
+
+            w.drip(x * PX, y * PX, PX, PX, r, g, b)
+            yeet x = x + 1
+        bet
+        yeet y = y + 1
+    bet
+
+    💀 title overlay
+    w.stan(✨PLASMA✨, 10, 10, 255, 255, 255, 2)
+    w.stan(✨ESC=QUIT✨, 10, H - 20, 120, 120, 140)
+
+    w.flaunt()
+    yeet t = t + 1
+bet
+
+w.unalive()
+spill ✨✨
+spill ✨💀 plasma complete. the demoscene lives in genz++ now.✨
+  </script>
+
+  <script type="text/genz" id="example-dom_hello">
+💀 DOM module demo — create elements in the browser
+
+plug in dom
+
+💀 inject some styles
+dom.vibes(✨
+  #genz-dom {
+    padding: 24px;
+    font-family: system-ui, sans-serif;
+  }
+  .hero {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    padding: 32px;
+    border-radius: 16px;
+    border: 2px solid #ff6b9d;
+    text-align: center;
+  }
+  .hero h1 {
+    font-size: 36px;
+    background: linear-gradient(90deg, #ff6b9d, #c084fc, #67e8f9);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 12px;
+  }
+  .hero p { color: #aaa; font-size: 16px; }
+✨)
+
+💀 build the DOM
+yeet hero = dom.cook(✨div✨)
+dom.glow_up(hero, ✨hero✨)
+
+yeet title = dom.cook(✨h1✨)
+dom.caption(title, ✨hello from genz++✨)
+dom.yeet_in(hero, title)
+
+yeet desc = dom.cook(✨p✨)
+dom.caption(desc, ✨this was built entirely with the dom module. no cap.✨)
+dom.yeet_in(hero, desc)
+
+dom.yeet(hero)
+
+spill ✨DOM elements created!✨
+  </script>
+
+  <script type="text/genz" id="example-dom_counter">
+💀 DOM counter — interactive button with callbacks
+
+plug in dom
+
+dom.vibes(✨
+  #genz-dom {
+    padding: 24px;
+    font-family: system-ui, sans-serif;
+  }
+  .counter-box {
+    background: #1a1a2e;
+    border: 2px solid #c084fc;
+    border-radius: 16px;
+    padding: 32px;
+    text-align: center;
+    max-width: 300px;
+  }
+  .count {
+    font-size: 64px;
+    color: #c084fc;
+    font-weight: bold;
+    margin: 16px 0;
+  }
+  .counter-btn {
+    background: #c084fc;
+    color: #fff;
+    border: none;
+    padding: 12px 32px;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    margin: 4px;
+    transition: all 0.15s;
+  }
+  .counter-btn:hover {
+    background: #d4a0ff;
+    transform: translateY(-2px);
+  }
+✨)
+
+yeet count = 0
+yeet box = dom.cook(✨div✨)
+dom.glow_up(box, ✨counter-box✨)
+
+yeet label = dom.cook(✨div✨)
+dom.caption(label, ✨click counter✨)
+dom.drip(label, ✨color✨, ✨#888✨)
+dom.drip(label, ✨fontSize✨, ✨14px✨)
+dom.yeet_in(box, label)
+
+yeet display = dom.cook(✨div✨)
+dom.glow_up(display, ✨count✨)
+dom.caption(display, ✨0✨)
+dom.yeet_in(box, display)
+
+bruh increment(ev) tho
+    yeet count = count + 1
+    dom.caption(display, ✨✨ + count)
+bet
+
+bruh decrement(ev) tho
+    yeet count = count - 1
+    dom.caption(display, ✨✨ + count)
+bet
+
+yeet minus_btn = dom.cook(✨button✨)
+dom.glow_up(minus_btn, ✨counter-btn✨)
+dom.caption(minus_btn, ✨-✨)
+dom.tune_in(minus_btn, ✨click✨, decrement)
+dom.yeet_in(box, minus_btn)
+
+yeet plus_btn = dom.cook(✨button✨)
+dom.glow_up(plus_btn, ✨counter-btn✨)
+dom.caption(plus_btn, ✨+✨)
+dom.tune_in(plus_btn, ✨click✨, increment)
+dom.yeet_in(box, plus_btn)
+
+dom.yeet(box)
+
+spill ✨counter ready! click the buttons.✨
+  </script>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+
+  <script src="../genz-web.js"></script>
+  <script>
+    // Prevent genz-web.js from auto-executing the example script tags.
+    // (They have IDs prefixed with "example-" and are loaded on demand.)
+
+    const editor = document.getElementById('editor');
+    const output = document.getElementById('genz-output');
+    const gpuContainer = document.getElementById('genz-gpu');
+    const domContainer = document.getElementById('genz-dom');
+    const statusEl = document.getElementById('status');
+    const runBtn = document.getElementById('run-btn');
+    const stopBtn = document.getElementById('stop-btn');
+
+    let currentInterpreter = null;
+
+    function getExample(id) {
+      const el = document.getElementById('example-' + id);
+      if (!el) return '';
+      // Trim leading/trailing blank lines from the script tag content
+      return el.textContent.replace(/^\n/, '').replace(/\n\s*$/, '');
+    }
+
+    // Load default example
+    editor.value = getExample('hello');
+
+    function loadExample() {
+      const sel = document.getElementById('examples');
+      const key = sel.value;
+      if (key) {
+        const src = getExample(key);
+        if (src) editor.value = src;
+      }
+      sel.value = '';
+    }
+
+    function clearOutput() {
+      output.innerHTML = '';
+      gpuContainer.innerHTML = '';
+      domContainer.innerHTML = '';
+    }
+
+    function setStatus(text, cls) {
+      statusEl.textContent = text;
+      statusEl.className = 'status ' + (cls || '');
+    }
+
+    async function runCode() {
+      if (currentInterpreter) {
+        currentInterpreter.stop();
+        currentInterpreter = null;
+      }
+
+      clearOutput();
+      setStatus('running...', 'running');
+      runBtn.disabled = true;
+      stopBtn.disabled = false;
+
+      const source = editor.value;
+      const start = performance.now();
+
+      try {
+        currentInterpreter = await GenzPP.run(source, { output: output });
+        const elapsed = (performance.now() - start).toFixed(0);
+        setStatus(`done in ${elapsed}ms`, 'done');
+      } catch (e) {
+        const errDiv = document.createElement('div');
+        errDiv.className = 'genz-line genz-error';
+        errDiv.textContent = '\u{1F480} ERROR: ' + e.message;
+        output.appendChild(errDiv);
+        setStatus('error', 'error');
+      } finally {
+        currentInterpreter = null;
+        runBtn.disabled = false;
+        stopBtn.disabled = true;
+      }
+    }
+
+    function stopCode() {
+      if (currentInterpreter) {
+        currentInterpreter.stop();
+        setStatus('stopped', 'error');
+      }
+    }
+
+    // Tab key inserts spaces in editor
+    editor.addEventListener('keydown', function(e) {
+      if (e.key === 'Tab') {
+        e.preventDefault();
+        const start = this.selectionStart;
+        const end = this.selectionEnd;
+        this.value = this.value.substring(0, start) + '    ' + this.value.substring(end);
+        this.selectionStart = this.selectionEnd = start + 4;
+      }
+      // Ctrl/Cmd+Enter to run
+      if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+        e.preventDefault();
+        runCode();
+      }
+    });
+  </script>
+</body>
+</html>
