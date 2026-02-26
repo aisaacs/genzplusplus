@@ -1,0 +1,435 @@
+💀 ═══════════════════════════════════════════════════════════════
+💀 TOCCATA & FUGUE IN D MINOR — Bach x Cyberpunk
+💀 ═══════════════════════════════════════════════════════════════
+💀 procedural plasma + procedural audio synthesis demoscene
+💀 every pixel computed, every note synthesized, zero files loaded
+💀 ESC to quit
+💀 ═══════════════════════════════════════════════════════════════
+
+plug in gpu
+plug in math
+plug in sound
+plug in time
+
+yeet W = 200
+yeet H = 100
+yeet w = gpu.spawn(W, H, ✨TOCCATA — genz++✨)
+yeet snd = sound.spawn()
+snd.volume(80)
+
+💀 plasma resolution — 4x4 fat pixels
+yeet PX = 4
+yeet LW = W / PX
+yeet LH = H / PX
+
+💀 music energy — drives visual reactivity
+yeet energy = 0
+yeet bass_e = 0
+yeet pt = 0
+yeet t = 0
+yeet LOOP = 1500
+
+💀 ═══════════════════════════════════════════════════════════════
+💀 SOUND HELPERS
+💀 ═══════════════════════════════════════════════════════════════
+
+💀 organ — stacks octaves like a pipe organ with multiple stops
+bruh organ(of, od, ov) tho
+    snd.bop(✨saw✨, of, od, ov)
+    snd.bop(✨saw✨, of * 2, od, ov * 0.6)
+    snd.bop(✨square✨, of, od, ov * 0.3)
+    yeet energy = 1
+bet
+
+💀 lead — saw + square doubling for the runs
+bruh lead(lf, ld, lv) tho
+    snd.bop(✨saw✨, lf, ld, lv)
+    snd.bop(✨square✨, lf, ld, lv * 0.25)
+    yeet energy = 0.8
+bet
+
+bruh bass_note(nf, nd, nv) tho
+    snd.bop(✨square✨, nf, nd, nv)
+    snd.bop(✨sine✨, nf, nd, nv * 0.5)
+    yeet bass_e = 1
+bet
+
+💀 heavy kick — sub-bass thump + transient
+bruh kick() tho
+    snd.noise(80, 65)
+    snd.bop(✨sine✨, 50, 150, 60)
+    snd.bop(✨sine✨, 30, 100, 45)
+    yeet bass_e = 1
+bet
+
+💀 snare — noise crack + mid tone
+bruh snare() tho
+    snd.noise(180, 55)
+    snd.bop(✨tri✨, 200, 60, 30)
+    yeet energy = 0.7
+bet
+
+bruh hat() tho
+    snd.noise(30, 25)
+bet
+
+bruh open_hat() tho
+    snd.noise(80, 30)
+bet
+
+💀 ═══════════════════════════════════════════════════════════════
+💀 MAIN LOOP
+💀 ═══════════════════════════════════════════════════════════════
+
+vibe check w.serve() tho
+    yeet frame_start = time.rn()
+
+    sus w.pressed(✨esc✨) tho
+        dip
+    bet
+
+    snd.serve()
+
+    💀 decay music energy each frame
+    yeet energy = energy * 0.93
+    yeet bass_e = bass_e * 0.91
+
+    💀 plasma time — speeds up on note hits
+    yeet pt = pt + 0.07 + energy * 0.05
+
+    yeet f = t % LOOP
+
+    💀 ═══════════════════════════════════
+    💀 TOCCATA — rubato opening
+    💀 dramatic pauses, accelerating runs
+    💀 ═══════════════════════════════════
+
+    💀 sub-bass rumble buildup
+    sus f be 5 tho
+        snd.slide(✨sine✨, 40, 500, 800, 30)
+    bet
+
+    💀 ─────────────────────────────────
+    💀 FIRST PHRASE — high octave
+    💀 ─────────────────────────────────
+
+    💀 mordent: D5-C#5-D5 (lightning fast)
+    sus f be 30 tho
+        lead(587, 35, 75)
+    bet
+    sus f be 32 tho
+        lead(554, 35, 70)
+    bet
+    💀 held D5 — fermata with organ fullness
+    sus f be 34 tho
+        organ(587, 900, 75)
+    bet
+
+    💀 descending run: A4-G4-F4-E4-D4-C#4-D4
+    💀 ACCELERATING — gaps decrease: 11, 10, 9, 8, 6, 5
+    sus f be 100 tho
+        lead(440, 170, 70)
+    bet
+    sus f be 111 tho
+        lead(392, 155, 70)
+    bet
+    sus f be 121 tho
+        lead(349, 140, 70)
+    bet
+    sus f be 130 tho
+        lead(330, 125, 70)
+    bet
+    sus f be 138 tho
+        lead(294, 100, 70)
+    bet
+    sus f be 144 tho
+        lead(277, 80, 65)
+    bet
+    💀 resolve on D4 — fermata
+    sus f be 149 tho
+        organ(294, 1000, 75)
+        bass_note(147, 1000, 35)
+    bet
+
+    💀 ─────────────────────────────────
+    💀 SECOND PHRASE — one octave lower
+    💀 ─────────────────────────────────
+
+    💀 mordent: D4-C#4-D4
+    sus f be 240 tho
+        lead(294, 35, 75)
+    bet
+    sus f be 242 tho
+        lead(277, 35, 70)
+    bet
+    💀 held D4 — fermata
+    sus f be 244 tho
+        organ(294, 900, 75)
+    bet
+
+    💀 descending run: A3-G3-F3-E3-D3-C#3-D3
+    sus f be 310 tho
+        lead(220, 170, 70)
+    bet
+    sus f be 321 tho
+        lead(196, 155, 70)
+    bet
+    sus f be 331 tho
+        lead(175, 140, 70)
+    bet
+    sus f be 340 tho
+        lead(165, 125, 70)
+    bet
+    sus f be 348 tho
+        lead(147, 100, 70)
+    bet
+    sus f be 354 tho
+        lead(139, 80, 65)
+    bet
+    💀 resolve on D3 — long fermata
+    sus f be 359 tho
+        organ(147, 1300, 75)
+        bass_note(73, 1300, 50)
+    bet
+
+    💀 ─────────────────────────────────
+    💀 TENSION — diminished approach
+    💀 ─────────────────────────────────
+
+    sus f be 460 tho
+        snd.slide(✨saw✨, 1000, 60, 800, 35)
+        snd.slide(✨sine✨, 50, 500, 700, 30)
+    bet
+    sus f be 490 tho
+        snd.noise(300, 40)
+    bet
+
+    💀 ═══════════════════════════════════
+    💀 THE CHORD — D minor, every stop pulled
+    💀 12 voices: sub-bass through mixture
+    💀 ═══════════════════════════════════
+
+    sus f be 520 tho
+        💀 sub-bass foundation
+        snd.bop(✨sine✨, 36, 3500, 55)
+        snd.bop(✨sine✨, 73, 3500, 55)
+
+        💀 bass organ — saw + square
+        snd.bop(✨saw✨, 147, 3500, 50)
+        snd.bop(✨square✨, 147, 3500, 30)
+
+        💀 principal — the core of the organ
+        snd.bop(✨saw✨, 220, 3500, 45)
+        snd.bop(✨saw✨, 294, 3500, 50)
+        snd.bop(✨saw✨, 349, 3500, 45)
+
+        💀 octave stop — brilliance
+        snd.bop(✨saw✨, 440, 3000, 40)
+        snd.bop(✨saw✨, 587, 3000, 35)
+
+        💀 mixture — shimmer
+        snd.bop(✨square✨, 294, 3000, 25)
+        snd.bop(✨square✨, 440, 2500, 20)
+
+        💀 crash impact
+        snd.noise(600, 60)
+
+        yeet energy = 1
+        yeet bass_e = 1
+    bet
+
+    💀 reverb tail
+    sus f be 523 tho
+        snd.noise(200, 40)
+    bet
+    sus f be 530 tho
+        snd.slide(✨sine✨, 80, 2500, 1200, 20)
+    bet
+
+    💀 ═══════════════════════════════════
+    💀 BEAT DROP — cyberpunk kicks in
+    💀 120 BPM = 30 frames per beat
+    💀 bar = 120 frames
+    💀 ═══════════════════════════════════
+
+    sus f >= 750 tho
+        💀 crash cymbal on the drop
+        sus f be 750 tho
+            snd.noise(500, 60)
+        bet
+
+        💀 ── drums: kick + snare + hats ──
+        yeet bf = (f - 750) % 120
+
+        💀 four-on-the-floor kick
+        sus bf be 0 tho
+            kick()
+        bet
+        sus bf be 30 tho
+            kick()
+        bet
+        sus bf be 60 tho
+            kick()
+        bet
+        sus bf be 90 tho
+            kick()
+        bet
+
+        💀 snare on 2 and 4
+        sus bf be 30 tho
+            snare()
+        bet
+        sus bf be 90 tho
+            snare()
+        bet
+
+        💀 hi-hats on 8th notes — closed on beat, open offbeat
+        sus bf be 0 tho
+            hat()
+        bet
+        sus bf be 15 tho
+            open_hat()
+        bet
+        sus bf be 30 tho
+            hat()
+        bet
+        sus bf be 45 tho
+            open_hat()
+        bet
+        sus bf be 60 tho
+            hat()
+        bet
+        sus bf be 75 tho
+            open_hat()
+        bet
+        sus bf be 90 tho
+            hat()
+        bet
+        sus bf be 105 tho
+            open_hat()
+        bet
+
+        💀 ── bass: D2 and A2 alternating every half-bar ──
+        yeet bb = (f - 750) % 120
+        sus bb be 0 tho
+            bass_note(73, 400, 55)
+        bet
+        sus bb be 60 tho
+            bass_note(110, 400, 50)
+        bet
+
+        💀 ── fugue subject on organ lead ──
+        yeet mf = (f - 750) % 240
+        sus mf be 0 tho
+            organ(294, 200, 55)
+        bet
+        sus mf be 30 tho
+            organ(440, 200, 55)
+        bet
+        sus mf be 60 tho
+            lead(587, 130, 60)
+        bet
+        sus mf be 75 tho
+            lead(554, 80, 55)
+        bet
+        sus mf be 90 tho
+            organ(587, 280, 65)
+        bet
+        sus mf be 120 tho
+            organ(349, 200, 55)
+        bet
+        sus mf be 150 tho
+            organ(330, 200, 55)
+        bet
+        sus mf be 180 tho
+            lead(294, 130, 60)
+        bet
+        sus mf be 195 tho
+            lead(277, 80, 55)
+        bet
+        sus mf be 210 tho
+            organ(294, 280, 65)
+        bet
+    bet
+
+    💀 ═══════════════════════════════════
+    💀 PLASMA — cyberpunk palette
+    💀 ═══════════════════════════════════
+
+    yeet y = 0
+    vibe check y < LH tho
+        yeet x = 0
+        vibe check x < LW tho
+            💀 four overlapping sines — classic plasma
+            yeet v1 = math.vibes(x * 0.08 + pt)
+            yeet v2 = math.vibes(y * 0.1 + pt * 0.7)
+            yeet v3 = math.vibes((x + y) * 0.06 + pt * 0.6)
+            yeet v4 = math.vibes(math.glow(x * x + y * y) * 0.04 + pt * 0.5)
+            yeet val = (v1 + v2 + v3 + v4) * 0.25
+
+            💀 cyberpunk color mapping: purple → magenta → cyan
+            yeet phase = val * 3.14159 + pt * 0.3
+            yeet pr = math.ate(math.vibes(phase))
+            yeet pg = math.ate(math.vibes(phase + 4.2))
+            yeet pb = math.ate(math.vibes(phase + 2.1))
+
+            💀 R: magenta/red — squared for high contrast
+            💀 G: subdued, flares on melody hits
+            💀 B: dominant cyan/purple base
+            yeet flash = bass_e * 80
+            yeet r = math.humbled(pr * pr * 220 + flash)
+            yeet g = math.humbled(pg * 50 + energy * 100)
+            yeet b = math.humbled(pb * 255)
+
+            sus r > 255 tho
+                yeet r = 255
+            bet
+            sus g > 255 tho
+                yeet g = 255
+            bet
+
+            💀 scanline darkening — every other row
+            sus y % 2 be 0 tho
+                yeet r = math.humbled(r * 0.7)
+                yeet g = math.humbled(g * 0.7)
+                yeet b = math.humbled(b * 0.7)
+            bet
+
+            w.drip(x * PX, y * PX, PX, PX, r, g, b)
+            yeet x = x + 1
+        bet
+        yeet y = y + 1
+    bet
+
+    💀 ═══════════════════════════════════
+    💀 TITLE OVERLAY
+    💀 ═══════════════════════════════════
+
+    yeet tr = 200 + math.humbled(bass_e * 55)
+    yeet tg = 140 + math.humbled(energy * 80)
+    yeet tb = 220 + math.humbled(bass_e * 35)
+
+    sus f < 520 tho
+        w.stan(✨TOCCATA & FUGUE✨, 262, 16, tr, tg, tb, 3)
+        w.stan(✨IN D MINOR✨, 333, 52, 160, 100, 180, 2)
+    nah
+        w.stan(✨TOCCATA✨, 330, 16, tr, tg, tb, 3)
+    bet
+    w.stan(✨BWV 565 x CYBERPUNK✨, 291, H - 38, 100, 70, 140, 2)
+    w.stan(✨genz++✨, 375, H - 18, 70, 50, 90)
+
+    w.flaunt()
+
+    💀 cap at 60fps so music plays at correct tempo
+    yeet frame_ms = time.rn() - frame_start
+    sus frame_ms < 16 tho
+        time.nap(16 - frame_ms)
+    bet
+
+    yeet t = t + 1
+bet
+
+snd.unalive()
+w.unalive()
+spill ✨✨
+spill ✨💀 toccata complete. bach has been cyberpunked.✨

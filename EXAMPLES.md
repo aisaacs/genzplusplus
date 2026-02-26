@@ -1,6 +1,6 @@
 # 💀 genz++ Examples
 
-> *A guided tour of 16 example programs, from "hello world" to "infinite AI-powered text adventure." The difficulty curve is not gentle.*
+> *A guided tour of 17 example programs, from "hello world" to "infinite AI-powered text adventure." The difficulty curve is not gentle.*
 
 All examples live in the `examples/` directory. Run any of them with:
 
@@ -288,6 +288,29 @@ node genz.js examples/sound_test.genz
 
 Turn up your speakers. Or don't — the first sine wave is pretty loud.
 
+### toccata.genz
+
+**Concepts:** GPU rendering, procedural audio, music sequencing, plasma, demoscene
+
+A full demoscene production: cyberpunk plasma visuals driven by a procedurally synthesized arrangement of Bach's Toccata & Fugue in D minor (BWV 565). Every pixel computed, every note synthesized, zero files loaded.
+
+The music plays the iconic opening — mordents, descending runs, the massive D minor organ chord — then drops into a 120 BPM cyberpunk beat with kick/hat patterns, alternating bass, and the fugue subject on saw lead. The visuals respond to the music in real time: note hits accelerate the plasma, bass thumps flash the reds, melody energy flares the greens.
+
+What it demonstrates:
+
+- **Procedural music sequencing:** frame-based event scheduling with a 960-frame (16-second) loop, helper functions for lead/bass/kick/hat voices
+- **Music-reactive visuals:** `energy` and `bass_e` variables decay each frame, spike on note triggers, modulate plasma speed and color intensity
+- **Classic plasma algorithm:** four overlapping sine waves with cyberpunk color mapping (purple → magenta → cyan), squared R channel for high contrast
+- **Scanline effect:** every other row darkened for CRT feel
+- **Multi-voice synthesis:** up to 7 simultaneous voices during the chord section, mixed and soft-clipped
+
+```bash
+npm install koffi   # requires SDL2 installed
+node genz.js examples/toccata.genz
+```
+
+425 lines. Bach has been cyberpunked.
+
 ---
 
 ## 🔥 Demoscene: Terminal Classics
@@ -422,7 +445,7 @@ npm install koffi   # requires SDL2 installed
 node genz.js examples/asteroids.genz
 ```
 
-694 lines. The most ambitious genz++ program that isn't calling an AI. No cap that's fire.
+746 lines. The most ambitious genz++ program that isn't calling an AI. No cap that's fire.
 
 ---
 
@@ -488,6 +511,7 @@ This runs tests for all core modules (math, tea, random, list, time, convert, de
 | `gpu_plasma.genz` | GPU plasma, real-time | 61 |
 | `gpu_terrain.genz` | GPU raycasting, biomes | 170 |
 | `sound_test.genz` | Procedural audio synthesis | 95 |
+| `toccata.genz` | Demoscene: plasma + procedural music | 425 |
 | `asteroids.genz` | Full arcade game, sound + graphics | 746 |
 | `adventure.genz` | Everything + Claude API | 190 |
 | `test_stdlib.genz` | Module testing | 120 |

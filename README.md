@@ -112,6 +112,7 @@ node genz.js examples/gpu_fire.genz     # native window fire
 node genz.js examples/gpu_plasma.genz   # native window plasma
 node genz.js examples/gpu_terrain.genz  # native window terrain flyover
 node genz.js examples/asteroids.genz    # full arcade game
+node genz.js examples/toccata.genz     # Bach meets cyberpunk
 ```
 
 ## The Asteroids Game
