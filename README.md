@@ -1,5 +1,7 @@
 # 💀 genz++
 
+**[Try it in your browser](https://aisaacs.github.io/genzplusplus/web/)** — playground with GPU demos, sound, and asteroids. No install needed.
+
 > *"It started as a third-place hackathon joke. Then the AIs adopted it. Then everything else followed."*
 
 genz++ is a programming language that was never supposed to exist. It uses emoji comments, sparkle-delimited strings, and keywords that sound like a group chat. It is, against all odds, Turing complete.

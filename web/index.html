@@ -163,9 +163,102 @@
 
     /* Responsive */
     @media (max-width: 768px) {
-      .main { flex-direction: column; }
-      .editor-pane { border-right: none; border-bottom: 1px solid #2a2a3e; flex: none; height: 40vh; }
-      .output-pane { flex: 1; }
+      .header { padding: 10px 12px; gap: 8px; }
+      .header h1 { font-size: 20px; }
+      .header .sub { display: none; }
+      .toolbar { padding: 8px 12px; gap: 8px; flex-wrap: wrap; }
+      .btn { padding: 6px 14px; font-size: 13px; }
+      select { font-size: 12px; padding: 6px 8px; }
+      .main { flex-direction: column; height: auto; min-height: calc(100vh - 90px); }
+      .editor-pane { border-right: none; border-bottom: 1px solid #2a2a3e; flex: none; height: 35vh; min-height: 150px; }
+      .output-pane { flex: 1; min-height: 40vh; }
+      #editor { font-size: 13px; padding: 10px; }
+      #genz-output { padding: 10px; }
+      #genz-output canvas { max-width: 100%; height: auto; }
+    }
+
+    /* Touch gamepad — injected by GPU module on touch devices */
+    .genz-gamepad {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 12px;
+      gap: 8px;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: none;
+    }
+    .genz-dpad {
+      display: grid;
+      grid-template-columns: 48px 48px 48px;
+      grid-template-rows: 48px 48px;
+      gap: 4px;
+    }
+    .genz-dpad-btn {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      border: 2px solid #ff6b9d;
+      background: rgba(255,107,157,0.15);
+      color: #ff6b9d;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      touch-action: none;
+    }
+    .genz-dpad-btn:active, .genz-dpad-btn.active {
+      background: rgba(255,107,157,0.5);
+    }
+    .genz-dpad-btn.empty {
+      border: none;
+      background: none;
+    }
+    .genz-action-btns {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: center;
+    }
+    .genz-action-btn {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      border: 2px solid #67e8f9;
+      background: rgba(103,232,249,0.15);
+      color: #67e8f9;
+      font-family: monospace;
+      font-size: 11px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      touch-action: none;
+    }
+    .genz-action-btn:active, .genz-action-btn.active {
+      background: rgba(103,232,249,0.5);
+    }
+    .genz-meta-btns {
+      display: flex;
+      gap: 6px;
+      justify-content: center;
+    }
+    .genz-meta-btn {
+      padding: 6px 14px;
+      border-radius: 6px;
+      border: 1px solid #666;
+      background: rgba(100,100,100,0.2);
+      color: #999;
+      font-family: monospace;
+      font-size: 11px;
+      cursor: pointer;
+      touch-action: none;
+    }
+    .genz-meta-btn:active, .genz-meta-btn.active {
+      background: rgba(100,100,100,0.5);
+      color: #fff;
     }
   </style>
 </head>

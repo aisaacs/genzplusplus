@@ -1020,7 +1020,7 @@ const _gpu = (() => {
       const canvas = document.createElement('canvas');
       canvas.width = w;
       canvas.height = h;
-      canvas.style.cssText = 'border:3px solid #ff6b9d;border-radius:12px;box-shadow:0 0 30px rgba(255,107,157,0.3);display:block;margin:8px auto;image-rendering:pixelated;';
+      canvas.style.cssText = 'border:3px solid #ff6b9d;border-radius:12px;box-shadow:0 0 30px rgba(255,107,157,0.3);display:block;margin:8px auto;image-rendering:pixelated;max-width:100%;height:auto;';
 
       // Title label
       const label = document.createElement('div');
@@ -1059,6 +1059,52 @@ const _gpu = (() => {
       }
       document.addEventListener('keydown', onKeyDown);
       document.addEventListener('keyup', onKeyUp);
+
+      // Touch gamepad for mobile
+      let gamepad = null;
+      const hasTouch = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+      if (hasTouch) {
+        gamepad = document.createElement('div');
+        gamepad.className = 'genz-gamepad';
+        gamepad.innerHTML =
+          '<div class="genz-dpad">' +
+            '<div class="genz-dpad-btn empty"></div>' +
+            '<div class="genz-dpad-btn" data-key="up">\u25B2</div>' +
+            '<div class="genz-dpad-btn empty"></div>' +
+            '<div class="genz-dpad-btn" data-key="left">\u25C0</div>' +
+            '<div class="genz-dpad-btn" data-key="down">\u25BC</div>' +
+            '<div class="genz-dpad-btn" data-key="right">\u25B6</div>' +
+          '</div>' +
+          '<div class="genz-meta-btns">' +
+            '<div class="genz-meta-btn" data-key="enter">START</div>' +
+            '<div class="genz-meta-btn" data-key="esc">ESC</div>' +
+          '</div>' +
+          '<div class="genz-action-btns">' +
+            '<div class="genz-action-btn" data-key="space">FIRE</div>' +
+            '<div class="genz-action-btn" data-key="up" style="border-color:#4ade80;color:#4ade80;background:rgba(74,222,128,0.15);width:56px;height:56px;font-size:10px;">THRUST</div>' +
+          '</div>';
+        container.appendChild(gamepad);
+
+        // Wire touch events — each button sets/clears the key in the same Set
+        const btns = gamepad.querySelectorAll('[data-key]');
+        btns.forEach(function(btn) {
+          var k = btn.getAttribute('data-key');
+          btn.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            if (alive) keys.add(k);
+            btn.classList.add('active');
+          }, {passive: false});
+          btn.addEventListener('touchend', function(e) {
+            e.preventDefault();
+            keys.delete(k);
+            btn.classList.remove('active');
+          }, {passive: false});
+          btn.addEventListener('touchcancel', function(e) {
+            keys.delete(k);
+            btn.classList.remove('active');
+          });
+        });
+      }
 
       const obj = {
         _type: 'gpu_window',
@@ -1181,6 +1227,7 @@ const _gpu = (() => {
           alive = false;
           document.removeEventListener('keydown', onKeyDown);
           document.removeEventListener('keyup', onKeyUp);
+          if (gamepad) { gamepad.remove(); gamepad = null; }
           return this;
         }
       };
