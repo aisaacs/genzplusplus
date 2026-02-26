@@ -275,6 +275,141 @@ Requires `koffi` (Node.js FFI library) and SDL2 installed on your system. Arrow 
 
 ---
 
+## 🔥 Demoscene: Terminal Classics
+
+These demos prove that the terminal is still a valid GPU if you believe hard enough. All four use the `screen` module's half-block pixel renderer to produce real-time graphics at 60x40-ish resolution.
+
+### fire.genz
+
+**Concepts:** screen module, heat buffers, palette mapping, random seeding
+
+The classic demoscene fire effect. A heat buffer fills the bottom row with random hot values each frame, then propagation averages neighboring cells upward with random cooling. The result maps through a black → red → yellow → white palette.
+
+```
+bruh heat_to_rgb(heat) tho
+    sus heat < 64 tho
+        its giving [heat * 4, 0, 0]
+    nah sus heat < 128 tho
+        its giving [255, (heat - 64) * 4, 0]
+    nah sus heat < 192 tho
+        its giving [255, 255, (heat - 128) * 4]
+    nah
+        its giving [255, 255, 255]
+    bet
+bet
+```
+
+150 frames of pure heat. This is what the smart toaster sees when it dreams.
+
+### plasma.genz
+
+**Concepts:** screen module, sine math, color cycling
+
+Classic mode 13h plasma — four overlapping sine waves create interference patterns, then three phase-shifted sine-to-RGB conversions produce the cycling colors. The whole thing is 54 lines and looks like it fell out of a 1993 BBS.
+
+```
+yeet v1 = math.vibes(x * 0.08 + t * 0.07)
+yeet v2 = math.vibes(y * 0.1 + t * 0.05)
+yeet v3 = math.vibes((x + y) * 0.06 + t * 0.04)
+yeet v4 = math.vibes(math.glow(x * x + y * y) * 0.05 + t * 0.03)
+```
+
+120 frames. The demoscene lives in genz++ now.
+
+### cube.genz
+
+**Concepts:** 3D math, rotation matrices, perspective projection, depth shading
+
+A rotating wireframe cube rendered entirely in the terminal. 8 vertices stored as a flat coordinate array, 12 edges as index pairs. Each frame applies Y-axis then X-axis rotation using precomputed sin/cos, projects with perspective division, then draws depth-shaded lines — front edges are bright cyan, back edges are dim blue.
+
+```
+💀 rotate around Y axis
+yeet rx = vx * cy_rot + vz * sy
+yeet rz = vz * cy_rot - vx * sy
+
+💀 perspective projection
+yeet z_offset = rz2 + fov
+yeet px = cx + (rx * scale) / z_offset
+```
+
+300 frames. Wireframe is a lifestyle.
+
+### terrain.genz
+
+**Concepts:** voxel-space raycasting, keyboard input, biome coloring, distance fog
+
+An infinite terrain flyover using column-based raycasting. The terrain is procedurally generated from three summed sine waves. Each screen column casts a ray in the camera's heading direction, marches near-to-far in depth steps, and projects height to screen coordinates. Six biome colors (water, sand, grass, highland, rock, snow) are blended toward a sky color based on distance.
+
+Fly with WASD/arrows, quit with Q. Uses the `keys` module for real-time keyboard input.
+
+```
+bruh terrain(x, z) tho
+    its giving math.vibes(x * 0.13 + z * 0.09) * 3.5 + math.vibes(x * 0.07 - z * 0.11) * 6 + math.vibes(x * 0.31 + z * 0.17) * 2
+bet
+```
+
+158 lines. The world has been explored. In 60x40.
+
+---
+
+## 🎮 GPU Editions
+
+The same demoscene effects, but now in real native SDL2 windows. These require `koffi` and SDL2 installed. Each one runs at 1/4 resolution with 4x4 fat pixels because the aesthetic is the point.
+
+### gpu_fire.genz
+
+**Concepts:** gpu module, heat propagation, fat-pixel rendering
+
+The terminal fire effect, upgraded to a 320x200 native window. Same algorithm — bottom-row seeding, neighbor averaging with random cooling, heat-to-RGB palette — but rendered as 4x4 filled rectangles via `w.drip()`. Runs until you close the window or press ESC.
+
+### gpu_plasma.genz
+
+**Concepts:** gpu module, sine-based plasma, real-time rendering
+
+The plasma effect in a real window. 320x200 at 1/4 logic resolution (80x50 fat pixels). Same four-sine formula, same three-phase RGB mapping. Title overlay via `w.stan()`. ESC to quit.
+
+### gpu_terrain.genz
+
+**Concepts:** gpu module, voxel-space raycasting, biome coloring, fog
+
+The terrain flyover at 640x400 in a real window. 160 logic columns rendered as 4px-wide strips. Same raycasting algorithm, same six biomes, same distance fog blending. WASD/arrows to fly, ESC to quit.
+
+```
+w.drip(cx * PX, sy, PX, sh, r, g, b)
+```
+
+170 lines. The world has been explored. In actual pixels this time.
+
+---
+
+## 🕹️ The Arcade
+
+### asteroids.genz
+
+**Concepts:** all of them, simultaneously, at 60fps
+
+A full classic Asteroids arcade game in a native 800x600 SDL2 window. Vector-style rendering — the ship is a green triangle made of `strut()` lines, asteroids are white `halo()` circle outlines, bullets are yellow `aura()` dots, and the background is a 3D starfield with perspective-projected streak lines flying toward the viewer.
+
+What it demonstrates:
+
+- **Parallel array pools:** 30 asteroid slots and 10 bullet slots, each tracked with parallel arrays for x, y, dx, dy, radius, and active flags — all initialized with `list.mint()`
+- **3D starfield:** 80 stars with 3D positions projected to screen using focal-length perspective division, with depth-based brightness and motion streaks
+- **Rotation matrix math:** asteroid splits rotate the parent's velocity vector ±25-35 degrees using sin/cos, producing natural-looking trajectories
+- **Ship explosion:** triangle edges break apart and drift outward with rotation, plus 6 debris sparks radiating from the blast point
+- **Three game screens:** start screen with drifting decorative asteroids and a blinking "PRESS ENTER", the main game, and a "gg no re" game over screen
+- **Full game mechanics:** ship thrust with drag, screen wrapping, 3-size asteroid splitting (big → 2 medium → 2 small → destroyed), bullet cooldown, invincibility after respawn with ship flashing, wave progression, lives, scoring
+
+Controls: arrows/WASD to move, space to shoot, ESC to quit.
+
+```bash
+npm install koffi   # requires SDL2 installed
+node genz.js examples/asteroids.genz
+```
+
+694 lines. The most ambitious genz++ program that isn't calling an AI. No cap that's fire.
+
+---
+
 ## 💀 The Final Boss
 
 ### adventure.genz
@@ -329,5 +464,14 @@ This runs tests for all core modules (math, tea, random, list, time, convert, de
 | `color_demo.genz` | Colors, spinners, terminal UI | 45 |
 | `net_test.genz` | HTTP, JSON, error handling | 75 |
 | `gpu_demo.genz` | GPU window, game loop, input | 150 |
-| `adventure.genz` | Everything | 190 |
+| `fire.genz` | Heat buffer, palette mapping | 113 |
+| `plasma.genz` | Sine math, color cycling | 54 |
+| `cube.genz` | 3D rotation, wireframe | 129 |
+| `terrain.genz` | Raycasting, keyboard input | 158 |
+| `gpu_fire.genz` | GPU fire, fat pixels | 111 |
+| `gpu_plasma.genz` | GPU plasma, real-time | 61 |
+| `gpu_terrain.genz` | GPU raycasting, biomes | 170 |
+| `asteroids.genz` | Full arcade game, 3D starfield | 694 |
+| `adventure.genz` | Everything + Claude API | 190 |
 | `test_stdlib.genz` | Module testing | 120 |
+| `test_gradient.genz` | Screen renderer validation | 27 |

@@ -550,7 +550,7 @@ The screen module lets you draw pixels in the terminal. It's like a GPU but for 
 
 | Method | What It Does |
 |--------|-------------|
-| `spawn(cols, rows)` | Spawn a screen buffer |
+| `spawn(cols, rows, title)` | Spawn a screen buffer (title optional) |
 | `ink(scr, x, y, char)` | Ink a pixel |
 | `peep(scr, x, y)` | Peep at a pixel |
 | `cleanse(scr)` | Cleanse the screen |
@@ -564,8 +564,8 @@ The screen module lets you draw pixels in the terminal. It's like a GPU but for 
 | `boot()` | Boot the terminal (raw mode) |
 | `unalive()` | Unalive the terminal (restore) |
 | `snapshot(scr, path)` | Snapshot to PPM file |
-| `cols(scr)` | Get column count |
-| `rows(scr)` | Get row count |
+| `cols()` | Get terminal column count |
+| `rows()` | Get terminal row count |
 
 ```
 plug in screen

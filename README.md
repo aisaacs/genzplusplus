@@ -75,7 +75,7 @@ If you can read that, you might be the last programmer.
 
 ## Standard Library
 
-Import modules with `plug in`. All 13 of them.
+Import modules with `plug in`. All 16 of them.
 
 | Module      | What It Is                              | Vibe                                |
 |-------------|-----------------------------------------|-------------------------------------|
@@ -95,6 +95,25 @@ Import modules with `plug in`. All 13 of them.
 | `canvas`    | HTML5 canvas-style drawing              | `canvas.fit()`, `canvas.drip()`     |
 | `gpu`       | Native SDL2 window rendering            | `gpu.spawn(800,600,✨title✨)` goes hard |
 | `debug`     | Type checking & inspection              | `debug.type_check(x)` tells you     |
+
+## Demoscene & Games
+
+The `examples/` directory includes classic demoscene effects in both terminal and native GPU versions:
+
+```bash
+node genz.js examples/fire.genz         # terminal fire effect
+node genz.js examples/plasma.genz       # terminal plasma
+node genz.js examples/cube.genz         # wireframe cube
+node genz.js examples/terrain.genz      # terrain flyover (WASD to fly)
+
+# GPU versions (requires koffi + SDL2)
+node genz.js examples/gpu_fire.genz     # native window fire
+node genz.js examples/gpu_plasma.genz   # native window plasma
+node genz.js examples/gpu_terrain.genz  # native window terrain flyover
+node genz.js examples/asteroids.genz    # full arcade game
+```
+
+The Asteroids game is 694 lines of genz++ with a 3D starfield, ship explosions, asteroid splitting, wave progression, and three game screens. It is the most ambitious genz++ program that isn't calling an AI.
 
 ## The Adventure Game
 
