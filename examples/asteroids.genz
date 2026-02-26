@@ -40,6 +40,11 @@ yeet frame = 0
 yeet game_over = 0
 yeet game_started = 0
 
+💀 ── heartbeat music ──
+yeet beat_timer = 0
+yeet beat_note = 0
+yeet beat_interval = 45
+
 💀 ── asteroid pool (max 30) ──
 yeet MAX_AST = 30
 yeet ast_x = list.mint(MAX_AST, 0)
@@ -313,6 +318,9 @@ bruh reset_game() tho
     yeet wave_num = 1
     yeet cooldown = 0
     yeet game_over = 0
+    yeet beat_timer = 0
+    yeet beat_note = 0
+    yeet beat_interval = 45
     💀 clear all asteroids
     yeet ra = 0
     vibe check ra < MAX_AST tho
@@ -640,6 +648,33 @@ vibe check running and w.serve() tho
                     yeet wave_num = wave_num + 1
                     spawn_wave(wave_num + 3)
                     snd.slide(✨sine✨, 300, 900, 400, 50)
+                bet
+            bet
+
+            💀 ══════════════════════════════════════════════════
+            💀 HEARTBEAT — two alternating bass thumps
+            💀 tempo scales with asteroid count (fewer = faster)
+            💀 ══════════════════════════════════════════════════
+
+            sus game_over be 0 tho
+                yeet beat_timer = beat_timer + 1
+                sus beat_timer >= beat_interval tho
+                    yeet beat_timer = 0
+                    sus beat_note be 0 tho
+                        snd.bop(✨square✨, 82, 100, 35)
+                        yeet beat_note = 1
+                    nah
+                        snd.bop(✨square✨, 65, 100, 35)
+                        yeet beat_note = 0
+                    bet
+                    💀 speed up: fewer asteroids = shorter interval
+                    yeet beat_interval = 12 + ast_count * 2
+                    sus beat_interval > 50 tho
+                        yeet beat_interval = 50
+                    bet
+                    sus beat_interval < 8 tho
+                        yeet beat_interval = 8
+                    bet
                 bet
             bet
 

@@ -2263,7 +2263,6 @@ const _sound = (() => {
       function msToSamples(ms) { return Math.round(ms / 1000 * SAMPLE_RATE); }
 
       function addVoice(wave, freq, freqEnd, durMs, vol01) {
-        const wasEmpty = voices.length === 0;
         const totalSamples = msToSamples(durMs);
         voices.push({
           wave, freq, freqEnd,
@@ -2275,8 +2274,6 @@ const _sound = (() => {
           decay:  Math.min(DEFAULT_DECAY,  Math.floor(totalSamples / 3)),
           totalDuration: totalSamples,
         });
-        // Flush queued silence so new sound plays immediately
-        if (wasEmpty) sdl.ClearQueuedAudio(deviceId);
       }
 
       function mixInto(numSamples) {
@@ -2358,9 +2355,10 @@ const _sound = (() => {
           if (!alive) return;
           const queued = sdl.GetQueuedAudioSize(deviceId);
           const queuedSamples = queued / 2;
-          if (queuedSamples >= TARGET_QUEUED && voices.length === 0) return;
-          const needed = Math.max(0, TARGET_QUEUED - queuedSamples);
-          const chunks = Math.max(1, Math.ceil(needed / CHUNK));
+          if (queuedSamples >= TARGET_QUEUED) return;
+          const needed = TARGET_QUEUED - queuedSamples;
+          const chunks = Math.ceil(needed / CHUNK);
+          if (chunks <= 0) return;
           for (let c = 0; c < chunks; c++) {
             mixInto(CHUNK);
             for (let i = 0; i < CHUNK; i++) {
