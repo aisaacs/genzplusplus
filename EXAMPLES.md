@@ -412,7 +412,7 @@ What it demonstrates:
 - **Rotation matrix math:** asteroid splits rotate the parent's velocity vector ±25-35 degrees using sin/cos, producing natural-looking trajectories
 - **Ship explosion:** triangle edges break apart and drift outward with rotation, plus 6 debris sparks radiating from the blast point
 - **Three game screens:** start screen with drifting decorative asteroids and a blinking "PRESS ENTER", the main game, and a "gg no re" game over screen
-- **Procedural sound effects:** laser shots, explosions (sized by asteroid), thrust rumble, death sweep, and wave-clear fanfare — all synthesized via the `sound` module
+- **Procedural sound effects:** laser shots, explosions (sized by asteroid), thrust rumble, death sweep, wave-clear fanfare, and the classic two-note heartbeat that accelerates as you clear asteroids — all synthesized via the `sound` module
 - **Full game mechanics:** ship thrust with drag, screen wrapping, 3-size asteroid splitting (big → 2 medium → 2 small → destroyed), bullet cooldown, invincibility after respawn with ship flashing, wave progression, lives, scoring
 
 Controls: arrows/WASD to move, space to shoot, ESC to quit.
@@ -488,7 +488,7 @@ This runs tests for all core modules (math, tea, random, list, time, convert, de
 | `gpu_plasma.genz` | GPU plasma, real-time | 61 |
 | `gpu_terrain.genz` | GPU raycasting, biomes | 170 |
 | `sound_test.genz` | Procedural audio synthesis | 95 |
-| `asteroids.genz` | Full arcade game, sound + graphics | 711 |
+| `asteroids.genz` | Full arcade game, sound + graphics | 746 |
 | `adventure.genz` | Everything + Claude API | 190 |
 | `test_stdlib.genz` | Module testing | 120 |
 | `test_gradient.genz` | Screen renderer validation | 27 |

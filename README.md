@@ -116,7 +116,7 @@ node genz.js examples/asteroids.genz    # full arcade game
 
 ## The Asteroids Game
 
-A full classic Asteroids arcade game in 694 lines of genz++. Native 800x600 SDL2 window with vector-style rendering — green wireframe ship, white circle asteroids, yellow bullet dots, and a 3D starfield flying toward the viewer. Ship explosions, asteroid splitting, wave progression, scoring, lives, and three game screens (start, gameplay, game over).
+A full classic Asteroids arcade game in 746 lines of genz++. Native 800x600 SDL2 window with vector-style rendering, procedural sound effects, and the classic accelerating heartbeat soundtrack — all synthesized from code. Green wireframe ship, white circle asteroids, yellow bullet dots, a 3D starfield, ship explosions, asteroid splitting, wave progression, scoring, lives, and three game screens.
 
 ```bash
 npm install koffi   # requires SDL2 installed
