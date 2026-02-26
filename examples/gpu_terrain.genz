@@ -1,17 +1,22 @@
-💀 infinite terrain flyover - voxel space column raycasting
-💀 WASD/arrows to fly, Q to quit
-plug in screen
+💀 ═══════════════════════════════════════════════════════════════
+💀 GPU TERRAIN FLYOVER — voxel-space column raycasting
+💀 ═══════════════════════════════════════════════════════════════
+💀 WASD/arrows to fly, ESC or close window to quit
+💀 1/4 res columns with 4-wide strips for speed
+💀 ═══════════════════════════════════════════════════════════════
+
+plug in gpu
 plug in math
-plug in time
-plug in keys
 
-yeet w = 60
-yeet h = 40
-yeet s = screen.spawn(w, h, ✨terrain flyover  wasd/arrows  q=quit✨)
-s.boot()
-keys.tune_in()
+yeet W = 640
+yeet H = 400
+yeet w = gpu.spawn(W, H, ✨genz++ gpu terrain✨)
 
-💀 gentler terrain: range ~-11.5 to +11.5
+💀 logic resolution — 1/4 columns, 4px wide strips
+yeet PX = 4
+yeet LW = W / PX
+
+💀 terrain: sum of 3 scaled sines (same as terminal version)
 bruh terrain(x, z) tho
     its giving math.vibes(x * 0.13 + z * 0.09) * 3.5 + math.vibes(x * 0.07 - z * 0.11) * 6 + math.vibes(x * 0.31 + z * 0.17) * 2
 bet
@@ -23,41 +28,41 @@ yeet heading = 0
 yeet speed = 0.8
 yeet turn_rate = 0.06
 
-yeet horizon = 12
-yeet scale = 80
+💀 rendering params adjusted for 640x400
+yeet horizon = 24
+yeet scale = 160
 yeet fov = 1.5
 yeet max_depth = 80
+yeet half_w = LW / 2
 
 💀 sky color for fog blending
 yeet sky_r = 80
 yeet sky_g = 120
 yeet sky_b = 180
 
-yeet running = no cap
-vibe check running tho
+vibe check w.serve() tho
     💀 handle input
-    sus keys.pressed(✨q✨) or keys.pressed(✨esc✨) tho
-        yeet running = cap
+    sus w.pressed(✨esc✨) tho
+        dip
     bet
-    sus keys.pressed(✨a✨) or keys.pressed(✨left✨) tho
+    sus w.pressed(✨a✨) or w.pressed(✨left✨) tho
         yeet heading = heading - turn_rate
     bet
-    sus keys.pressed(✨d✨) or keys.pressed(✨right✨) tho
+    sus w.pressed(✨d✨) or w.pressed(✨right✨) tho
         yeet heading = heading + turn_rate
     bet
-    sus keys.pressed(✨w✨) or keys.pressed(✨up✨) tho
+    sus w.pressed(✨w✨) or w.pressed(✨up✨) tho
         yeet speed = speed + 0.15
         sus speed > 3 tho
             yeet speed = 3
         bet
     bet
-    sus keys.pressed(✨s✨) or keys.pressed(✨down✨) tho
+    sus w.pressed(✨s✨) or w.pressed(✨down✨) tho
         yeet speed = speed - 0.15
         sus speed < 0 tho
             yeet speed = 0
         bet
     bet
-    keys.forget()
 
     💀 move camera in heading direction
     yeet sin_h = math.vibes(heading)
@@ -66,13 +71,13 @@ vibe check running tho
     yeet cam_z = cam_z + cos_h * speed
     yeet cam_y = terrain(cam_x, cam_z) + 12
 
-    s.cleanse(sky_r, sky_g, sky_b)
+    w.cleanse(sky_r, sky_g, sky_b)
 
-    💀 raycast each screen column
+    💀 raycast each logic column — 160 cols, 4px wide strips
     yeet cx = 0
-    vibe check cx < w tho
-        yeet top = h
-        yeet col_off = (cx - 30) * fov / 30
+    vibe check cx < LW tho
+        yeet top = H
+        yeet col_off = (cx - half_w) * fov / half_w
 
         💀 ray direction rotated by heading
         yeet dx = sin_h + col_off * cos_h
@@ -95,7 +100,7 @@ vibe check running tho
             bet
 
             sus sy < top tho
-                💀 biome color by height (adjusted for gentler terrain)
+                💀 biome color by height
                 yeet r = 50
                 yeet g = 150
                 yeet b = 60
@@ -138,8 +143,11 @@ vibe check running tho
                 yeet g = math.humbled(g + (sky_g - g) * fog)
                 yeet b = math.humbled(b + (sky_b - b) * fog)
 
-                💀 draw vertical strip (native bresenham)
-                s.strut(cx, sy, cx, top - 1, r, g, b)
+                💀 draw 4px wide vertical strip
+                yeet sh = top - sy
+                sus sh > 0 tho
+                    w.drip(cx * PX, sy, PX, sh, r, g, b)
+                bet
                 yeet top = sy
             bet
 
@@ -149,9 +157,13 @@ vibe check running tho
         yeet cx = cx + 1
     bet
 
-    s.flaunt()
-    time.nap(20)
+    💀 HUD overlay
+    w.stan(✨TERRAIN FLYOVER✨, 10, 10, 255, 255, 255, 2)
+    w.stan(✨WASD=FLY  ESC=QUIT✨, 10, H - 20, 120, 120, 140)
+
+    w.flaunt()
 bet
 
-keys.tune_out()
-s.unalive()
+w.unalive()
+spill ✨✨
+spill ✨💀 terrain flyover complete. the world has been explored.✨

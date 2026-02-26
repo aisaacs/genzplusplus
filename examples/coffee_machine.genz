@@ -14,8 +14,8 @@ spill ✨║     "dispensing liquid at vibes-based temp" ║✨
 spill ✨╚═══════════════════════════════════════════╝✨
 spill ✨✨
 
-yeet beverages = list.new(✨coffee✨, ✨coffee✨, ✨coffee✨, ✨coffee✨, ✨coffee✨, ✨gazpacho✨, ✨coffee✨, ✨mystery liquid✨)
-yeet temp_descriptions = list.new(✨temperature of the suns corona✨, ✨coffee-flavored ice cube✨, ✨room temperature (wow it worked)✨, ✨lukewarm disappointment✨, ✨surface of mercury✨, ✨absolute zero adjacent✨)
+yeet beverages = list.spawn(✨coffee✨, ✨coffee✨, ✨coffee✨, ✨coffee✨, ✨coffee✨, ✨gazpacho✨, ✨coffee✨, ✨mystery liquid✨)
+yeet temp_descriptions = list.spawn(✨temperature of the suns corona✨, ✨coffee-flavored ice cube✨, ✨room temperature (wow it worked)✨, ✨lukewarm disappointment✨, ✨surface of mercury✨, ✨absolute zero adjacent✨)
 
 yeet cups = 5
 

@@ -921,32 +921,32 @@ const stdlib = {
   // TEA - string utilities (spill the tea) 🍵
   // ─────────────────────────────────────────────────────────────────────────
   tea: {
-    upper: (s) => String(s).toUpperCase(),      // YELLING
-    lower: (s) => String(s).toLowerCase(),      // mumbling
+    yell: (s) => String(s).toUpperCase(),       // YELLING
+    whisper: (s) => String(s).toLowerCase(),    // shhhh
     spill_length: (s) => String(s).length,      // length (spill how long the tea is)
     sip: (s, start, end) => String(s).slice(start, end), // substring (take a sip)
     has_tea: (s, sub) => String(s).includes(sub), // contains (got that tea?)
-    split: (s, delim = '') => String(s).split(delim), // split the tea
-    trim: (s) => String(s).trim(),              // clean it up
-    reverse: (s) => [...String(s)].reverse().join(''), // reverse (plot twist)
-    starts_with: (s, prefix) => String(s).startsWith(prefix),
-    ends_with: (s, suffix) => String(s).endsWith(suffix),
-    replace: (s, old, replacement) => String(s).replace(old, replacement),
-    replace_all: (s, old, replacement) => String(s).replaceAll(old, replacement),
-    repeat: (s, n) => String(s).repeat(n),      // say it again bestie
-    pad_left: (s, len, char = ' ') => String(s).padStart(len, char),
-    pad_right: (s, len, char = ' ') => String(s).padEnd(len, char),
-    char_at: (s, i) => String(s).charAt(i),     // get that character
-    find: (s, sub) => String(s).indexOf(sub),   // where's the tea at? (-1 if not found)
-    find_last: (s, sub) => String(s).lastIndexOf(sub),
-    concat: (...strs) => strs.join(''),         // bring it all together
-    join: (arr, sep = '') => arr.join(sep),     // join the group chat
-    to_num: (s) => {                            // convert to number
+    shatter: (s, delim = '') => String(s).split(delim), // break it apart
+    detox: (s) => String(s).trim(),             // clean it up
+    plot_twist: (s) => [...String(s)].reverse().join(''), // reverse (nobody saw it coming)
+    opens_with: (s, prefix) => String(s).startsWith(prefix), // how it starts
+    closes_with: (s, suffix) => String(s).endsWith(suffix),  // how it ends
+    swap: (s, old, replacement) => String(s).replace(old, replacement), // swap out
+    swap_all: (s, old, replacement) => String(s).replaceAll(old, replacement), // swap all
+    spam: (s, n) => String(s).repeat(n),        // say it again bestie
+    fluff_left: (s, len, char = ' ') => String(s).padStart(len, char),  // cushion the left
+    fluff_right: (s, len, char = ' ') => String(s).padEnd(len, char),   // cushion the right
+    peek: (s, i) => String(s).charAt(i),        // peek at a character
+    stalk: (s, sub) => String(s).indexOf(sub),  // stalk it down (-1 if ghosted)
+    stalk_last: (s, sub) => String(s).lastIndexOf(sub), // stalk from the end
+    link_up: (...strs) => strs.join(''),        // link it all up
+    squad_up: (arr, sep = '') => arr.join(sep),  // squad up into one string
+    cook_num: (s) => {                          // cook it into a number
       const n = parseFloat(s);
       return isNaN(n) ? null : n;
     },
-    from_code: (n) => String.fromCharCode(n),   // char from code
-    to_code: (s) => String(s).charCodeAt(0),    // code from char
+    summon: (n) => String.fromCharCode(n),      // summon a char from code
+    expose: (s) => String(s).charCodeAt(0),     // expose the code point
   },
   
   // ─────────────────────────────────────────────────────────────────────────
@@ -978,27 +978,27 @@ const stdlib = {
   // LIST - array operations (the squad) 📋
   // ─────────────────────────────────────────────────────────────────────────
   list: {
-    new: (...items) => [...items],              // create new list
-    push: (arr, ...items) => { arr.push(...items); return arr; }, // add to end
-    pop: (arr) => arr.pop(),                    // remove from end
-    shift: (arr) => arr.shift(),                // remove from start
-    unshift: (arr, ...items) => { arr.unshift(...items); return arr; }, // add to start
-    yoink: (arr, index) => arr.splice(index, 1)[0], // remove at index
-    insert: (arr, index, item) => { arr.splice(index, 0, item); return arr; },
-    length: (arr) => arr.length,                // how long is the list
-    at: (arr, index) => arr.at(index),          // get element (supports negative)
-    first: (arr) => arr[0],                     // first element
-    last: (arr) => arr[arr.length - 1],         // last element
-    slice: (arr, start, end) => arr.slice(start, end), // get a portion
-    concat: (...arrs) => [].concat(...arrs),    // combine lists
-    includes: (arr, item) => arr.includes(item), // is it in there?
-    find_index: (arr, item) => arr.indexOf(item), // where is it?
-    reverse: (arr) => [...arr].reverse(),       // flip it (doesn't mutate)
-    sort_nums: (arr) => [...arr].sort((a, b) => a - b), // sort numbers
-    sort_words: (arr) => [...arr].sort(),       // sort strings
-    unique: (arr) => [...new Set(arr)],         // remove duplicates (main characters only)
-    flatten: (arr) => arr.flat(Infinity),       // flatten nested lists
-    fill: (length, value) => Array(length).fill(value), // create filled list
+    spawn: (...items) => [...items],            // summon a new squad
+    yeet_in: (arr, ...items) => { arr.push(...items); return arr; }, // yeet it in (end)
+    yeet_out: (arr) => arr.pop(),               // yeet it out (end)
+    boot: (arr) => arr.shift(),                 // boot the first one
+    cut_in: (arr, ...items) => { arr.unshift(...items); return arr; }, // cut in line (front)
+    yoink: (arr, index) => arr.splice(index, 1)[0], // yoink from index
+    sneak_in: (arr, index, item) => { arr.splice(index, 0, item); return arr; }, // sneak in
+    body_count: (arr) => arr.length,            // how many in the squad
+    peep: (arr, index) => arr.at(index),        // peep at index (supports negative)
+    alpha: (arr) => arr[0],                     // the first one (alpha)
+    omega: (arr) => arr[arr.length - 1],        // the last one (omega)
+    snag: (arr, start, end) => arr.slice(start, end), // snag a portion
+    collab: (...arrs) => [].concat(...arrs),    // collab (combine lists)
+    claims: (arr, item) => arr.includes(item),  // claims to have it
+    where_at: (arr, item) => arr.indexOf(item), // where's it at?
+    plot_twist: (arr) => [...arr].reverse(),    // plot twist (reverse, non-mutating)
+    rank: (arr) => [...arr].sort((a, b) => a - b), // rank (sort numbers)
+    abc: (arr) => [...arr].sort(),              // abc order (sort strings)
+    no_dupes: (arr) => [...new Set(arr)],       // no dupes (main characters only)
+    unbox: (arr) => arr.flat(Infinity),         // unbox nested lists
+    mint: (length, value) => Array(length).fill(value), // mint copies
     range: (start, end, step = 1) => {          // create range of numbers
       const result = [];
       for (let i = start; step > 0 ? i < end : i > end; i += step) {
@@ -1006,9 +1006,9 @@ const stdlib = {
       }
       return result;
     },
-    sum: (arr) => arr.reduce((a, b) => a + b, 0), // add them all up
-    average: (arr) => arr.length ? arr.reduce((a, b) => a + b, 0) / arr.length : 0,
-    count: (arr, item) => arr.filter(x => x === item).length, // count occurrences
+    total: (arr) => arr.reduce((a, b) => a + b, 0), // the total
+    mid: (arr) => arr.length ? arr.reduce((a, b) => a + b, 0) / arr.length : 0, // the mid (average)
+    tally: (arr, item) => arr.filter(x => x === item).length, // tally occurrences
   },
   
   // ─────────────────────────────────────────────────────────────────────────
@@ -1017,7 +1017,7 @@ const stdlib = {
   time: {
     nap: async (ms) => new Promise(resolve => setTimeout(resolve, ms)), // sleep
     wait: async (ms) => new Promise(resolve => setTimeout(resolve, ms)), // alias for nap
-    now: () => Date.now(),                      // current timestamp (ms)
+    rn: () => Date.now(),                       // right now (ms)
     vibes: () => new Date().toLocaleTimeString(), // current time string
     today: () => new Date().toLocaleDateString(), // current date string
     year: () => new Date().getFullYear(),
@@ -1027,38 +1027,38 @@ const stdlib = {
     hour: () => new Date().getHours(),
     minute: () => new Date().getMinutes(),
     second: () => new Date().getSeconds(),
-    timestamp: () => Math.floor(Date.now() / 1000), // unix timestamp (seconds)
+    receipts: () => Math.floor(Date.now() / 1000), // the receipts (unix timestamp)
   },
   
   // ─────────────────────────────────────────────────────────────────────────
   // CONVERT - type conversions (glow up your types) 🔄
   // ─────────────────────────────────────────────────────────────────────────
   convert: {
-    to_num: (x) => {
+    cook_num: (x) => {                          // cook it into a number
       const n = Number(x);
       return isNaN(n) ? null : n;
     },
-    to_int: (x) => {
+    cook_int: (x) => {                          // cook it into an integer
       const n = parseInt(x, 10);
       return isNaN(n) ? null : n;
     },
-    to_str: (x) => String(x),
-    to_bool: (x) => Boolean(x),
-    to_list: (x) => Array.isArray(x) ? x : [...String(x)], // string to char array
-    from_json: (s) => {
+    cook_str: (x) => String(x),                // cook it into a string
+    cook_bool: (x) => Boolean(x),              // cook it into a boolean
+    cook_list: (x) => Array.isArray(x) ? x : [...String(x)], // cook it into a list
+    unjson: (s) => {                            // unjson (parse JSON)
       try { return JSON.parse(s); }
       catch { return null; }
     },
-    to_json: (x) => JSON.stringify(x),
-    to_json_pretty: (x) => JSON.stringify(x, null, 2),
+    jsonify: (x) => JSON.stringify(x),          // jsonify
+    jsonify_pretty: (x) => JSON.stringify(x, null, 2), // jsonify but make it pretty
   },
   
   // ─────────────────────────────────────────────────────────────────────────
   // NET - http requests (sliding into DMs) 🌐
   // ─────────────────────────────────────────────────────────────────────────
   net: {
-    // GET request - just grab the vibes
-    get: async (url) => {
+    // GET request - yoink the data
+    yoink: async (url) => {
       try {
         const res = await fetch(url);
         const text = await res.text();
@@ -1071,7 +1071,7 @@ const stdlib = {
     },
 
     // GET but always return raw text (no JSON parsing)
-    get_text: async (url) => {
+    yoink_text: async (url) => {
       try {
         const res = await fetch(url);
         return await res.text();
@@ -1081,7 +1081,7 @@ const stdlib = {
     },
 
     // GET but always return parsed JSON
-    get_json: async (url) => {
+    yoink_json: async (url) => {
       try {
         const res = await fetch(url);
         return await res.json();
@@ -1090,8 +1090,8 @@ const stdlib = {
       }
     },
 
-    // POST with JSON body - sending the vibes
-    post: async (url, body) => {
+    // POST with JSON body - shoot your shot
+    shoot: async (url, body) => {
       try {
         const res = await fetch(url, {
           method: 'POST',
@@ -1107,7 +1107,7 @@ const stdlib = {
     },
 
     // POST with raw text body
-    post_text: async (url, body) => {
+    shoot_text: async (url, body) => {
       try {
         const res = await fetch(url, {
           method: 'POST',
@@ -1122,8 +1122,8 @@ const stdlib = {
       }
     },
 
-    // PUT with JSON body - updating the vibes
-    put: async (url, body) => {
+    // PUT with JSON body - glow up the resource
+    glow_up: async (url, body) => {
       try {
         const res = await fetch(url, {
           method: 'PUT',
@@ -1150,8 +1150,8 @@ const stdlib = {
       }
     },
 
-    // PATCH - small tweaks
-    patch: async (url, body) => {
+    // PATCH - tweak it
+    tweak: async (url, body) => {
       try {
         const res = await fetch(url, {
           method: 'PATCH',
@@ -1166,8 +1166,8 @@ const stdlib = {
       }
     },
 
-    // Full request with all the options - for when you need control
-    fetch: async (url, method, headers, body) => {
+    // Full request with all the options - full send
+    full_send: async (url, method, headers, body) => {
       try {
         const opts = { method: method || 'GET' };
         if (headers) opts.headers = headers;
@@ -1189,7 +1189,7 @@ const stdlib = {
     },
 
     // Just get the status code - vibe check the URL
-    status: async (url) => {
+    vibe_check: async (url) => {
       try {
         const res = await fetch(url, { method: 'HEAD' });
         return res.status;
@@ -1198,8 +1198,8 @@ const stdlib = {
       }
     },
 
-    // Build a URL with query params
-    url: (base, params) => {
+    // Build a URL with query params - link up
+    link_up: (base, params) => {
       if (!params) return base;
       const qs = Object.entries(params)
         .map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(v)}`)
@@ -1212,31 +1212,31 @@ const stdlib = {
   // OBJ - object/map utilities (the blueprint) 🏗️
   // ─────────────────────────────────────────────────────────────────────────
   obj: {
-    new: () => ({}),                              // empty object
-    from: (...pairs) => {                         // create from key-value pairs
-      const o = {};                               // obj.from(k1, v1, k2, v2, ...)
+    spawn: () => ({}),                            // summon an empty object
+    cook: (...pairs) => {                         // cook from key-value pairs
+      const o = {};                               // obj.cook(k1, v1, k2, v2, ...)
       for (let i = 0; i < pairs.length - 1; i += 2) {
         o[pairs[i]] = pairs[i + 1];
       }
       return o;
     },
-    set: (o, key, val) => { o[key] = val; return o; }, // set a key
-    get: (o, key) => o[key] !== undefined ? o[key] : null, // get a key
+    slap: (o, key, val) => { o[key] = val; return o; }, // slap a value on it
+    peep: (o, key) => o[key] !== undefined ? o[key] : null, // peep at a key
     keys: (o) => Object.keys(o),                  // all keys
-    values: (o) => Object.values(o),              // all values
-    has: (o, key) => key in o,                    // check if key exists
-    remove: (o, key) => { delete o[key]; return o; },
-    merge: (a, b) => ({ ...a, ...b }),            // combine two objects
-    clone: (o) => ({ ...o }),                     // shallow copy
-    entries: (o) => Object.entries(o),            // [[key, val], ...]
+    goods: (o) => Object.values(o),               // the goods (all values)
+    got: (o, key) => key in o,                    // you got that key?
+    yeet: (o, key) => { delete o[key]; return o; }, // yeet that key
+    mashup: (a, b) => ({ ...a, ...b }),           // mashup two objects
+    dupe: (o) => ({ ...o }),                      // dupe it (shallow copy)
+    rundown: (o) => Object.entries(o),            // the full rundown [[key, val], ...]
   },
 
   // ─────────────────────────────────────────────────────────────────────────
   // ENV - environment variables (the backstage) 🎭
   // ─────────────────────────────────────────────────────────────────────────
   env: {
-    get: (key) => process.env[key] || null,       // read env var
-    has: (key) => key in process.env,             // check if env var exists
+    peep: (key) => process.env[key] || null,      // peep at an env var
+    got: (key) => key in process.env,             // you got that env var?
   },
 
   // ─────────────────────────────────────────────────────────────────────────
@@ -1296,7 +1296,7 @@ const stdlib = {
     reset: () => '\x1b[0m',
 
     // ── utility ──
-    strip: (s) => String(s).replace(/\x1b\[[0-9;]*m/g, ''),      // remove all ansi
+    cleanse: (s) => String(s).replace(/\x1b\[[0-9;]*m/g, ''),    // cleanse all ansi
     rainbow: (s) => {                                               // 🌈
       const colors = [31, 33, 32, 36, 34, 35];
       return String(s).split('').map((c, i) =>
@@ -1322,7 +1322,7 @@ const stdlib = {
     };
 
     return {
-      start: (msg, style) => {
+      spin_up: (msg, style) => {
         if (_interval) return;
         const frames = spinners[style] || spinners.dots;
         _frame = 0;
@@ -1332,7 +1332,7 @@ const stdlib = {
           _frame++;
         }, 100);
       },
-      stop: (msg) => {
+      wind_down: (msg) => {
         if (_interval) {
           clearInterval(_interval);
           _interval = null;
@@ -1360,40 +1360,40 @@ const stdlib = {
         // background color
         vibe: function(color) { this.bg = color; return this; },
 
-        // fill color for shapes
-        fill: function(color) { this.commands.push({ type: 'fill', color }); return this; },
+        // sauce = set fill color (the drip sauce)
+        sauce: function(color) { this.commands.push({ type: 'fill', color }); return this; },
 
-        // stroke/outline color
-        stroke: function(color) { this.commands.push({ type: 'stroke', color }); return this; },
+        // edge = set outline color
+        edge: function(color) { this.commands.push({ type: 'stroke', color }); return this; },
 
         // line width
         thicc: function(width) { this.commands.push({ type: 'lineWidth', width }); return this; },
 
-        // rectangle (outline)
-        box: function(x, y, w, h) { this.commands.push({ type: 'rect', x, y, w, h }); return this; },
+        // rectangle (outline) — the fit
+        fit: function(x, y, w, h) { this.commands.push({ type: 'rect', x, y, w, h }); return this; },
 
-        // filled rectangle
-        fill_box: function(x, y, w, h) { this.commands.push({ type: 'fillRect', x, y, w, h }); return this; },
+        // filled rectangle — dripping
+        drip: function(x, y, w, h) { this.commands.push({ type: 'fillRect', x, y, w, h }); return this; },
 
-        // circle (outline)
-        circle: function(x, y, r) { this.commands.push({ type: 'circle', x, y, r, fill: false }); return this; },
+        // circle (outline) — halo
+        halo: function(x, y, r) { this.commands.push({ type: 'circle', x, y, r, fill: false }); return this; },
 
-        // filled circle
-        fill_circle: function(x, y, r) { this.commands.push({ type: 'circle', x, y, r, fill: true }); return this; },
+        // filled circle — aura
+        aura: function(x, y, r) { this.commands.push({ type: 'circle', x, y, r, fill: true }); return this; },
 
-        // line
-        line: function(x1, y1, x2, y2) { this.commands.push({ type: 'line', x1, y1, x2, y2 }); return this; },
+        // line — strut
+        strut: function(x1, y1, x2, y2) { this.commands.push({ type: 'line', x1, y1, x2, y2 }); return this; },
 
-        // text
-        text: function(str, x, y, size) { this.commands.push({ type: 'text', str, x, y, size: size || 16 }); return this; },
+        // text — caption
+        caption: function(str, x, y, size) { this.commands.push({ type: 'text', str, x, y, size: size || 16 }); return this; },
 
         // triangle (outline)
         triangle: function(x1, y1, x2, y2, x3, y3) {
           this.commands.push({ type: 'triangle', points: [[x1,y1],[x2,y2],[x3,y3]], fill: false }); return this;
         },
 
-        // filled triangle
-        fill_triangle: function(x1, y1, x2, y2, x3, y3) {
+        // filled triangle — slay
+        slay_triangle: function(x1, y1, x2, y2, x3, y3) {
           this.commands.push({ type: 'triangle', points: [[x1,y1],[x2,y2],[x3,y3]], fill: true }); return this;
         },
 
@@ -1401,12 +1401,12 @@ const stdlib = {
         polygon: function(points) {
           this.commands.push({ type: 'triangle', points, fill: false }); return this;
         },
-        fill_polygon: function(points) {
+        slay_polygon: function(points) {
           this.commands.push({ type: 'triangle', points, fill: true }); return this;
         },
 
-        // linear gradient
-        gradient: function(x1, y1, x2, y2, color1, color2) {
+        // linear gradient — ombré
+        ombre: function(x1, y1, x2, y2, color1, color2) {
           this.commands.push({ type: 'gradient', x1, y1, x2, y2, color1, color2 }); return this;
         },
 
@@ -1414,30 +1414,30 @@ const stdlib = {
         arc: function(x, y, r, startAngle, endAngle) {
           this.commands.push({ type: 'arc', x, y, r, startAngle, endAngle, fill: false }); return this;
         },
-        fill_arc: function(x, y, r, startAngle, endAngle) {
+        slay_arc: function(x, y, r, startAngle, endAngle) {
           this.commands.push({ type: 'arc', x, y, r, startAngle, endAngle, fill: true }); return this;
         },
 
-        // rounded rectangle
+        // rounded rectangle — pill
         pill: function(x, y, w, h, radius) {
           this.commands.push({ type: 'roundRect', x, y, w, h, radius: radius || 10 }); return this;
         },
-        fill_pill: function(x, y, w, h, radius) {
+        slay_pill: function(x, y, w, h, radius) {
           this.commands.push({ type: 'fillRoundRect', x, y, w, h, radius: radius || 10 }); return this;
         },
 
-        // clear canvas
-        clear: function() { this.commands.push({ type: 'clear' }); return this; },
+        // cleanse the canvas
+        cleanse: function() { this.commands.push({ type: 'clear' }); return this; },
 
         // transform state
-        save: function() { this.commands.push({ type: 'save' }); return this; },
-        restore: function() { this.commands.push({ type: 'restore' }); return this; },
-        rotate: function(angle) { this.commands.push({ type: 'rotate', angle }); return this; },
-        translate: function(x, y) { this.commands.push({ type: 'translate', x, y }); return this; },
-        scale: function(sx, sy) { this.commands.push({ type: 'scale', x: sx, y: sy !== undefined ? sy : sx }); return this; },
+        checkpoint: function() { this.commands.push({ type: 'save' }); return this; },
+        respawn: function() { this.commands.push({ type: 'restore' }); return this; },
+        spin: function(angle) { this.commands.push({ type: 'rotate', angle }); return this; },
+        slide: function(x, y) { this.commands.push({ type: 'translate', x, y }); return this; },
+        zoom: function(sx, sy) { this.commands.push({ type: 'scale', x: sx, y: sy !== undefined ? sy : sx }); return this; },
 
-        // set global alpha
-        opacity: function(a) { this.commands.push({ type: 'alpha', a }); return this; },
+        // ghostly = transparency
+        ghostly: function(a) { this.commands.push({ type: 'alpha', a }); return this; },
 
         // render to HTML file
         serve: function(filename) {
@@ -1492,7 +1492,7 @@ const stdlib = {
     }
 
     return {
-      start: function() {
+      tune_in: function() {
         if (_active) return;
         if (process.stdin.isTTY) {
           process.stdin.setRawMode(true);
@@ -1503,7 +1503,7 @@ const stdlib = {
           process.stdin.on('data', _listener);
         }
       },
-      stop: function() {
+      tune_out: function() {
         if (_active && process.stdin.isTTY) {
           process.stdin.setRawMode(false);
           process.stdin.pause();
@@ -1514,13 +1514,13 @@ const stdlib = {
           _active = false;
         }
       },
-      down: function(name) { return _pressed.has(name); },
-      clear: function() { _pressed.clear(); },
-      last: function() {
+      pressed: function(name) { return _pressed.has(name); },
+      forget: function() { _pressed.clear(); },
+      latest: function() {
         const arr = [..._pressed];
         return arr.length > 0 ? arr[arr.length - 1] : '';
       },
-      any: function() { return _pressed.size > 0; },
+      vibing: function() { return _pressed.size > 0; },
     };
   })(),
 };
@@ -1631,7 +1631,7 @@ const _screen = (() => {
     cols: function() { return process.stdout.columns || 80; },
     rows: function() { return process.stdout.rows || 24; },
 
-    new: function(w, h, title) {
+    spawn: function(w, h, title) {
       w = w || 80;
       h = h % 2 === 0 ? h : h + 1; // ensure even height for half-blocks
       const buf = new Uint8Array(w * h * 3); // RGB per pixel
@@ -1645,7 +1645,7 @@ const _screen = (() => {
 
         // ── pixel operations ──
 
-        pixel: function(x, y, r, g, b) {
+        ink: function(x, y, r, g, b) {
           x = x | 0; y = y | 0;
           if (x < 0 || x >= w || y < 0 || y >= h) return this;
           const i = (y * w + x) * 3;
@@ -1653,14 +1653,14 @@ const _screen = (() => {
           return this;
         },
 
-        get: function(x, y) {
+        peep: function(x, y) {
           x = x | 0; y = y | 0;
           if (x < 0 || x >= w || y < 0 || y >= h) return [0, 0, 0];
           const i = (y * w + x) * 3;
           return [buf[i], buf[i+1], buf[i+2]];
         },
 
-        clear: function(r, g, b) {
+        cleanse: function(r, g, b) {
           r = r || 0; g = g || 0; b = b || 0;
           for (let i = 0; i < w * h; i++) {
             buf[i*3] = r; buf[i*3+1] = g; buf[i*3+2] = b;
@@ -1668,18 +1668,16 @@ const _screen = (() => {
           return this;
         },
 
-        fill: function(r, g, b) { return this.clear(r, g, b); },
-
         // ── shape drawing ──
 
-        line: function(x0, y0, x1, y1, r, g, b) {
+        strut: function(x0, y0, x1, y1, r, g, b) {
           // bresenham
           x0=x0|0; y0=y0|0; x1=x1|0; y1=y1|0;
           const dx = Math.abs(x1-x0), sx = x0<x1?1:-1;
           const dy = -Math.abs(y1-y0), sy = y0<y1?1:-1;
           let err = dx+dy;
           while(true) {
-            this.pixel(x0,y0,r,g,b);
+            this.ink(x0,y0,r,g,b);
             if(x0===x1 && y0===y1) break;
             const e2 = 2*err;
             if(e2>=dy) { err+=dy; x0+=sx; }
@@ -1688,47 +1686,47 @@ const _screen = (() => {
           return this;
         },
 
-        box: function(x, y, bw, bh, r, g, b) {
-          this.line(x,y,x+bw-1,y,r,g,b);
-          this.line(x+bw-1,y,x+bw-1,y+bh-1,r,g,b);
-          this.line(x+bw-1,y+bh-1,x,y+bh-1,r,g,b);
-          this.line(x,y+bh-1,x,y,r,g,b);
+        fit: function(x, y, bw, bh, r, g, b) {
+          this.strut(x,y,x+bw-1,y,r,g,b);
+          this.strut(x+bw-1,y,x+bw-1,y+bh-1,r,g,b);
+          this.strut(x+bw-1,y+bh-1,x,y+bh-1,r,g,b);
+          this.strut(x,y+bh-1,x,y,r,g,b);
           return this;
         },
 
-        fill_box: function(x, y, bw, bh, r, g, b) {
+        drip: function(x, y, bw, bh, r, g, b) {
           x=x|0; y=y|0;
           for(let py=y; py<y+bh; py++)
             for(let px=x; px<x+bw; px++)
-              this.pixel(px,py,r,g,b);
+              this.ink(px,py,r,g,b);
           return this;
         },
 
-        circle: function(cx, cy, radius, r, g, b) {
+        halo: function(cx, cy, radius, r, g, b) {
           // midpoint circle
           cx=cx|0; cy=cy|0; radius=radius|0;
           let x=radius, y=0, err=1-radius;
           while(x>=y) {
-            this.pixel(cx+x,cy+y,r,g,b); this.pixel(cx-x,cy+y,r,g,b);
-            this.pixel(cx+x,cy-y,r,g,b); this.pixel(cx-x,cy-y,r,g,b);
-            this.pixel(cx+y,cy+x,r,g,b); this.pixel(cx-y,cy+x,r,g,b);
-            this.pixel(cx+y,cy-x,r,g,b); this.pixel(cx-y,cy-x,r,g,b);
+            this.ink(cx+x,cy+y,r,g,b); this.ink(cx-x,cy+y,r,g,b);
+            this.ink(cx+x,cy-y,r,g,b); this.ink(cx-x,cy-y,r,g,b);
+            this.ink(cx+y,cy+x,r,g,b); this.ink(cx-y,cy+x,r,g,b);
+            this.ink(cx+y,cy-x,r,g,b); this.ink(cx-y,cy-x,r,g,b);
             y++;
             if(err<0) { err+=2*y+1; } else { x--; err+=2*(y-x)+1; }
           }
           return this;
         },
 
-        fill_circle: function(cx, cy, radius, r, g, b) {
+        aura: function(cx, cy, radius, r, g, b) {
           cx=cx|0; cy=cy|0; radius=radius|0;
           for(let py=-radius; py<=radius; py++)
             for(let px=-radius; px<=radius; px++)
               if(px*px+py*py<=radius*radius)
-                this.pixel(cx+px,cy+py,r,g,b);
+                this.ink(cx+px,cy+py,r,g,b);
           return this;
         },
 
-        text: function(str, x, y, r, g, b) {
+        stan: function(str, x, y, r, g, b) {
           // 3x5 pixel font for ascii 32-126
           const font = _miniFont;
           str = String(str);
@@ -1738,14 +1736,14 @@ const _screen = (() => {
             for (let gy = 0; gy < 5; gy++)
               for (let gx = 0; gx < 3; gx++)
                 if ((glyph[gy] >> (2-gx)) & 1)
-                  this.pixel(x + ci*4 + gx, y + gy, r, g, b);
+                  this.ink(x + ci*4 + gx, y + gy, r, g, b);
           }
           return this;
         },
 
         // ── rendering ──
 
-        render: function() {
+        flaunt: function() {
           // move cursor to top-left
           let out = '\x1b[H';
           if (this._title) out += `\x1b[2K\x1b[1m ${this._title}\x1b[0m\n`;
@@ -1777,19 +1775,19 @@ const _screen = (() => {
         },
 
         // clear terminal and hide cursor before animation
-        init: function() {
+        boot: function() {
           process.stdout.write('\x1b[2J\x1b[?25l');
           return this;
         },
 
         // show cursor and reset terminal after animation
-        done: function() {
+        unalive: function() {
           process.stdout.write('\x1b[?25h\x1b[0m');
           return this;
         },
 
         // export to PPM (simple image format)
-        save_ppm: function(filename) {
+        snapshot: function(filename) {
           let data = `P6\n${w} ${h}\n255\n`;
           const header = Buffer.from(data, 'ascii');
           const pixels = Buffer.from(buf.buffer, buf.byteOffset, buf.byteLength);
@@ -1905,6 +1903,269 @@ const _miniFont = [
 
 // Wire screen into stdlib
 stdlib.screen = _screen;
+
+// ============================================================================
+// GPU MODULE — real native graphics window via SDL2 + koffi FFI
+// ============================================================================
+
+const _gpu = (() => {
+  let koffi = null;
+  let sdl = null;
+  let sdlInited = false;
+
+  // SDL2 constants
+  const SDL_INIT_VIDEO        = 0x20;
+  const SDL_WINDOWPOS_CENTERED = 0x2FFF0000;
+  const SDL_WINDOW_SHOWN      = 0x04;
+  const SDL_RENDERER_ACCELERATED = 0x02;
+  const SDL_RENDERER_PRESENTVSYNC = 0x04;
+  const SDL_TEXTUREACCESS_STREAMING = 1;
+  const SDL_PIXELFORMAT_ABGR8888   = 0x16762004;
+  const SDL_QUIT    = 0x100;
+  const SDL_KEYDOWN = 0x300;
+  const SDL_KEYUP   = 0x301;
+
+  // SDL keycode → name mapping
+  const keyNameMap = {
+    27: 'esc', 13: 'enter', 9: 'tab', 8: 'backspace', 32: 'space',
+    1073741903: 'right', 1073741904: 'left', 1073741905: 'down', 1073741906: 'up',
+  };
+  // a-z (97-122) and 0-9 (48-57) mapped by char
+  for (let i = 97; i <= 122; i++) keyNameMap[i] = String.fromCharCode(i);
+  for (let i = 48; i <= 57; i++) keyNameMap[i] = String.fromCharCode(i);
+
+  // SDL2 library discovery
+  const sdlPaths = [
+    '/opt/homebrew/opt/sdl2/lib/libSDL2.dylib',
+    '/usr/local/opt/sdl2/lib/libSDL2.dylib',
+    '/opt/homebrew/lib/libSDL2.dylib',
+    '/usr/local/lib/libSDL2.dylib',
+    '/Library/Frameworks/SDL2.framework/SDL2',
+    'libSDL2.dylib',
+  ];
+
+  function _initSDL() {
+    if (sdl) return;
+    try {
+      koffi = require('koffi');
+    } catch(e) {
+      throw new Error('gpu module requires koffi — run: npm install koffi');
+    }
+
+    let lib = null;
+    for (const p of sdlPaths) {
+      try { lib = koffi.load(p); break; } catch(_) {}
+    }
+    if (!lib) throw new Error('SDL2 not found. Install via: brew install sdl2');
+
+    sdl = {
+      Init:              lib.func('int SDL_Init(uint32_t)'),
+      Quit:              lib.func('void SDL_Quit()'),
+      GetError:          lib.func('const char* SDL_GetError()'),
+      CreateWindow:      lib.func('void* SDL_CreateWindow(const char*, int, int, int, int, uint32_t)'),
+      DestroyWindow:     lib.func('void SDL_DestroyWindow(void*)'),
+      CreateRenderer:    lib.func('void* SDL_CreateRenderer(void*, int, uint32_t)'),
+      DestroyRenderer:   lib.func('void SDL_DestroyRenderer(void*)'),
+      CreateTexture:     lib.func('void* SDL_CreateTexture(void*, uint32_t, int, int, int)'),
+      DestroyTexture:    lib.func('void SDL_DestroyTexture(void*)'),
+      UpdateTexture:     lib.func('int SDL_UpdateTexture(void*, void*, const uint8_t*, int)'),
+      RenderClear:       lib.func('int SDL_RenderClear(void*)'),
+      RenderCopy:        lib.func('int SDL_RenderCopy(void*, void*, void*, void*)'),
+      RenderPresent:     lib.func('void SDL_RenderPresent(void*)'),
+      SetRenderDrawColor:lib.func('int SDL_SetRenderDrawColor(void*, uint8_t, uint8_t, uint8_t, uint8_t)'),
+      PollEvent:         lib.func('int SDL_PollEvent(uint8_t*)'),
+      Delay:             lib.func('void SDL_Delay(uint32_t)'),
+    };
+
+    if (!sdlInited) {
+      const rc = sdl.Init(SDL_INIT_VIDEO);
+      if (rc !== 0) throw new Error('SDL_Init failed: ' + sdl.GetError());
+      sdlInited = true;
+      process.on('exit', () => { try { sdl.Quit(); } catch(_) {} });
+    }
+  }
+
+  return {
+    spawn: function(w, h, title) {
+      w = (w || 800) | 0;
+      h = (h || 600) | 0;
+      title = title || 'genz++ gpu';
+
+      _initSDL();
+
+      const win = sdl.CreateWindow(title,
+        SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+        w, h, SDL_WINDOW_SHOWN);
+      if (!win) throw new Error('SDL_CreateWindow failed: ' + sdl.GetError());
+
+      const ren = sdl.CreateRenderer(win, -1,
+        SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+      if (!ren) throw new Error('SDL_CreateRenderer failed: ' + sdl.GetError());
+
+      const tex = sdl.CreateTexture(ren,
+        SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STREAMING, w, h);
+      if (!tex) throw new Error('SDL_CreateTexture failed: ' + sdl.GetError());
+
+      const buf = new Uint8Array(w * h * 4); // RGBA pixel buffer
+      const evtBuf = Buffer.alloc(128);       // SDL_Event
+      const keys = new Set();
+      let alive = true;
+
+      const obj = {
+        _type: 'gpu_window',
+        width: w,
+        height: h,
+
+        // ── event loop (serve = keep the window serving looks) ──
+
+        serve: function() {
+          if (!alive) return false;
+          while (sdl.PollEvent(evtBuf)) {
+            const type = evtBuf.readUInt32LE(0);
+            if (type === SDL_QUIT) { alive = false; return false; }
+            if (type === SDL_KEYDOWN || type === SDL_KEYUP) {
+              const sym = evtBuf.readInt32LE(20);
+              const name = keyNameMap[sym];
+              if (name) {
+                if (type === SDL_KEYDOWN) keys.add(name);
+                else keys.delete(name);
+              }
+            }
+          }
+          return true;
+        },
+
+        pressed: function(name) {
+          return keys.has(name);
+        },
+
+        // ── pixel operations ──
+
+        ink: function(x, y, r, g, b) {
+          x = x | 0; y = y | 0;
+          if (x < 0 || x >= w || y < 0 || y >= h) return this;
+          const i = (y * w + x) * 4;
+          buf[i] = r; buf[i+1] = g; buf[i+2] = b; buf[i+3] = 255;
+          return this;
+        },
+
+        cleanse: function(r, g, b) {
+          r = r || 0; g = g || 0; b = b || 0;
+          for (let p = 0; p < w * h; p++) {
+            const i = p * 4;
+            buf[i] = r; buf[i+1] = g; buf[i+2] = b; buf[i+3] = 255;
+          }
+          return this;
+        },
+
+        // ── shape drawing (adapted from screen module, 4-byte RGBA) ──
+
+        strut: function(x0, y0, x1, y1, r, g, b) {
+          x0=x0|0; y0=y0|0; x1=x1|0; y1=y1|0;
+          const dx = Math.abs(x1-x0), sx = x0<x1?1:-1;
+          const dy = -Math.abs(y1-y0), sy = y0<y1?1:-1;
+          let err = dx+dy;
+          while(true) {
+            this.ink(x0,y0,r,g,b);
+            if(x0===x1 && y0===y1) break;
+            const e2 = 2*err;
+            if(e2>=dy) { err+=dy; x0+=sx; }
+            if(e2<=dx) { err+=dx; y0+=sy; }
+          }
+          return this;
+        },
+
+        fit: function(x, y, bw, bh, r, g, b) {
+          this.strut(x,y,x+bw-1,y,r,g,b);
+          this.strut(x+bw-1,y,x+bw-1,y+bh-1,r,g,b);
+          this.strut(x+bw-1,y+bh-1,x,y+bh-1,r,g,b);
+          this.strut(x,y+bh-1,x,y,r,g,b);
+          return this;
+        },
+
+        drip: function(x, y, bw, bh, r, g, b) {
+          x=x|0; y=y|0;
+          for(let py=y; py<y+bh; py++)
+            for(let px=x; px<x+bw; px++)
+              this.ink(px,py,r,g,b);
+          return this;
+        },
+
+        halo: function(cx, cy, radius, r, g, b) {
+          cx=cx|0; cy=cy|0; radius=radius|0;
+          let x=radius, y=0, err=1-radius;
+          while(x>=y) {
+            this.ink(cx+x,cy+y,r,g,b); this.ink(cx-x,cy+y,r,g,b);
+            this.ink(cx+x,cy-y,r,g,b); this.ink(cx-x,cy-y,r,g,b);
+            this.ink(cx+y,cy+x,r,g,b); this.ink(cx-y,cy+x,r,g,b);
+            this.ink(cx+y,cy-x,r,g,b); this.ink(cx-y,cy-x,r,g,b);
+            y++;
+            if(err<0) { err+=2*y+1; } else { x--; err+=2*(y-x)+1; }
+          }
+          return this;
+        },
+
+        aura: function(cx, cy, radius, r, g, b) {
+          cx=cx|0; cy=cy|0; radius=radius|0;
+          for(let py=-radius; py<=radius; py++)
+            for(let px=-radius; px<=radius; px++)
+              if(px*px+py*py<=radius*radius)
+                this.ink(cx+px,cy+py,r,g,b);
+          return this;
+        },
+
+        stan: function(str, x, y, r, g, b, scale) {
+          const font = _miniFont;
+          str = String(str);
+          scale = (scale || 2) | 0;
+          for (let ci = 0; ci < str.length; ci++) {
+            const ch = str.charCodeAt(ci) - 32;
+            const glyph = font[ch] || font[0];
+            for (let gy = 0; gy < 5; gy++)
+              for (let gx = 0; gx < 3; gx++)
+                if ((glyph[gy] >> (2-gx)) & 1)
+                  for (let sy = 0; sy < scale; sy++)
+                    for (let sx = 0; sx < scale; sx++)
+                      this.ink(
+                        x + ci*(3+1)*scale + gx*scale + sx,
+                        y + gy*scale + sy, r, g, b);
+          }
+          return this;
+        },
+
+        // ── rendering (flaunt = show it off) ──
+
+        flaunt: function() {
+          sdl.UpdateTexture(tex, null, buf, w * 4);
+          sdl.RenderClear(ren);
+          sdl.RenderCopy(ren, tex, null, null);
+          sdl.RenderPresent(ren);
+          return this;
+        },
+
+        chill: function(ms) {
+          sdl.Delay((ms || 0) | 0);
+          return this;
+        },
+
+        // ── cleanup (unalive = window is no more) ──
+
+        unalive: function() {
+          if (!alive) return this;
+          alive = false;
+          sdl.DestroyTexture(tex);
+          sdl.DestroyRenderer(ren);
+          sdl.DestroyWindow(win);
+          return this;
+        }
+      };
+      return obj;
+    }
+  };
+})();
+
+// Wire gpu into stdlib
+stdlib.gpu = _gpu;
 
 // ============================================================================
 // INTERPRETER

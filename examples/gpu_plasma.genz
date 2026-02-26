@@ -1,28 +1,33 @@
 💀 ═══════════════════════════════════════════════════════════════
-💀 PLASMA DEMO — mode 13h vibes in your terminal
+💀 GPU PLASMA — mode 13h vibes in a real native window
 💀 ═══════════════════════════════════════════════════════════════
-💀 classic demoscene plasma effect rendered with half-block chars
-💀 this is what programming used to feel like before everything broke
+💀 classic demoscene plasma at 320x200 — 1/4 res, 4x4 fat pixels
+💀 ESC or close window to quit
 💀 ═══════════════════════════════════════════════════════════════
 
-plug in screen
+plug in gpu
 plug in math
-plug in time
 
-yeet w = 60
-yeet h = 30
-yeet s = screen.spawn(w, h, ✨💀 genz++ plasma 💀✨)
+yeet W = 320
+yeet H = 200
+yeet w = gpu.spawn(W, H, ✨genz++ gpu plasma✨)
 
-s.boot()
+💀 logic resolution — 1/4 of window, each pixel is a 4x4 block
+yeet PX = 4
+yeet LW = W / PX
+yeet LH = H / PX
 
 yeet t = 0
-yeet frames = 120
 
-vibe check t < frames tho
+vibe check w.serve() tho
+    sus w.pressed(✨esc✨) tho
+        dip
+    bet
+
     yeet y = 0
-    vibe check y < h tho
+    vibe check y < LH tho
         yeet x = 0
-        vibe check x < w tho
+        vibe check x < LW tho
             💀 classic plasma: sum of sines
             yeet v1 = math.vibes(x * 0.08 + t * 0.07)
             yeet v2 = math.vibes(y * 0.1 + t * 0.05)
@@ -36,18 +41,20 @@ vibe check t < frames tho
             yeet g = math.humbled(math.ate(math.vibes(val * 3.14159 + 2.094 + t * 0.03)) * 255)
             yeet b = math.humbled(math.ate(math.vibes(val * 3.14159 + 4.188 + t * 0.015)) * 255)
 
-            s.ink(x, y, r, g, b)
+            w.drip(x * PX, y * PX, PX, PX, r, g, b)
             yeet x = x + 1
         bet
         yeet y = y + 1
     bet
 
-    s.flaunt()
-    time.nap(16)
+    💀 title overlay
+    w.stan(✨PLASMA✨, 10, 10, 255, 255, 255, 2)
+    w.stan(✨ESC=QUIT✨, 10, H - 20, 120, 120, 140)
+
+    w.flaunt()
     yeet t = t + 1
 bet
 
-s.unalive()
+w.unalive()
 spill ✨✨
-spill ✨💀 plasma complete. ✨ + frames + ✨ frames rendered.✨
-spill ✨💀 the demoscene lives in genz++ now.✨
+spill ✨💀 plasma complete. the demoscene lives in genz++ now.✨

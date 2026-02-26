@@ -53,10 +53,10 @@ spill ✨=== TEA TESTS ===✨
 yeet msg = ✨hello world✨
 
 spill ✨upper should be HELLO WORLD:✨
-spill tea.upper(msg)
+spill tea.yell(msg)
 
 spill ✨lower of CAPS:✨
-spill tea.lower(✨YELLING✨)
+spill tea.whisper(✨YELLING✨)
 
 spill ✨spill_length of hello world:✨
 spill tea.spill_length(msg)
@@ -68,13 +68,13 @@ spill ✨has_tea for world:✨
 spill tea.has_tea(msg, ✨world✨)
 
 spill ✨reverse of hello:✨
-spill tea.reverse(✨hello✨)
+spill tea.plot_twist(✨hello✨)
 
 spill ✨repeat fire 3 times:✨
-spill tea.repeat(✨🔥✨, 3)
+spill tea.spam(✨🔥✨, 3)
 
 spill ✨join array with dash:✨
-spill tea.join(list.new(✨a✨, ✨b✨, ✨c✨), ✨-✨)
+spill tea.squad_up(list.spawn(✨a✨, ✨b✨, ✨c✨), ✨-✨)
 
 💀 ═══════════════════════════════════════════════════════
 💀 RANDOM TESTS (chaos mode)
@@ -103,33 +103,33 @@ spill random.uuid()
 spill ✨✨
 spill ✨=== LIST TESTS ===✨
 
-yeet squad = list.new(1, 2, 3, 4, 5)
+yeet squad = list.spawn(1, 2, 3, 4, 5)
 spill ✨created list:✨
 spill squad
 
 spill ✨length:✨
-spill list.length(squad)
+spill list.body_count(squad)
 
 spill ✨first:✨
-spill list.first(squad)
+spill list.alpha(squad)
 
 spill ✨last:✨
-spill list.last(squad)
+spill list.omega(squad)
 
 spill ✨sum:✨
-spill list.sum(squad)
+spill list.total(squad)
 
 spill ✨average:✨
-spill list.average(squad)
+spill list.mid(squad)
 
 spill ✨range(0, 5):✨
 spill list.range(0, 5)
 
 spill ✨unique of [1,1,2,2,3]:✨
-spill list.unique(list.new(1, 1, 2, 2, 3))
+spill list.no_dupes(list.spawn(1, 1, 2, 2, 3))
 
 spill ✨fill(3, zero):✨
-spill list.fill(3, ✨zero✨)
+spill list.mint(3, ✨zero✨)
 
 💀 ═══════════════════════════════════════════════════════
 💀 TIME TESTS (take a nap)
@@ -156,16 +156,16 @@ spill ✨✨
 spill ✨=== CONVERT TESTS ===✨
 
 spill ✨to_num of 42:✨
-spill convert.to_num(✨42✨)
+spill convert.cook_num(✨42✨)
 
 spill ✨to_str of 123:✨
-spill convert.to_str(123)
+spill convert.cook_str(123)
 
 spill ✨to_json:✨
-spill convert.to_json(list.new(1, 2, 3))
+spill convert.jsonify(list.spawn(1, 2, 3))
 
 spill ✨from_json:✨
-spill convert.from_json(✨[1,2,3]✨)
+spill convert.unjson(✨[1,2,3]✨)
 
 💀 ═══════════════════════════════════════════════════════
 💀 DEBUG TESTS (what's the tea)
@@ -183,7 +183,7 @@ spill ✨type_check of ghosted:✨
 spill debug.type_check(ghosted)
 
 spill ✨type_check of list:✨
-spill debug.type_check(list.new(1, 2))
+spill debug.type_check(list.spawn(1, 2))
 
 spill ✨is_num(42):✨
 spill debug.is_num(42)

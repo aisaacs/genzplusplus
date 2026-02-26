@@ -254,13 +254,13 @@ Objects are created and manipulated through the `obj` module. There is no object
 ```
 plug in obj
 
-yeet person = obj.from(
+yeet person = obj.cook(
     ✨name✨, ✨marcus✨,
     ✨age✨, 48,
     ✨status✨, ✨confused✨
 )
 
-spill obj.get(person, ✨name✨)    💀 marcus
+spill obj.peep(person, ✨name✨)   💀 marcus
 spill person.name                  💀 also marcus (property access)
 spill person.status                💀 confused (understandably)
 ```
@@ -304,7 +304,7 @@ plug in tea
 plug in random
 
 spill math.periodt()         💀 3.141592653589793
-spill tea.upper(✨hello✨)    💀 HELLO
+spill tea.yell(✨hello✨)     💀 HELLO
 spill random.pick(1, 100)    💀 some number, who knows
 ```
 
@@ -343,29 +343,29 @@ The math module has opinions about function names.
 
 | Method | What It Does |
 |--------|-------------|
-| `upper(s)` | Uppercase (YELLING) |
-| `lower(s)` | Lowercase (whispering) |
+| `yell(s)` | YELLING (uppercase) |
+| `whisper(s)` | whispering (lowercase) |
 | `spill_length(s)` | String length |
 | `sip(s, start, end)` | Substring/slice |
 | `has_tea(s, sub)` | Contains check |
-| `split(s, delim)` | Split into array |
-| `trim(s)` | Trim whitespace |
-| `reverse(s)` | Reverse the string |
-| `starts_with(s, prefix)` | Starts with check |
-| `ends_with(s, suffix)` | Ends with check |
-| `replace(s, old, new)` | Replace first occurrence |
-| `replace_all(s, old, new)` | Replace all occurrences |
-| `repeat(s, n)` | Repeat n times |
-| `pad_left(s, len, char)` | Pad start |
-| `pad_right(s, len, char)` | Pad end |
-| `char_at(s, i)` | Character at index |
-| `find(s, sub)` | Find index (-1 if not found) |
-| `find_last(s, sub)` | Find last index |
-| `concat(a, b, ...)` | Concatenate strings |
-| `join(arr, sep)` | Join array with separator |
-| `to_num(s)` | Parse string to number |
-| `from_code(n)` | Character from code point |
-| `to_code(s)` | Code point from character |
+| `shatter(s, delim)` | Shatter into array |
+| `detox(s)` | Detox whitespace |
+| `plot_twist(s)` | Reverse the string |
+| `opens_with(s, prefix)` | Opens with check |
+| `closes_with(s, suffix)` | Closes with check |
+| `swap(s, old, new)` | Swap first occurrence |
+| `swap_all(s, old, new)` | Swap all occurrences |
+| `spam(s, n)` | Spam it n times |
+| `fluff_left(s, len, char)` | Fluff the start |
+| `fluff_right(s, len, char)` | Fluff the end |
+| `peek(s, i)` | Peek at character |
+| `stalk(s, sub)` | Stalk index (-1 if not found) |
+| `stalk_last(s, sub)` | Stalk last index |
+| `link_up(a, b, ...)` | Link up strings |
+| `squad_up(arr, sep)` | Squad up array with separator |
+| `cook_num(s)` | Cook string to number |
+| `summon(n)` | Summon character from code point |
+| `expose(s)` | Expose code point from character |
 
 ### random — *chaos module*
 
@@ -383,31 +383,31 @@ The math module has opinions about function names.
 
 | Method | What It Does |
 |--------|-------------|
-| `new(a, b, ...)` | Create array from arguments |
-| `push(arr, item, ...)` | Add to end |
-| `pop(arr)` | Remove and return last element |
-| `shift(arr)` | Remove and return first element |
-| `unshift(arr, item, ...)` | Add to start |
+| `spawn(a, b, ...)` | Spawn array from arguments |
+| `yeet_in(arr, item, ...)` | Yeet in at the end |
+| `yeet_out(arr)` | Yeet out the last element |
+| `boot(arr)` | Boot the first element |
+| `cut_in(arr, item, ...)` | Cut in at the start |
 | `yoink(arr, index)` | Remove at index |
-| `insert(arr, index, item)` | Insert at index |
-| `length(arr)` | Get length |
-| `at(arr, index)` | Get element (supports negative index) |
-| `first(arr)` | First element |
-| `last(arr)` | Last element |
-| `slice(arr, start, end)` | Get portion |
-| `concat(a, b, ...)` | Combine arrays |
-| `includes(arr, item)` | Check membership |
-| `find_index(arr, item)` | Find index |
-| `reverse(arr)` | Reverse (non-mutating) |
-| `sort_nums(arr)` | Sort numerically |
-| `sort_words(arr)` | Sort alphabetically |
-| `unique(arr)` | Remove duplicates |
-| `flatten(arr)` | Flatten nested arrays |
-| `fill(length, value)` | Create filled array |
+| `sneak_in(arr, index, item)` | Sneak in at index |
+| `body_count(arr)` | Get the body count (length) |
+| `peep(arr, index)` | Peep element (supports negative index) |
+| `alpha(arr)` | The alpha (first element) |
+| `omega(arr)` | The omega (last element) |
+| `snag(arr, start, end)` | Snag a portion |
+| `collab(a, b, ...)` | Collab arrays together |
+| `claims(arr, item)` | Claims membership |
+| `where_at(arr, item)` | Where it's at (find index) |
+| `plot_twist(arr)` | Plot twist (reverse, non-mutating) |
+| `rank(arr)` | Rank numerically |
+| `abc(arr)` | ABC order (sort alphabetically) |
+| `no_dupes(arr)` | No dupes allowed |
+| `unbox(arr)` | Unbox nested arrays |
+| `mint(length, value)` | Mint a filled array |
 | `range(start, end, step)` | Generate numeric range |
-| `sum(arr)` | Sum all elements |
-| `average(arr)` | Average of elements |
-| `count(arr, item)` | Count occurrences |
+| `total(arr)` | Total all elements |
+| `mid(arr)` | The mid (average) |
+| `tally(arr, item)` | Tally occurrences |
 
 ### time — *temporal operations*
 
@@ -415,30 +415,30 @@ The math module has opinions about function names.
 |--------|-------------|
 | `nap(ms)` | Sleep for ms milliseconds (async) |
 | `wait(ms)` | Alias for nap |
-| `now()` | Current timestamp in milliseconds |
+| `rn()` | Current timestamp in milliseconds |
 | `vibes()` | Current time as a readable string |
 | `today()` | Current date as a readable string |
 | `year()` | Current year |
-| `month()` | Current month (1–12) |
+| `month()` | Current month (1-12) |
 | `day()` | Day of month |
 | `weekday()` | Day name (Monday, etc.) |
-| `hour()` | Hour (0–23) |
-| `minute()` | Minute (0–59) |
-| `second()` | Second (0–59) |
-| `timestamp()` | Unix timestamp in seconds |
+| `hour()` | Hour (0-23) |
+| `minute()` | Minute (0-59) |
+| `second()` | Second (0-59) |
+| `receipts()` | Unix timestamp in seconds (the receipts) |
 
 ### convert — *type coercion*
 
 | Method | What It Does |
 |--------|-------------|
-| `to_num(x)` | Convert to number |
-| `to_int(x)` | Convert to integer |
-| `to_str(x)` | Convert to string |
-| `to_bool(x)` | Convert to boolean |
-| `to_list(x)` | Convert to array |
-| `from_json(s)` | Parse JSON string |
-| `to_json(x)` | Stringify to JSON |
-| `to_json_pretty(x)` | Stringify with indentation |
+| `cook_num(x)` | Cook it to a number |
+| `cook_int(x)` | Cook it to an integer |
+| `cook_str(x)` | Cook it to a string |
+| `cook_bool(x)` | Cook it to a boolean |
+| `cook_list(x)` | Cook it to an array |
+| `unjson(s)` | Unjson a JSON string |
+| `jsonify(x)` | Jsonify to JSON |
+| `jsonify_pretty(x)` | Jsonify with indentation |
 
 ### net — *HTTP client*
 
@@ -446,42 +446,42 @@ All methods are async (the interpreter handles this automatically).
 
 | Method | What It Does |
 |--------|-------------|
-| `get(url)` | GET request, returns parsed JSON |
-| `get_text(url)` | GET request, returns raw text |
-| `get_json(url)` | GET request, returns parsed JSON (alias) |
-| `post(url, body)` | POST JSON, returns parsed response |
-| `post_text(url, body)` | POST text body |
-| `put(url, body)` | PUT JSON |
-| `ghost(url)` | DELETE request (we couldn't call it `delete`) |
-| `patch(url, body)` | PATCH JSON |
-| `fetch(url, method, headers, body)` | Full control — custom method, headers, body |
-| `status(url)` | Just get the HTTP status code |
-| `url(base, params)` | Build URL with query parameters |
+| `yoink(url)` | Yoink data (GET, returns parsed JSON) |
+| `yoink_text(url)` | Yoink text (GET, returns raw text) |
+| `yoink_json(url)` | Yoink JSON (GET, returns parsed JSON alias) |
+| `shoot(url, body)` | Shoot a POST (JSON), returns parsed response |
+| `shoot_text(url, body)` | Shoot text (POST text body) |
+| `glow_up(url, body)` | Glow up (PUT JSON) |
+| `ghost(url)` | Ghost (DELETE request) |
+| `tweak(url, body)` | Tweak it (PATCH JSON) |
+| `full_send(url, method, headers, body)` | Full send — custom method, headers, body |
+| `vibe_check(url)` | Vibe check the HTTP status code |
+| `link_up(base, params)` | Link up URL with query parameters |
 
-The `fetch` method returns an object with `.status` and `.body` properties. The `ghost` method is called `ghost` because `delete` is too many syllables and `yeet` was already taken.
+The `full_send` method returns an object with `.status` and `.body` properties. The `ghost` method is called `ghost` because `delete` is too many syllables and `yeet` was already taken.
 
 ### obj — *key-value objects*
 
 | Method | What It Does |
 |--------|-------------|
-| `new()` | Create empty object |
-| `from(k1, v1, k2, v2, ...)` | Create from alternating key-value pairs |
-| `set(o, key, val)` | Set a property |
-| `get(o, key)` | Get a property |
+| `spawn()` | Spawn empty object |
+| `cook(k1, v1, k2, v2, ...)` | Cook from alternating key-value pairs |
+| `slap(o, key, val)` | Slap a property on |
+| `peep(o, key)` | Peep a property |
 | `keys(o)` | Get all keys as array |
-| `values(o)` | Get all values as array |
-| `has(o, key)` | Check if key exists |
-| `remove(o, key)` | Delete a property |
-| `merge(a, b)` | Combine two objects |
-| `clone(o)` | Shallow copy |
-| `entries(o)` | Get [key, value] pairs |
+| `goods(o)` | Get all the goods (values) |
+| `got(o, key)` | Got that key? |
+| `yeet(o, key)` | Yeet a property |
+| `mashup(a, b)` | Mashup two objects |
+| `dupe(o)` | Dupe it (shallow copy) |
+| `rundown(o)` | Get the rundown ([key, value] pairs) |
 
 ### env — *environment variables*
 
 | Method | What It Does |
 |--------|-------------|
-| `get(key)` | Read an environment variable (or ghosted) |
-| `has(key)` | Check if an env var exists |
+| `peep(key)` | Peep an environment variable (or ghosted) |
+| `got(key)` | Got that env var? |
 
 ### drip — *terminal colors & styles* 🎨
 
@@ -503,7 +503,7 @@ The drip module makes your terminal output look presentable. Or at least colorfu
 | `bg_rgb(s, r, g, b)` | True RGB background |
 | `raw(code)` | Raw ANSI escape code |
 | `reset()` | Reset all formatting |
-| `strip(s)` | Remove all ANSI codes |
+| `cleanse(s)` | Cleanse all ANSI codes |
 | `rainbow(s)` | The text is a rainbow now |
 
 All drip methods are composable. Stack them:
@@ -520,8 +520,8 @@ For when your program needs to pretend it's doing something important.
 
 | Method | What It Does |
 |--------|-------------|
-| `start(message, style)` | Start an animated spinner |
-| `stop(message)` | Stop the spinner and print a final message |
+| `spin_up(message, style)` | Spin up an animated spinner |
+| `wind_down(message)` | Wind down the spinner and print a final message |
 | `styles()` | List available spinner styles |
 
 **Spinner Styles:**
@@ -539,9 +539,142 @@ For when your program needs to pretend it's doing something important.
 plug in loading
 plug in time
 
-loading.start(✨thinking...✨, ✨vibes✨)
+loading.spin_up(✨thinking...✨, ✨vibes✨)
 time.nap(3000)
-loading.stop(✨done thinking. the answer is 42.✨)
+loading.wind_down(✨done thinking. the answer is 42.✨)
+```
+
+### screen — *terminal pixel canvas*
+
+The screen module lets you draw pixels in the terminal. It's like a GPU but for people who think 80x24 is a resolution.
+
+| Method | What It Does |
+|--------|-------------|
+| `spawn(cols, rows)` | Spawn a screen buffer |
+| `ink(scr, x, y, char)` | Ink a pixel |
+| `peep(scr, x, y)` | Peep at a pixel |
+| `cleanse(scr)` | Cleanse the screen |
+| `strut(scr, x0, y0, x1, y1, char)` | Strut a line |
+| `fit(scr, x, y, w, h, char)` | Fit a box outline |
+| `drip(scr, x, y, w, h, char)` | Drip a filled box |
+| `halo(scr, cx, cy, r, char)` | Halo (circle outline) |
+| `aura(scr, cx, cy, r, char)` | Aura (filled circle) |
+| `stan(scr, str, x, y)` | Stan text onto screen |
+| `flaunt(scr)` | Flaunt it (render to terminal) |
+| `boot()` | Boot the terminal (raw mode) |
+| `unalive()` | Unalive the terminal (restore) |
+| `snapshot(scr, path)` | Snapshot to PPM file |
+| `cols(scr)` | Get column count |
+| `rows(scr)` | Get row count |
+
+```
+plug in screen
+
+yeet s = screen.spawn(40, 20)
+screen.drip(s, 5, 5, 10, 8, ✨#✨)
+screen.halo(s, 20, 10, 6, ✨*✨)
+screen.stan(s, ✨genz++✨, 2, 1)
+screen.flaunt(s)
+```
+
+### keys — *keyboard input*
+
+Listen for keypresses without waiting for enter. The terminal becomes your instrument.
+
+| Method | What It Does |
+|--------|-------------|
+| `tune_in()` | Tune in (start listening for keys) |
+| `tune_out()` | Tune out (stop listening) |
+| `pressed(key)` | Check if key is pressed |
+| `forget()` | Forget all pressed keys |
+| `latest()` | Get the latest key pressed |
+| `vibing()` | Any key vibing? (any key pressed) |
+
+```
+plug in keys
+
+keys.tune_in()
+spill ✨press any key bestie✨
+vibe check not keys.vibing() tho
+    💀 waiting
+bet
+spill ✨you pressed: ✨ + keys.latest()
+keys.tune_out()
+```
+
+### canvas — *HTML5-style drawing*
+
+The canvas module brings fancy drawing primitives. Think HTML5 canvas but make it gen-z.
+
+| Method | What It Does |
+|--------|-------------|
+| `vibe(w, h)` | Set up the canvas vibe |
+| `sauce(r, g, b, a)` | Set fill sauce (color) |
+| `edge(r, g, b, a)` | Set edge (stroke) color |
+| `thicc(w)` | Set line thiccness |
+| `fit(x, y, w, h)` | Fit a box outline |
+| `drip(x, y, w, h)` | Drip a filled box |
+| `halo(cx, cy, r)` | Halo (circle outline) |
+| `aura(cx, cy, r)` | Aura (filled circle) |
+| `strut(x0, y0, x1, y1)` | Strut a line |
+| `caption(str, x, y)` | Caption text |
+| `triangle(x1, y1, x2, y2, x3, y3)` | Triangle outline |
+| `slay_triangle(x1, y1, x2, y2, x3, y3)` | Slay a filled triangle |
+| `polygon(points)` | Polygon outline |
+| `slay_polygon(points)` | Slay a filled polygon |
+| `arc(cx, cy, r, start, end)` | Arc outline |
+| `slay_arc(cx, cy, r, start, end)` | Slay a filled arc |
+| `pill(x, y, w, h, r)` | Pill outline (rounded rect) |
+| `slay_pill(x, y, w, h, r)` | Slay a filled pill |
+| `ombre(x0, y0, x1, y1, colors)` | Ombre gradient |
+| `cleanse()` | Cleanse the canvas |
+| `checkpoint()` | Checkpoint (save state) |
+| `respawn()` | Respawn (restore state) |
+| `spin(angle)` | Spin (rotate) |
+| `slide(x, y)` | Slide (translate) |
+| `zoom(sx, sy)` | Zoom (scale) |
+| `ghostly(a)` | Set ghostly opacity |
+| `serve()` | Serve the canvas (output) |
+
+### gpu — *native SDL2 window rendering*
+
+The gpu module spawns a real native window using SDL2. This is genz++ escaping the terminal. Requires `npm install koffi` and SDL2 installed on your system.
+
+| Method | What It Does |
+|--------|-------------|
+| `gpu.spawn(w, h, title)` | Spawn a native SDL2 window |
+| `w.serve()` | Poll events, returns false on window close |
+| `w.pressed(key)` | Check if key is held |
+| `w.ink(x, y, r, g, b)` | Ink a pixel |
+| `w.cleanse(r, g, b)` | Cleanse (clear/fill buffer) |
+| `w.strut(x0, y0, x1, y1, r, g, b)` | Strut a bresenham line |
+| `w.fit(x, y, w, h, r, g, b)` | Fit a rect outline |
+| `w.drip(x, y, w, h, r, g, b)` | Drip a filled rect |
+| `w.halo(cx, cy, r, r, g, b)` | Halo (circle outline) |
+| `w.aura(cx, cy, r, r, g, b)` | Aura (filled circle) |
+| `w.stan(str, x, y, r, g, b)` | Stan text (3x5 font, scale param) |
+| `w.flaunt()` | Flaunt (upload texture + present frame) |
+| `w.chill(ms)` | Chill for ms milliseconds |
+| `w.unalive()` | Unalive the window (cleanup/destroy) |
+
+**Supported keys:** a-z, 0-9, up/down/left/right, esc, space, enter, tab, backspace
+
+```
+plug in gpu
+
+yeet w = gpu.spawn(800, 600, ✨my window✨)
+
+vibe check w.serve() tho
+    sus w.pressed(✨esc✨) tho
+        dip
+    bet
+    w.cleanse(0, 0, 0)
+    w.drip(100, 100, 200, 150, 255, 0, 128)
+    w.stan(✨genz++ gpu✨, 120, 50, 255, 255, 255)
+    w.flaunt()
+bet
+
+w.unalive()
 ```
 
 ### debug — *inspection tools*

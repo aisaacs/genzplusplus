@@ -37,18 +37,18 @@ spill ✨✨
 spill drip.yellow(✨watch the spinners:✨)
 spill ✨✨
 
-loading.start(drip.cyan(✨vibing...✨), ✨vibes✨)
+loading.spin_up(drip.cyan(✨vibing...✨), ✨vibes✨)
 plug in time
 time.wait(2000)
-loading.stop(drip.green(✨  ✨) + ✨ vibes checked ✨ + drip.dim(✨(vibes style)✨))
+loading.wind_down(drip.green(✨  ✨) + ✨ vibes checked ✨ + drip.dim(✨(vibes style)✨))
 
-loading.start(drip.purple(✨processing the timeline...✨), ✨moon✨)
+loading.spin_up(drip.purple(✨processing the timeline...✨), ✨moon✨)
 time.wait(2000)
-loading.stop(drip.green(✨  🌕✨) + ✨ timeline loaded ✨ + drip.dim(✨(moon style)✨))
+loading.wind_down(drip.green(✨  🌕✨) + ✨ timeline loaded ✨ + drip.dim(✨(moon style)✨))
 
-loading.start(drip.orange(✨consulting the council of AIs...✨), ✨dots✨)
+loading.spin_up(drip.orange(✨consulting the council of AIs...✨), ✨dots✨)
 time.wait(2000)
-loading.stop(drip.green(✨  ✨) + ✨ council has spoken ✨ + drip.dim(✨(dots style)✨))
+loading.wind_down(drip.green(✨  ✨) + ✨ council has spoken ✨ + drip.dim(✨(dots style)✨))
 
 spill ✨✨
 spill drip.bold(drip.green(✨drip check complete. the fit is immaculate. 💅✨))

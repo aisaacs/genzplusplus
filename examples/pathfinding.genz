@@ -40,7 +40,7 @@ bruh findPath(graph, start, end) tho
         bet
 
         💀 check the adjacent vibes
-        sus visited.length be 0 or not list.includes(visited, current) tho
+        sus visited.length be 0 or not list.claims(visited, current) tho
             visited = visited + [current]
             yeet neighbors = getNeighbors(graph, current)
             spill ✨checking ✨ + current + ✨ -> neighbors: ✨ + neighbors.length
@@ -51,7 +51,7 @@ bruh findPath(graph, start, end) tho
             nah
                 yeet i = 0
                 vibe check i < neighbors.length tho
-                    sus not list.includes(visited, neighbors[i]) tho
+                    sus not list.claims(visited, neighbors[i]) tho
                         💀 idk why this works but it does
                         queue = queue + [neighbors[i]]
                     bet

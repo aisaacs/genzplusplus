@@ -19,7 +19,7 @@ yeet h = (screen.rows() - 2) * 2
 sus h > 40 tho
     yeet h = 40
 bet
-yeet s = screen.new(w, h, ✨💀 genz++ cube 💀✨)
+yeet s = screen.spawn(w, h, ✨💀 genz++ cube 💀✨)
 
 💀 cube vertices — 8 corners of a unit cube centered at origin
 💀 stored as flat array: x0,y0,z0, x1,y1,z1, ...
@@ -34,13 +34,13 @@ yeet cx = w / 2
 yeet cy = h / 2
 yeet scale = h * 0.55
 
-s.init()
+s.boot()
 
 yeet frame = 0
 yeet frames = 300
 
 vibe check frame < frames tho
-    s.clear()
+    s.cleanse()
 
     💀 rotation angles
     yeet ay = frame * 0.03
@@ -54,7 +54,7 @@ vibe check frame < frames tho
 
     💀 transform and project all 8 vertices
     💀 store px, py, rz per vertex (24 slots)
-    yeet projected = list.fill(24, 0)
+    yeet projected = list.mint(24, 0)
 
     yeet i = 0
     vibe check i < 8 tho
@@ -112,17 +112,17 @@ vibe check frame < frames tho
         yeet cg = math.humbled(255 * brightness)
         yeet cb = math.humbled(255 * brightness)
 
-        s.line(x0, y0, x1, y1, cr, cg, cb)
+        s.strut(x0, y0, x1, y1, cr, cg, cb)
 
         yeet e = e + 1
     bet
 
-    s.render()
+    s.flaunt()
     time.nap(33)
     yeet frame = frame + 1
 bet
 
-s.done()
+s.unalive()
 spill ✨✨
 spill ✨💀 cube collapsed. ✨ + frames + ✨ frames rendered.✨
 spill ✨💀 wireframe is a lifestyle.✨

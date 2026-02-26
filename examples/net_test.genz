@@ -15,7 +15,7 @@ spill ✨✨
 💀 TEST 1: GET json (auto-parses response)
 💀 ═══════════════════════════════════════════════════════
 spill ✨--- TEST 1: GET json ---✨
-yeet data = net.get(✨https://httpbin.org/json✨)
+yeet data = net.yoink(✨https://httpbin.org/json✨)
 spill ✨type: ✨ + debug.type_check(data)
 💀 access nested property via dot notation
 yeet slideshow = data.slideshow
@@ -26,7 +26,7 @@ spill ✨✨
 💀 TEST 2: GET raw text
 💀 ═══════════════════════════════════════════════════════
 spill ✨--- TEST 2: GET text ---✨
-yeet txt = net.get_text(✨https://httpbin.org/robots.txt✨)
+yeet txt = net.yoink_text(✨https://httpbin.org/robots.txt✨)
 spill ✨response: ✨ + txt
 spill ✨✨
 
@@ -34,8 +34,8 @@ spill ✨✨
 💀 TEST 3: POST JSON body
 💀 ═══════════════════════════════════════════════════════
 spill ✨--- TEST 3: POST json ---✨
-yeet body = convert.from_json(✨{"message":"no cap","vibe":"immaculate"}✨)
-yeet post_resp = net.post(✨https://httpbin.org/post✨, body)
+yeet body = convert.unjson(✨{"message":"no cap","vibe":"immaculate"}✨)
+yeet post_resp = net.shoot(✨https://httpbin.org/post✨, body)
 spill ✨posted data: ✨ + post_resp.data
 spill ✨✨
 
@@ -51,7 +51,7 @@ spill ✨✨
 💀 TEST 5: full fetch with status/ok/body
 💀 ═══════════════════════════════════════════════════════
 spill ✨--- TEST 5: full fetch ---✨
-yeet full = net.fetch(✨https://httpbin.org/get✨, ✨GET✨, ghosted, ghosted)
+yeet full = net.full_send(✨https://httpbin.org/get✨, ✨GET✨, ghosted, ghosted)
 spill ✨status: ✨ + full.status
 spill ✨ok: ✨ + full.ok
 spill ✨body type: ✨ + debug.type_check(full.body)
@@ -61,9 +61,9 @@ spill ✨✨
 💀 TEST 6: status check (HEAD request)
 💀 ═══════════════════════════════════════════════════════
 spill ✨--- TEST 6: status check ---✨
-yeet s1 = net.status(✨https://httpbin.org/status/200✨)
+yeet s1 = net.vibe_check(✨https://httpbin.org/status/200✨)
 spill ✨200 check: ✨ + s1
-yeet s2 = net.status(✨https://httpbin.org/status/404✨)
+yeet s2 = net.vibe_check(✨https://httpbin.org/status/404✨)
 spill ✨404 check: ✨ + s2
 spill ✨✨
 
@@ -71,7 +71,7 @@ spill ✨✨
 💀 TEST 7: error handling (bad URL)
 💀 ═══════════════════════════════════════════════════════
 spill ✨--- TEST 7: error handling ---✨
-yeet bad = net.get(✨https://this-does-not-exist-fr-fr.invalid✨)
+yeet bad = net.yoink(✨https://this-does-not-exist-fr-fr.invalid✨)
 spill ✨error: ✨ + bad.error
 spill ✨message: ✨ + bad.message
 spill ✨✨

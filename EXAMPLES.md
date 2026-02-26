@@ -130,7 +130,7 @@ bet
 
 Arrays are zero-indexed and mutable. `arr[j] = value` works for assignment. There's no for loop, so you get nested `vibe check` loops instead, which reads like an increasingly agitated programmer muttering "vibe check" under their breath.
 
-The example also demonstrates `list.sort_words()` for when you'd rather not implement sorting yourself, which is always.
+The example also demonstrates `list.abc()` for when you'd rather not implement sorting yourself, which is always.
 
 ### magic8ball.genz
 
@@ -234,7 +234,7 @@ The comments are in the voice of an AI that doesn't fully understand its own cod
 
 ---
 
-## ✨ Showcase: Colors, Spinners, and HTTP
+## ✨ Showcase: Colors, Spinners, HTTP, and GPU
 
 ### color_demo.genz
 
@@ -254,9 +254,24 @@ Run this one in a proper terminal. It's worth it.
 
 **Concepts:** HTTP requests, JSON parsing, error handling, the net module
 
-Seven tests covering every HTTP method: GET (JSON and text), POST, DELETE (`net.ghost()`), full `net.fetch()` with status and body, status-only checks, and error handling for bad URLs.
+Seven tests covering every HTTP method: GET (JSON and text), POST, DELETE (`net.ghost()`), full `net.full_send()` with status and body, status-only checks, and error handling for bad URLs.
 
 Uses httpbin.org as a test target. Demonstrates property access on response objects (`resp.slideshow.title`) and type checking with the debug module.
+
+### gpu_demo.genz
+
+**Concepts:** the gpu module, native window rendering, real-time input, game loop
+
+A bouncing ball and paddle game running in a real native SDL2 window. This is genz++ escaping the terminal. Demonstrates `gpu.spawn()` for window creation, `w.serve()` for the event loop, `w.pressed()` for keyboard input, drawing primitives (`w.cleanse()`, `w.aura()`, `w.drip()`, `w.stan()`), and `w.flaunt()` to present each frame.
+
+Features a starfield background, ball physics with wall bouncing, paddle collision with angle-based deflection, and a score counter. The ball is hot pink. The paddle is electric blue. The vibes are immaculate.
+
+```bash
+npm install koffi   # requires SDL2 installed
+node genz.js examples/gpu_demo.genz
+```
+
+Requires `koffi` (Node.js FFI library) and SDL2 installed on your system. Arrow keys to move, Esc to quit.
 
 ---
 
@@ -313,5 +328,6 @@ This runs tests for all core modules (math, tea, random, list, time, convert, de
 | `pathfinding.genz` | BFS, graph traversal | 80 |
 | `color_demo.genz` | Colors, spinners, terminal UI | 45 |
 | `net_test.genz` | HTTP, JSON, error handling | 75 |
+| `gpu_demo.genz` | GPU window, game loop, input | 150 |
 | `adventure.genz` | Everything | 190 |
 | `test_stdlib.genz` | Module testing | 120 |

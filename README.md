@@ -75,21 +75,25 @@ If you can read that, you might be the last programmer.
 
 ## Standard Library
 
-Import modules with `plug in`. All 12 of them.
+Import modules with `plug in`. All 13 of them.
 
 | Module      | What It Is                              | Vibe                                |
 |-------------|-----------------------------------------|-------------------------------------|
 | `math`      | Numbers, trig, constants                | `math.periodt()` returns π          |
 | `tea`       | String manipulation                     | spill the tea on your strings       |
 | `random`    | RNG, shuffles, UUIDs                    | `random.flip()` for coin tosses     |
-| `list`      | Array operations                        | push, pop, sort, the whole era      |
+| `list`      | Array operations                        | yeet_in, yeet_out, rank, the whole era |
 | `time`      | Dates, timestamps, sleeping             | `time.nap(1000)` sleeps 1 second    |
-| `convert`   | Type coercion, JSON                     | `convert.to_json(x)` does the thing |
-| `net`       | HTTP requests (wraps fetch)             | `net.get(url)` is your friend       |
-| `obj`       | Key-value object manipulation           | `obj.from(✨k✨, v)` for objects     |
-| `env`       | Environment variables                   | `env.get(✨PATH✨)` reads $PATH      |
+| `convert`   | Type coercion, JSON                     | `convert.jsonify(x)` does the thing |
+| `net`       | HTTP requests (wraps fetch)             | `net.yoink(url)` is your friend     |
+| `obj`       | Key-value object manipulation           | `obj.cook(✨k✨, v)` for objects     |
+| `env`       | Environment variables                   | `env.peep(✨PATH✨)` reads $PATH     |
 | `drip`      | Terminal colors & styles                | 20 named colors, styles, rainbow    |
 | `loading`   | Animated spinners                       | 6 styles including emoji rotation   |
+| `screen`    | Terminal pixel canvas                   | `screen.spawn(80,24)` for pixel art |
+| `keys`      | Keyboard input                          | `keys.tune_in()` starts listening   |
+| `canvas`    | HTML5 canvas-style drawing              | `canvas.fit()`, `canvas.drip()`     |
+| `gpu`       | Native SDL2 window rendering            | `gpu.spawn(800,600,✨title✨)` goes hard |
 | `debug`     | Type checking & inspection              | `debug.type_check(x)` tells you     |
 
 ## The Adventure Game

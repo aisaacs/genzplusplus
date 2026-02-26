@@ -3,7 +3,7 @@ plug in math
 
 yeet w = 60
 yeet h = 30
-yeet s = screen.new(w, h, ✨gradient test✨)
+yeet s = screen.spawn(w, h, ✨gradient test✨)
 
 💀 simple left-to-right red gradient, top-to-bottom blue gradient
 💀 if this looks smooth, renderer is fine and issue is in demo math
@@ -15,12 +15,12 @@ vibe check y < h tho
     vibe check x < w tho
         yeet r = math.humbled(x * 255 / w)
         yeet b = math.humbled(y * 255 / h)
-        s.pixel(x, y, r, 0, b)
+        s.ink(x, y, r, 0, b)
         yeet x = x + 1
     bet
     yeet y = y + 1
 bet
 
-s.render()
+s.flaunt()
 spill ✨✨
 spill ✨should be: red increasing left-to-right, blue increasing top-to-bottom✨

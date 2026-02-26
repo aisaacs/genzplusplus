@@ -27,5 +27,5 @@ yeet sorted = bubbleSort(nums)
 spill ✨after:  ✨ + sorted
 
 spill ✨✨
-yeet words = list.new(✨slay✨, ✨based✨, ✨mid✨, ✨goat✨, ✨bussin✨)
-spill ✨words sorted: ✨ + list.sort_words(words)
+yeet words = list.spawn(✨slay✨, ✨based✨, ✨mid✨, ✨goat✨, ✨bussin✨)
+spill ✨words sorted: ✨ + list.abc(words)

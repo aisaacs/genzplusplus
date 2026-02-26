@@ -42,7 +42,7 @@ spill ✨✨
 
 💀 ─── get API key ──────────────────────────────────────────────
 
-yeet api_key = env.get(✨ANTHROPIC_API_KEY✨)
+yeet api_key = env.peep(✨ANTHROPIC_API_KEY✨)
 sus api_key be ghosted tho
     yeet api_key = 👀 drip.yellow(✨enter your anthropic API key:✨)
 bet
@@ -88,17 +88,17 @@ yeet history = []
 
 bruh ask_claude(message) tho
     💀 add user message to history
-    yeet user_msg = obj.from(✨role✨, ✨user✨, ✨content✨, message)
+    yeet user_msg = obj.cook(✨role✨, ✨user✨, ✨content✨, message)
     yeet history = history + [user_msg]
 
     💀 build request
-    yeet headers = obj.from(
+    yeet headers = obj.cook(
         ✨x-api-key✨, api_key,
         ✨anthropic-version✨, ✨2023-06-01✨,
         ✨content-type✨, ✨application/json✨
     )
 
-    yeet body = obj.from(
+    yeet body = obj.cook(
         ✨model✨, model,
         ✨max_tokens✨, 1024,
         ✨system✨, system_prompt,
@@ -106,12 +106,12 @@ bruh ask_claude(message) tho
     )
 
     💀 start spinner while we wait for the AI
-    loading.start(drip.dim(✨the timeline is being written...✨), ✨vibes✨)
+    loading.spin_up(drip.dim(✨the timeline is being written...✨), ✨vibes✨)
 
-    yeet resp = net.fetch(api_url, ✨POST✨, headers, body)
+    yeet resp = net.full_send(api_url, ✨POST✨, headers, body)
 
     💀 stop spinner
-    loading.stop(✨✨)
+    loading.wind_down(✨✨)
 
     💀 check for errors
     sus resp.status aint 200 tho
@@ -132,7 +132,7 @@ bruh ask_claude(message) tho
     yeet text = choices[0].text
 
     💀 add assistant response to history
-    yeet asst_msg = obj.from(✨role✨, ✨assistant✨, ✨content✨, text)
+    yeet asst_msg = obj.cook(✨role✨, ✨assistant✨, ✨content✨, text)
     yeet history = history + [asst_msg]
 
     its giving text

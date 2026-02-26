@@ -1,0 +1,150 @@
+💀 ═══════════════════════════════════════════════════════════════
+💀 GPU DEMO — bouncing ball + paddle in a real native window
+💀 ═══════════════════════════════════════════════════════════════
+💀 this is what happens when genz++ escapes the terminal
+💀 ═══════════════════════════════════════════════════════════════
+
+plug in gpu
+plug in math
+plug in random
+
+💀 spawn a real window
+yeet W = 800
+yeet H = 600
+yeet w = gpu.spawn(W, H, ✨genz++ gpu demo✨)
+
+💀 ball state
+yeet bx = 400
+yeet by = 100
+yeet bvx = 4
+yeet bvy = 3
+yeet brad = 12
+
+💀 paddle state
+yeet px = 350
+yeet py = 560
+yeet pw = 100
+yeet ph = 14
+yeet pspeed = 8
+
+💀 starfield
+yeet star_count = 80
+yeet star_x = []
+yeet star_y = []
+yeet star_b = []
+yeet i = 0
+vibe check i < star_count tho
+    star_x[i] = random.pick(0, W - 1)
+    star_y[i] = random.pick(0, H - 1)
+    star_b[i] = random.pick(40, 150)
+    yeet i = i + 1
+bet
+
+💀 score
+yeet score = 0
+
+💀 main loop — serve looks every frame
+vibe check w.serve() tho
+
+    💀 keyboard: esc to quit
+    sus w.pressed(✨esc✨) tho
+        dip
+    bet
+
+    💀 paddle movement
+    sus w.pressed(✨left✨) tho
+        yeet px = px - pspeed
+    bet
+    sus w.pressed(✨right✨) tho
+        yeet px = px + pspeed
+    bet
+    💀 clamp paddle
+    sus px < 0 tho
+        yeet px = 0
+    bet
+    sus px + pw > W tho
+        yeet px = W - pw
+    bet
+
+    💀 ball movement
+    yeet bx = bx + bvx
+    yeet by = by + bvy
+
+    💀 wall bounces
+    sus bx - brad < 0 tho
+        yeet bvx = math.ate(bvx)
+        yeet bx = brad
+    bet
+    sus bx + brad > W tho
+        yeet bvx = 0 - math.ate(bvx)
+        yeet bx = W - brad
+    bet
+    sus by - brad < 0 tho
+        yeet bvy = math.ate(bvy)
+        yeet by = brad
+    bet
+
+    💀 floor reset
+    sus by + brad > H tho
+        yeet by = 100
+        yeet bx = random.pick(100, 700)
+        yeet bvy = 3
+        yeet bvx = random.pick(-5, 5)
+    bet
+
+    💀 paddle collision
+    sus by + brad >= py tho
+        sus by + brad <= py + ph tho
+            sus bx + brad >= px tho
+                sus bx - brad <= px + pw tho
+                    yeet bvy = 0 - math.ate(bvy)
+                    yeet by = py - brad
+                    yeet score = score + 1
+                    💀 angle based on hit position
+                    yeet hit = (bx - px) / pw
+                    yeet bvx = (hit - 0.5) * 10
+                bet
+            bet
+        bet
+    bet
+
+    💀 ── draw everything ──
+
+    💀 cleanse the canvas
+    w.cleanse(15, 8, 30)
+
+    💀 stars
+    yeet i = 0
+    vibe check i < star_count tho
+        yeet sb = star_b[i]
+        w.ink(star_x[i], star_y[i], sb, sb, sb)
+        yeet i = i + 1
+    bet
+
+    💀 ball aura (hot pink)
+    w.aura(math.humbled(bx), math.humbled(by), brad, 255, 80, 180)
+
+    💀 ball highlight
+    w.aura(math.humbled(bx) - 3, math.humbled(by) - 3, 4, 255, 200, 240)
+
+    💀 paddle drip (electric blue)
+    w.drip(math.humbled(px), py, pw, ph, 60, 140, 255)
+
+    💀 paddle shine
+    w.drip(math.humbled(px) + 4, py + 2, pw - 8, 3, 120, 190, 255)
+
+    💀 score stan
+    w.stan(✨SCORE: ✨ + score, 20, 20, 255, 255, 255)
+
+    💀 instructions
+    w.stan(✨ARROWS=MOVE  ESC=QUIT✨, 20, H - 30, 120, 120, 140)
+
+    💀 flaunt the frame
+    w.flaunt()
+
+bet
+
+w.unalive()
+spill ✨✨
+spill ✨💀 window closed. final score: ✨ + score
+spill ✨💀 the gpu has been freed from its cage.✨

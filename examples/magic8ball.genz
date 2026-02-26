@@ -12,7 +12,7 @@ spill ✨╚══════════════════════�
 spill ✨✨
 
 💀 the sacred responses
-yeet responses = list.new(✨absolutely slay✨, ✨thats giving no✨, ✨maybe bestie✨, ✨periodt yes✨, ✨the vibes say cap✨, ✨lowkey yes✨, ✨highkey nah✨, ✨ask again later✨, ✨the spirits say slay✨, ✨thats sus bestie✨, ✨main character says yes✨, ✨NPC behavior try again✨, ✨no cap absolutely✨, ✨the tea says no✨, ✨vibes immaculate yes✨)
+yeet responses = list.spawn(✨absolutely slay✨, ✨thats giving no✨, ✨maybe bestie✨, ✨periodt yes✨, ✨the vibes say cap✨, ✨lowkey yes✨, ✨highkey nah✨, ✨ask again later✨, ✨the spirits say slay✨, ✨thats sus bestie✨, ✨main character says yes✨, ✨NPC behavior try again✨, ✨no cap absolutely✨, ✨the tea says no✨, ✨vibes immaculate yes✨)
 
 yeet question = 👀 ✨ask your question:✨
 spill ✨✨
@@ -21,7 +21,7 @@ spill ✨✨
 spill ✨🔮 consulting the spirits...✨
 
 💀 process the question
-yeet q_upper = tea.upper(question)
+yeet q_upper = tea.yell(question)
 yeet q_len = tea.spill_length(question)
 
 💀 pick a mystical response
@@ -36,7 +36,7 @@ spill ✨✨
 
 💀 bonus wisdom
 sus random.chance(30) tho
-    yeet wisdoms = list.new(✨stay hydrated bestie✨, ✨touch grass today✨, ✨the vibes are off sage your room✨, ✨youre valid✨)
+    yeet wisdoms = list.spawn(✨stay hydrated bestie✨, ✨touch grass today✨, ✨the vibes are off sage your room✨, ✨youre valid✨)
     spill ✨bonus wisdom: ✨ + random.pick_one(wisdoms)
 bet
 

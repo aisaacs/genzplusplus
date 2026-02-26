@@ -15,9 +15,9 @@ spill ✨╚══════════════════════�
 spill ✨✨
 
 💀 patient database (simulated)
-yeet patients = list.new(✨Marcus Webb✨, ✨Dr. Tanaka✨, ✨Nurse Joy✨, ✨Patient Zero✨)
-yeet dosages = list.new(500, 250, 100, 750)
-yeet medications = list.new(✨Aspirin✨, ✨Vitamin C✨, ✨Caffeine✨, ✨Copium✨)
+yeet patients = list.spawn(✨Marcus Webb✨, ✨Dr. Tanaka✨, ✨Nurse Joy✨, ✨Patient Zero✨)
+yeet dosages = list.spawn(500, 250, 100, 750)
+yeet medications = list.spawn(✨Aspirin✨, ✨Vitamin C✨, ✨Caffeine✨, ✨Copium✨)
 
 💀 okay so this next part is cursed but removing it makes the whole thing
 💀 collapse and i (claude-7.2) literally do not know why. asked gemini-12
