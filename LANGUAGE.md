@@ -677,6 +677,49 @@ bet
 w.unalive()
 ```
 
+### sound — *procedural audio synthesis* 🔊
+
+The sound module generates audio from code — no audio files needed. Synthesizes waveforms (sine, square, saw, triangle, noise) with automatic envelope shaping. Requires `npm install koffi` and SDL2 installed on your system (same as the gpu module).
+
+| Method | What It Does |
+|--------|-------------|
+| `sound.spawn()` | Spawn an audio context (opens audio device) |
+| `s.bop(wave, freq, dur, vol)` | Play a tone (wave, Hz, ms, volume 0-100) |
+| `s.slide(wave, start, end, dur, vol)` | Frequency sweep (Hz start→end) |
+| `s.noise(dur, vol)` | White noise burst (ms, volume 0-100) |
+| `s.serve()` | Mix and queue audio (call each frame in game loop) |
+| `s.volume(vol)` | Set master volume (0-100) |
+| `s.vibe()` | Number of active voices |
+| `s.hush()` | Stop all sounds immediately |
+| `s.unalive()` | Close audio device (cleanup) |
+
+**Waveforms:** `sine` (smooth), `square` (chiptuney), `saw` (buzzy), `tri` (soft), `noise` (white noise, freq ignored)
+
+All sounds get a 5ms attack / 10ms decay envelope automatically to prevent clicks. Multiple sounds play simultaneously with soft-clipping when voices overlap.
+
+```
+plug in gpu
+plug in sound
+
+yeet w = gpu.spawn(400, 300, ✨beep boop✨)
+yeet s = sound.spawn()
+
+💀 play a 440Hz sine for 200ms at 80% volume
+s.bop(✨sine✨, 440, 200, 80)
+
+💀 descending laser pew
+s.slide(✨square✨, 880, 220, 100, 60)
+
+vibe check w.serve() tho
+    s.serve()
+    w.cleanse(0, 0, 0)
+    w.flaunt()
+bet
+
+s.unalive()
+w.unalive()
+```
+
 ### debug — *inspection tools*
 
 | Method | What It Does |

@@ -1,0 +1,129 @@
+💀 ═══════════════════════════════════════════════════════════════
+💀 SOUND TEST — procedural audio synthesis demo
+💀 ═══════════════════════════════════════════════════════════════
+💀 plays a sequence of tones, sweeps, and noise bursts
+💀 requires koffi + SDL2 (same as gpu module)
+💀 ═══════════════════════════════════════════════════════════════
+
+plug in sound
+plug in time
+
+spill ✨💀 genz++ sound test✨
+spill ✨✨
+
+yeet s = sound.spawn()
+
+💀 ── test 1: simple sine tone ──
+spill ✨🔊 sine 440Hz 500ms...✨
+s.bop(✨sine✨, 440, 500, 80)
+yeet i = 0
+vibe check i < 40 tho
+    s.serve()
+    time.nap(16)
+    yeet i = i + 1
+bet
+
+💀 ── test 2: square wave (chiptuney) ──
+spill ✨🔊 square 660Hz 400ms...✨
+s.bop(✨square✨, 660, 400, 60)
+yeet i = 0
+vibe check i < 35 tho
+    s.serve()
+    time.nap(16)
+    yeet i = i + 1
+bet
+
+💀 ── test 3: sawtooth ──
+spill ✨🔊 saw 330Hz 400ms...✨
+s.bop(✨saw✨, 330, 400, 60)
+yeet i = 0
+vibe check i < 35 tho
+    s.serve()
+    time.nap(16)
+    yeet i = i + 1
+bet
+
+💀 ── test 4: triangle ──
+spill ✨🔊 tri 550Hz 400ms...✨
+s.bop(✨tri✨, 550, 400, 60)
+yeet i = 0
+vibe check i < 35 tho
+    s.serve()
+    time.nap(16)
+    yeet i = i + 1
+bet
+
+💀 ── test 5: white noise burst ──
+spill ✨🔊 noise 300ms...✨
+s.noise(300, 50)
+yeet i = 0
+vibe check i < 30 tho
+    s.serve()
+    time.nap(16)
+    yeet i = i + 1
+bet
+
+💀 ── test 6: descending sweep (laser pew pew) ──
+spill ✨🔊 sweep 1200→200Hz 300ms...✨
+s.slide(✨sine✨, 1200, 200, 300, 70)
+yeet i = 0
+vibe check i < 30 tho
+    s.serve()
+    time.nap(16)
+    yeet i = i + 1
+bet
+
+💀 ── test 7: ascending sweep (powerup) ──
+spill ✨🔊 sweep 200→1000Hz 500ms...✨
+s.slide(✨sine✨, 200, 1000, 500, 70)
+yeet i = 0
+vibe check i < 40 tho
+    s.serve()
+    time.nap(16)
+    yeet i = i + 1
+bet
+
+💀 ── test 8: multiple simultaneous sounds ──
+spill ✨🔊 chord: 3 sines at once...✨
+s.bop(✨sine✨, 261, 800, 60)
+s.bop(✨sine✨, 329, 800, 60)
+s.bop(✨sine✨, 392, 800, 60)
+yeet i = 0
+vibe check i < 60 tho
+    s.serve()
+    time.nap(16)
+    yeet i = i + 1
+bet
+
+💀 ── test 9: game sound effects ──
+spill ✨🔊 laser + explosion combo...✨
+s.bop(✨square✨, 880, 80, 50)
+yeet i = 0
+vibe check i < 10 tho
+    s.serve()
+    time.nap(16)
+    yeet i = i + 1
+bet
+s.noise(400, 70)
+s.bop(✨sine✨, 80, 400, 50)
+yeet i = 0
+vibe check i < 35 tho
+    s.serve()
+    time.nap(16)
+    yeet i = i + 1
+bet
+
+💀 ── test 10: death sweep ──
+spill ✨🔊 death sweep...✨
+s.slide(✨saw✨, 600, 40, 800, 60)
+yeet i = 0
+vibe check i < 60 tho
+    s.serve()
+    time.nap(16)
+    yeet i = i + 1
+bet
+
+s.unalive()
+
+spill ✨✨
+spill ✨💀 sound test complete. your ears have been blessed.✨

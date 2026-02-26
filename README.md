@@ -75,7 +75,7 @@ If you can read that, you might be the last programmer.
 
 ## Standard Library
 
-Import modules with `plug in`. All 16 of them.
+Import modules with `plug in`. All 17 of them.
 
 | Module      | What It Is                              | Vibe                                |
 |-------------|-----------------------------------------|-------------------------------------|
@@ -94,6 +94,7 @@ Import modules with `plug in`. All 16 of them.
 | `keys`      | Keyboard input                          | `keys.tune_in()` starts listening   |
 | `canvas`    | HTML5 canvas-style drawing              | `canvas.fit()`, `canvas.drip()`     |
 | `gpu`       | Native SDL2 window rendering            | `gpu.spawn(800,600,✨title✨)` goes hard |
+| `sound`     | Procedural audio synthesis              | `s.bop(✨sine✨, 440, 200, 80)` goes beep |
 | `debug`     | Type checking & inspection              | `debug.type_check(x)` tells you     |
 
 ## Demoscene & Games

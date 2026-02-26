@@ -2168,6 +2168,231 @@ const _gpu = (() => {
 stdlib.gpu = _gpu;
 
 // ============================================================================
+// SOUND MODULE — procedural audio synthesis via SDL2 audio queue
+// ============================================================================
+
+const _sound = (() => {
+  let koffi = null;
+  let sdl = null;
+  let audioInited = false;
+
+  // SDL2 audio constants
+  const SDL_INIT_AUDIO = 0x10;
+  const AUDIO_S16LSB   = 0x8010;
+  const SAMPLE_RATE    = 44100;
+  const CHANNELS       = 1;
+  const SPEC_SIZE      = 32; // SDL_AudioSpec on 64-bit
+  const TWO_PI         = 6.283185307179586;
+
+  // SDL2 library discovery (same paths as gpu module)
+  const sdlPaths = [
+    '/opt/homebrew/opt/sdl2/lib/libSDL2.dylib',
+    '/usr/local/opt/sdl2/lib/libSDL2.dylib',
+    '/opt/homebrew/lib/libSDL2.dylib',
+    '/usr/local/lib/libSDL2.dylib',
+    '/Library/Frameworks/SDL2.framework/SDL2',
+    'libSDL2.dylib',
+  ];
+
+  function _initSDL() {
+    if (sdl) return;
+    try {
+      koffi = require('koffi');
+    } catch(e) {
+      throw new Error('sound module requires koffi — run: npm install koffi');
+    }
+
+    let lib = null;
+    for (const p of sdlPaths) {
+      try { lib = koffi.load(p); break; } catch(_) {}
+    }
+    if (!lib) throw new Error('SDL2 not found. Install via: brew install sdl2');
+
+    sdl = {
+      Init:               lib.func('int SDL_Init(uint32_t)'),
+      Quit:               lib.func('void SDL_Quit()'),
+      GetError:           lib.func('const char* SDL_GetError()'),
+      OpenAudioDevice:    lib.func('uint32_t SDL_OpenAudioDevice(const char*, int, const uint8_t*, uint8_t*, int)'),
+      CloseAudioDevice:   lib.func('void SDL_CloseAudioDevice(uint32_t)'),
+      PauseAudioDevice:   lib.func('void SDL_PauseAudioDevice(uint32_t, int)'),
+      QueueAudio:         lib.func('int SDL_QueueAudio(uint32_t, const uint8_t*, uint32_t)'),
+      GetQueuedAudioSize: lib.func('uint32_t SDL_GetQueuedAudioSize(uint32_t)'),
+      ClearQueuedAudio:   lib.func('void SDL_ClearQueuedAudio(uint32_t)'),
+    };
+
+    if (!audioInited) {
+      const rc = sdl.Init(SDL_INIT_AUDIO);
+      if (rc !== 0) throw new Error('SDL_Init(AUDIO) failed: ' + sdl.GetError());
+      audioInited = true;
+      process.on('exit', () => { try { sdl.Quit(); } catch(_) {} });
+    }
+  }
+
+  return {
+    spawn: function() {
+      _initSDL();
+
+      // Build desired SDL_AudioSpec as raw buffer
+      const desired = Buffer.alloc(SPEC_SIZE);
+      desired.writeInt32LE(SAMPLE_RATE, 0); // freq
+      desired.writeUInt16LE(AUDIO_S16LSB, 4); // format
+      desired.writeUInt8(CHANNELS, 6); // channels
+      desired.writeUInt16LE(1024, 8); // samples (buffer size in frames)
+
+      const obtained = Buffer.alloc(SPEC_SIZE);
+      const deviceId = sdl.OpenAudioDevice(null, 0, desired, obtained, 0);
+      if (deviceId === 0) throw new Error('SDL_OpenAudioDevice failed: ' + sdl.GetError());
+
+      // Unpause (SDL opens paused by default)
+      sdl.PauseAudioDevice(deviceId, 0);
+
+      // Pre-allocated mixing buffers
+      const CHUNK = 1024;
+      const TARGET_QUEUED = 2048; // ~46ms runway
+      const mixFloat = new Float64Array(CHUNK);
+      const outBuf = Buffer.alloc(CHUNK * 2); // 2 bytes per Int16 sample
+
+      const voices = [];
+      let masterVol = 1.0;
+      let alive = true;
+
+      // Default envelope: 5ms attack, 10ms decay
+      const DEFAULT_ATTACK = Math.round(0.005 * SAMPLE_RATE); // ~220 samples
+      const DEFAULT_DECAY  = Math.round(0.010 * SAMPLE_RATE); // ~441 samples
+
+      function msToSamples(ms) { return Math.round(ms / 1000 * SAMPLE_RATE); }
+
+      function addVoice(wave, freq, freqEnd, durMs, vol01) {
+        const wasEmpty = voices.length === 0;
+        const totalSamples = msToSamples(durMs);
+        voices.push({
+          wave, freq, freqEnd,
+          phase: 0,
+          volume: vol01,
+          duration: totalSamples,
+          elapsed: 0,
+          attack: Math.min(DEFAULT_ATTACK, Math.floor(totalSamples / 3)),
+          decay:  Math.min(DEFAULT_DECAY,  Math.floor(totalSamples / 3)),
+          totalDuration: totalSamples,
+        });
+        // Flush queued silence so new sound plays immediately
+        if (wasEmpty) sdl.ClearQueuedAudio(deviceId);
+      }
+
+      function mixInto(numSamples) {
+        mixFloat.fill(0);
+        for (let v = voices.length - 1; v >= 0; v--) {
+          const vc = voices[v];
+          for (let i = 0; i < numSamples; i++) {
+            if (vc.duration <= 0) break;
+            // envelope
+            let env = 1.0;
+            if (vc.elapsed < vc.attack) env = vc.elapsed / vc.attack;
+            if (vc.duration < vc.decay) env = Math.min(env, vc.duration / vc.decay);
+            // frequency (with sweep)
+            let f = vc.freq;
+            if (vc.freqEnd !== null) {
+              const t = vc.elapsed / vc.totalDuration;
+              f = vc.freq + (vc.freqEnd - vc.freq) * t;
+            }
+            // waveform
+            let s = 0;
+            const p = vc.phase;
+            if (vc.wave === 'sine')        s = Math.sin(p * TWO_PI);
+            else if (vc.wave === 'square') s = p < 0.5 ? 1.0 : -1.0;
+            else if (vc.wave === 'saw')    s = 2.0 * p - 1.0;
+            else if (vc.wave === 'tri')    s = p < 0.5 ? (4.0 * p - 1.0) : (3.0 - 4.0 * p);
+            else if (vc.wave === 'noise')  s = Math.random() * 2.0 - 1.0;
+            // accumulate
+            mixFloat[i] += s * env * vc.volume;
+            // advance phase
+            vc.phase += f / SAMPLE_RATE;
+            vc.phase -= Math.floor(vc.phase);
+            vc.elapsed++;
+            vc.duration--;
+          }
+          if (vc.duration <= 0) voices.splice(v, 1);
+        }
+      }
+
+      const obj = {
+        _type: 'sound_context',
+
+        bop: function(wave, freq, dur, vol) {
+          wave = String(wave || 'sine');
+          freq = +freq || 440;
+          dur  = +dur  || 200;
+          vol  = (vol != null ? +vol : 80) / 100;
+          addVoice(wave, freq, null, dur, Math.max(0, Math.min(1, vol)));
+        },
+
+        slide: function(wave, freqStart, freqEnd, dur, vol) {
+          wave = String(wave || 'sine');
+          freqStart = +freqStart || 440;
+          freqEnd   = +freqEnd   || 220;
+          dur  = +dur  || 200;
+          vol  = (vol != null ? +vol : 80) / 100;
+          addVoice(wave, freqStart, freqEnd, dur, Math.max(0, Math.min(1, vol)));
+        },
+
+        noise: function(dur, vol) {
+          dur = +dur || 100;
+          vol = (vol != null ? +vol : 60) / 100;
+          addVoice('noise', 0, null, dur, Math.max(0, Math.min(1, vol)));
+        },
+
+        hush: function() {
+          voices.length = 0;
+          sdl.ClearQueuedAudio(deviceId);
+        },
+
+        vibe: function() {
+          return voices.length;
+        },
+
+        volume: function(v) {
+          masterVol = Math.max(0, Math.min(1, (+v || 0) / 100));
+        },
+
+        serve: function() {
+          if (!alive) return;
+          const queued = sdl.GetQueuedAudioSize(deviceId);
+          const queuedSamples = queued / 2;
+          if (queuedSamples >= TARGET_QUEUED && voices.length === 0) return;
+          const needed = Math.max(0, TARGET_QUEUED - queuedSamples);
+          const chunks = Math.max(1, Math.ceil(needed / CHUNK));
+          for (let c = 0; c < chunks; c++) {
+            mixInto(CHUNK);
+            for (let i = 0; i < CHUNK; i++) {
+              let s = mixFloat[i] * masterVol;
+              if (s > 1.0 || s < -1.0) s = Math.tanh(s);
+              outBuf.writeInt16LE(
+                Math.max(-32768, Math.min(32767, (s * 32767) | 0)),
+                i * 2
+              );
+            }
+            sdl.QueueAudio(deviceId, outBuf, CHUNK * 2);
+          }
+        },
+
+        unalive: function() {
+          if (!alive) return;
+          alive = false;
+          voices.length = 0;
+          sdl.ClearQueuedAudio(deviceId);
+          sdl.PauseAudioDevice(deviceId, 1);
+          sdl.CloseAudioDevice(deviceId);
+        },
+      };
+      return obj;
+    },
+  };
+})();
+
+// Wire sound into stdlib
+stdlib.sound = _sound;
+
+// ============================================================================
 // INTERPRETER
 // ============================================================================
 

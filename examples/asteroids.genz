@@ -8,11 +8,14 @@ plug in gpu
 plug in math
 plug in random
 plug in list
+plug in sound
 
 💀 ── window ──
 yeet W = 800
 yeet H = 600
 yeet w = gpu.spawn(W, H, ✨genz++ ASTEROIDS✨)
+yeet snd = sound.spawn()
+snd.volume(60)
 yeet PI = math.periodt()
 
 💀 ── ship state ──
@@ -340,6 +343,7 @@ vibe check running and w.serve() tho
 
     sus running tho
 
+        snd.serve()
         yeet frame = frame + 1
 
         💀 advance stars toward viewer
@@ -445,6 +449,9 @@ vibe check running and w.serve() tho
                     yeet ship_dx = ship_dx + math.waves(ship_angle) * 0.1
                     yeet ship_dy = ship_dy + math.vibes(ship_angle) * 0.1
                     yeet thrusting = 1
+                    sus frame % 4 be 0 tho
+                        snd.noise(80, 15)
+                    bet
                 bet
 
                 💀 fire
@@ -452,6 +459,7 @@ vibe check running and w.serve() tho
                     sus cooldown be 0 tho
                         fire_bul()
                         yeet cooldown = 8
+                        snd.slide(✨square✨, 880, 440, 80, 40)
                     bet
                 bet
             bet
@@ -559,6 +567,8 @@ vibe check running and w.serve() tho
                                 sus ast_r[j] > 20 tho
                                     💀 big → 2 medium
                                     yeet score = score + 20
+                                    snd.noise(400, 55)
+                                    snd.bop(✨sine✨, 80, 400, 35)
                                     yeet c1_spd = 1 + random.vibe() * 0.7
                                     yeet c2_spd = 1 + random.vibe() * 0.7
                                     spawn_ast(ast_x[j], ast_y[j], (par_nx * cos_s - par_ny * sin_s) * c1_spd, (par_nx * sin_s + par_ny * cos_s) * c1_spd, 13)
@@ -566,6 +576,8 @@ vibe check running and w.serve() tho
                                 nah sus ast_r[j] > 10 tho
                                     💀 medium → 2 small
                                     yeet score = score + 50
+                                    snd.noise(250, 45)
+                                    snd.bop(✨sine✨, 120, 250, 30)
                                     yeet c1_spd = 1.3 + random.vibe() * 0.8
                                     yeet c2_spd = 1.3 + random.vibe() * 0.8
                                     spawn_ast(ast_x[j], ast_y[j], (par_nx * cos_s - par_ny * sin_s) * c1_spd, (par_nx * sin_s + par_ny * cos_s) * c1_spd, 7)
@@ -573,6 +585,8 @@ vibe check running and w.serve() tho
                                 nah
                                     💀 small → destroyed
                                     yeet score = score + 100
+                                    snd.noise(120, 35)
+                                    snd.bop(✨sine✨, 200, 120, 25)
                                 bet
                             bet
                         bet
@@ -599,6 +613,8 @@ vibe check running and w.serve() tho
                                 yeet death_angle = ship_angle
                                 yeet lives = lives - 1
                                 yeet ship_dead = 90
+                                snd.slide(✨saw✨, 600, 40, 800, 50)
+                                snd.noise(600, 45)
                             bet
                         bet
                         yeet i = i + 1
@@ -623,6 +639,7 @@ vibe check running and w.serve() tho
                 sus game_over be 0 tho
                     yeet wave_num = wave_num + 1
                     spawn_wave(wave_num + 3)
+                    snd.slide(✨sine✨, 300, 900, 400, 50)
                 bet
             bet
 
@@ -687,6 +704,7 @@ vibe check running and w.serve() tho
     bet
 bet
 
+snd.unalive()
 w.unalive()
 spill ✨✨
 spill ✨💀 asteroids over. final score: ✨ + score

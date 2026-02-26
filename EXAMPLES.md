@@ -234,7 +234,7 @@ The comments are in the voice of an AI that doesn't fully understand its own cod
 
 ---
 
-## ✨ Showcase: Colors, Spinners, HTTP, and GPU
+## ✨ Showcase: Colors, Spinners, HTTP, GPU, and Sound
 
 ### color_demo.genz
 
@@ -272,6 +272,21 @@ node genz.js examples/gpu_demo.genz
 ```
 
 Requires `koffi` (Node.js FFI library) and SDL2 installed on your system. Arrow keys to move, Esc to quit.
+
+### sound_test.genz
+
+**Concepts:** the sound module, procedural synthesis, waveforms, sweeps
+
+A guided tour of the `sound` module's capabilities. Plays 10 tests in sequence: sine, square, sawtooth, and triangle tones, a white noise burst, descending and ascending frequency sweeps, a three-note chord (simultaneous voices), a laser-then-explosion combo, and a death sweep.
+
+Demonstrates `sound.spawn()`, `s.bop()` for tones, `s.slide()` for sweeps, `s.noise()` for bursts, and `s.serve()` in a timing loop with `time.nap()`.
+
+```bash
+npm install koffi   # requires SDL2 installed
+node genz.js examples/sound_test.genz
+```
+
+Turn up your speakers. Or don't — the first sine wave is pretty loud.
 
 ---
 
@@ -397,6 +412,7 @@ What it demonstrates:
 - **Rotation matrix math:** asteroid splits rotate the parent's velocity vector ±25-35 degrees using sin/cos, producing natural-looking trajectories
 - **Ship explosion:** triangle edges break apart and drift outward with rotation, plus 6 debris sparks radiating from the blast point
 - **Three game screens:** start screen with drifting decorative asteroids and a blinking "PRESS ENTER", the main game, and a "gg no re" game over screen
+- **Procedural sound effects:** laser shots, explosions (sized by asteroid), thrust rumble, death sweep, and wave-clear fanfare — all synthesized via the `sound` module
 - **Full game mechanics:** ship thrust with drag, screen wrapping, 3-size asteroid splitting (big → 2 medium → 2 small → destroyed), bullet cooldown, invincibility after respawn with ship flashing, wave progression, lives, scoring
 
 Controls: arrows/WASD to move, space to shoot, ESC to quit.
@@ -471,7 +487,8 @@ This runs tests for all core modules (math, tea, random, list, time, convert, de
 | `gpu_fire.genz` | GPU fire, fat pixels | 111 |
 | `gpu_plasma.genz` | GPU plasma, real-time | 61 |
 | `gpu_terrain.genz` | GPU raycasting, biomes | 170 |
-| `asteroids.genz` | Full arcade game, 3D starfield | 694 |
+| `sound_test.genz` | Procedural audio synthesis | 95 |
+| `asteroids.genz` | Full arcade game, sound + graphics | 711 |
 | `adventure.genz` | Everything + Claude API | 190 |
 | `test_stdlib.genz` | Module testing | 120 |
 | `test_gradient.genz` | Screen renderer validation | 27 |
